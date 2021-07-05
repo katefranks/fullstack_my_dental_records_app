@@ -5,7 +5,7 @@ import GoogleMap from './GoogleMap';
 import ApiTest from './api_test';
 
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-console.log(process.env.REACT_APP_GOOGLE_API_KEY);
+
 
 class App extends Component {
 render(){
