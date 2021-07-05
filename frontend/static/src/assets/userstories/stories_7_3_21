@@ -1,0 +1,15 @@
+User Stories
+1. As a new user, I want a registration screen so that I can sign up to use the app.
+2. As a returning user, I want a login screen so that I can sign in.
+3. As a returning user, I want a home screen that I automatically go to if I'm already logged in.
+4. As a new user, I want a "create profile view" so that I can store my personal information in one place.
+5. As a logged in user, I want a home screen so that I can efficiently & easily navigate through the app.
+6. As a user creating a profile, I want an image upload field so that I can upload my dental insurance card for easy access.
+7. As a logged in user, I want an appointment history (records) tab so I can see all of my past appts.
+8. As a logged in user, I want to be able to add new visits so I can keep my records current.
+9. As a logged in user, I want to be able to edit visits so I can edit the information that was entered.
+10. As a logged in user, I want a delete appointment button so that I can delete an enteire entry.
+11. As a logged in user, I want an input field so that I can enter services that were completed at an appt.
+12. As logged in user, I want a find care tab so that I can find dentists near a given location.
+13. As a logged in user, I want an input field on my profile so that I can enter when my toothbrush was replaced.
+14. As a logged in user, I want a logout button on all logged in views, so that my account stays private if I'm using a shared device or computer. 
