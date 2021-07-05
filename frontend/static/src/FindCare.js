@@ -3,7 +3,7 @@ import './App.css';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import { Loader } from "@googlemaps/js-api-loader"
 
-class GoogleMap extends Component {
+class FindCare extends Component {
 render(){
   return(
     <div className="map-container">
@@ -24,4 +24,4 @@ render(){
 
 export default GoogleApiWrapper({
   apiKey: ('AIzaSyBG242E6D2eH_Ai2RYwAiTMg2Y83P3iyXU')
-})(GoogleMap)
+})(FindCare)

@@ -6,5 +6,4 @@ urlpatterns = [
 
     path('profiles/user/', ProfileDetailAPIView.as_view()),
     path('profiles/', ProfileListAPIView.as_view()),
-
 ]
