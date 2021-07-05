@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Loader } from "@googlemaps/js-api-loader"
 
 class GoogleMap extends Component {
 render(){
   return(
     <div className="map-container">
+        <h2>Find Care:</h2>
         <Map className="map" google={this.props.google} zoom={14}>
 
             <Marker onClick={this.onMarkerClick}
