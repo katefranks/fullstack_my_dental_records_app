@@ -5,12 +5,14 @@ import "./index.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+//App Components:
 import Navbar from './navbar';
 import Login from './login';
 import Registration from './registration';
 import Homepage from './homepage';
 import FindCare from './findcare';
 import ApiTest from './api_test';
+import PrivateRoute from './privateRoute';
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -18,16 +20,17 @@ import ApiTest from './api_test';
 class App extends Component {
   constructor(props){
     super(props);
-    // this.state = {
-    // selection: !! Cookies.get('Authorization') ? 'homepage' : 'login'
-    // };
+    this.state = {
+      isAuthenticated: !!Cookies.get('Authorization') ? true : false
+    };
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
       this.handleRegistration = this.handleRegistration.bind(this);
       // this.handleNavigation = this.handleNavigation.bind(this);
   }
-  // handleNavigation(selection){
-  //   this.setState({ selection });
+
+  // isAuthenticated(){
+  //   !!Cookies.get('Authorization') ? this.setState()
   // }
 
   async handleLogin(user){
@@ -45,7 +48,7 @@ class App extends Component {
     if(response.ok){
       const data = await response.json().catch(handleError);
       Cookies.set('Authorization', `Token ${data.key}`);
-      this.setState( { selection : 'homepage' });
+      this.setState({isAuthenticated: true});
     } else {
       alert('Incorrect Username of Password, Please Try Again!')
     }
@@ -67,7 +70,8 @@ async handleRegistration(user){
     const data = await response.json().catch(handleError);
 
     Cookies.set('Authorization', `Token ${data.key}`);
-    this.setState( { selection : 'homepage' });
+    this.setState({isAuthenticated: true});
+    
   } else {
     throw new Error('Network response was not ok');
   }
@@ -86,17 +90,20 @@ async handleLogout(){
   const handleError = (err) => console.warn(err);
   const response = await fetch('/rest-auth/logout/', options).catch(handleError);
 
-if(response.ok){
-  Cookies.remove('Authorization');
-  this.setState({ selection: 'login' });
+  if(response.ok){
+    Cookies.remove('Authorization');
+    this.setState({isAuthenticated: false});
   }
 
 }
+
+
 
 render(){
   return(
     <>
         <Navbar handleLogout={this.handleLogout} />
+
         <Switch>
             <Route
               path='/login'
@@ -111,9 +118,9 @@ render(){
               )}
             />
 
-          <Route exact path="/">
+          <PrivateRoute isAuthenticated={this.state.isAuthenticated} exact path="/">
              <Homepage />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </>
 
@@ -123,6 +130,7 @@ render(){
 
 export default App;
 
+  // <PrivateRoute isAuthenticated={this.state.isAuthenticated} />
 //
 // Prior to React router:
 // render(){

@@ -23,5 +23,5 @@ render(){
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyBG242E6D2eH_Ai2RYwAiTMg2Y83P3iyXU')
+  apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(FindCare)
