@@ -11,6 +11,7 @@ class Navigation extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto align-items-baseline">
             <NavLink to='/' className="mr-2">Home</NavLink>
+            <NavLink to='/profile' className="mr-2">Profile</NavLink>
             <NavLink to='/login' className="mr-2">Login</NavLink>
             <NavLink to='/registration' className="mr-2">Register</NavLink>
             <button className="btn" onClick={() => this.props.handleLogout()}>Logout</button>
