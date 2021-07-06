@@ -4,8 +4,24 @@
 }
 
 .login-form-container{
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  max-width: 300px;
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-form-div{
+display: flex;
+justify-content: center;
+/* background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C12584, #E1306C, #FD1D1D); */
+}
+
+h1{
+  text-align: center;
+  margin: 50px;
 }

@@ -22,7 +22,7 @@ class Registration extends Component {
 //
 render(){
   return(
-<div>
+<div className="login-form-div">
   <form className="form-login p-4 mb-3 login-form-container" onSubmit={this.handleSubmit}>
   <h2>New User? <br/> Register!</h2>
   <div className="form-group">
@@ -47,14 +47,15 @@ render(){
   </div>
     <button className="btn btn-primary" type="submit">Submit</button>
     <div className="divider">New here? Register!</div>
-    <button className="btn btn-primary toggle-register" onClick={() => this.props.handleNavigation('register')}>Create New Account</button>
+    <button className="btn btn-primary toggle-register" >Create New Account</button>
     </form>
 </div>
 );
 }
 }
 export default Registration;
-
+//need to add back in functionality to toggle register/login.
+// <button className="btn btn-primary toggle-register" onClick={() => this.props.handleNavigation('register')}>Create New Account</button>
 
   //
 //   render(){

@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
+import "./index.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import Login from './Login';
-import Registration from './Registration';
-import Homepage from './Homepage';
-import FindCare from './FindCare';
+import Navbar from './navbar';
+import Login from './login';
+import Registration from './registration';
+import Homepage from './homepage';
+import FindCare from './findcare';
 import ApiTest from './api_test';
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -15,17 +18,17 @@ import ApiTest from './api_test';
 class App extends Component {
   constructor(props){
     super(props);
-      this.state = {
-        selection: 'login'
-      }
+    // this.state = {
+    // selection: !! Cookies.get('Authorization') ? 'homepage' : 'login'
+    // };
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
       this.handleRegistration = this.handleRegistration.bind(this);
-      this.handleNavigation = this.handleNavigation.bind(this);
+      // this.handleNavigation = this.handleNavigation.bind(this);
   }
-  handleNavigation(selection){
-    this.setState({ selection });
-  }
+  // handleNavigation(selection){
+  //   this.setState({ selection });
+  // }
 
   async handleLogin(user){
     const options = {
@@ -92,20 +95,55 @@ if(response.ok){
 
 render(){
   return(
-    <div className="main-container">
-        <h1>My Dental Records</h1>
-        <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation} />
-        <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
-        <Homepage selection={this.state.selection} handleNavigation={this.handleNavigation} handleLogin={this.handleLogin} handleLogout={this.handleLogout} />
-        <FindCare handleNavigation={this.handleNavigation}/>
-        <ApiTest />
-    </div>
+    <>
+        <Navbar handleLogout={this.handleLogout} />
+        <Switch>
+            <Route
+              path='/login'
+              render={(props) => (
+                <Login {...props} handleLogin={this.handleLogin} isAuthed={true} />
+              )}
+            />
+            <Route
+              path='/registration'
+              render={(props) => (
+                <Registration {...props} handleRegistration={this.handleRegistration} />
+              )}
+            />
+
+          <Route exact path="/">
+             <Homepage />
+          </Route>
+        </Switch>
+      </>
+
   );
 }
 }
 
 export default App;
 
+//
+// Prior to React router:
+// render(){
+//   return(
+//     <div className="main-container">
+//         <h1>My Dental Records</h1>
+//         <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation} />
+//         <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
+//         <Homepage selection={this.state.selection} handleNavigation={this.handleNavigation} handleLogin={this.handleLogin} handleLogout={this.handleLogout} />
+//         <FindCare handleNavigation={this.handleNavigation}/>
+//         <ApiTest />
+//     </div>
+//   );
+// }
+// }
+
+// export default App;
+
+
+
+//
 // export default GoogleApiWrapper({
 //   apiKey: (API_KEY)
 // })(App)
