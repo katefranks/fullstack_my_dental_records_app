@@ -55,6 +55,9 @@ async handleSubmit(e){
   formData.append('ins_card', this.state.ins_card);
   //possibly remove:
   formData.append('display_name', this.state.display_name);
+  formData.append('dob', this.state.dob);
+  formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
+  
 
   const options = {
     method: 'POST',

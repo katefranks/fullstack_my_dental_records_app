@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Records from './records';
 import { NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -11,10 +12,8 @@ class Navigation extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto align-items-baseline">
             <NavLink to='/' className="mr-2">Home</NavLink>
-            <NavLink to='/profile' className="mr-2">Profile</NavLink>
             <NavLink to='/records' className="mr-2">Records</NavLink>
-            <NavLink to='/login' className="mr-2">Login</NavLink>
-            <NavLink to='/registration' className="mr-2">Register</NavLink>
+            <NavLink to='/addRecord' className="mr-2">Add Record</NavLink>
             <button className="btn" onClick={() => this.props.handleLogout()}>Logout</button>
           </Nav>
         </Navbar.Collapse>
