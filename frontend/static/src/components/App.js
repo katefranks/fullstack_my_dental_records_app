@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
-import "./index.css";
+import "../index.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
@@ -47,6 +47,7 @@ class App extends Component {
       const data = await response.json().catch(handleError);
       Cookies.set('Authorization', `Token ${data.key}`);
       this.setState({isAuthenticated: true});
+      this.props.history.push('/');
     } else {
       alert('Incorrect Username of Password, Please Try Again!')
     }
@@ -69,7 +70,7 @@ async handleRegistration(user){
 
     Cookies.set('Authorization', `Token ${data.key}`);
     this.setState({isAuthenticated: true});
-
+    this.props.history.push('/');
   } else {
     throw new Error('Network response was not ok');
   }
@@ -132,7 +133,7 @@ render(){
 }
 }
 
-export default App;
+export default withRouter(App);
 
   // <PrivateRoute isAuthenticated={this.state.isAuthenticated} />
 //

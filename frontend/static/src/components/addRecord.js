@@ -7,7 +7,11 @@ class AddRecord extends Component{
   constructor(props){
     super(props);
     this.state = {
-
+      appt_date: '',
+      category:  '',
+      xrays: false,
+      xray_type: '',
+      appt_img: null,
     }
     //methods
   }
