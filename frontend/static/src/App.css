@@ -38,3 +38,18 @@ h1{
 .ins-card{
   width: 220px;
 }
+
+input{
+  border-radius: 10px;
+}
+
+input[type="text"]:disabled {
+  border-radius: 10px;
+  background: #FFF;
+
+}
+
+input[type="text"]:selection {
+  border: 1px solid blue;
+  border-radius: 10px;
+}

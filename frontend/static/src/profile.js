@@ -14,17 +14,21 @@ class Profile extends Component{
       ins_card: null,
       preview: '',
       isEditing: false,
+      id: null,
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.editProfile = this.editProfile.bind(this);
+    this.addProfile = this.addProfile.bind(this);
   }
 
 componentDidMount(){
   fetch('/api/v1/users/profiles/user/')
     .then(response => {
       if (!response.ok){
-        throw new Error('Network response was not ok');
+        // throw new Error('Network response was not ok');
+        this.setState({isEditing: true})
       }
       return response.json();
     })
@@ -40,7 +44,8 @@ handleInput(e){
 
 handleImage(e){
   let file = e.target.files[0];
-  this.setState({ [e.target.name]: file, });
+  // this.setState({ [e.target.name]: file, });
+  this.setState({ ins_card: file, });
 
   let reader = new FileReader();
   reader.onloadend = () => {
@@ -53,11 +58,21 @@ handleImage(e){
 
 async handleSubmit(e){
   e.preventDefault();
+  if(this.state.id) {
+    this.editProfile()
+  } else {
+    this.addProfile();
+  }
+}
+
+async addProfile(e) {
+
+  console.log(this.state.ins_card instanceof File)
   let formData = new FormData();
   formData.append('display_name', this.state.display_name);
   formData.append('dob', this.state.dob);
   formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
-  if (this.state.ins_card !== null){
+  if (this.state.ins_card instanceof File){
     formData.append('ins_card', this.state.ins_card);
   }
 
@@ -74,6 +89,30 @@ async handleSubmit(e){
   this.setState({response});
 }
 
+async editProfile(e){
+
+  let formData = new FormData();
+
+  if (this.state.ins_card instanceof File){
+    formData.append('ins_card', this.state.ins_card);
+  }
+
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'X-CSRFToken': Cookies.get('csrftoken'),
+    },
+    body: formData,
+  };
+
+  const response = await fetch(`/api/v1/users/profiles/user/`, options);
+  if(!response.ok) {
+
+  }
+
+  this.setState({isEditing: false})
+}
+
 // disabled={this.state.isEditing}
 
 render(){
@@ -81,16 +120,9 @@ render(){
 
 
       <div className="profile-form-div">
-        <form className="form-login p-4 mb-3 login-form-container profile-form-container" onSubmit={this.handleSubmit}>
+        <form className="form-login p-4 mb-3 login-form-container profile-form-container">
 
             <h2>Profile</h2>
-            {
-              this.state.isEditing
-              ? <button type="button" onClick={() => this.setState({isEditing: false})}>save</button>
-              : <button type="button" onClick={() => this.setState({isEditing: true})}>pencil</button>
-            }
-
-
             <div className="form-group">
               <label for="display_name" className="form-label">Full Name:</label>
               <br/>
@@ -118,11 +150,10 @@ render(){
                     : null
                   }
             </div>
-            {this.state.isEditing
-            ?<button className="btn btn-primary" type="submit">Submit</button>
-            :<button className="btn btn-primary" disabled>Logo</button>
+            {!this.state.isEditing
+              ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
+              : <button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Save</button>
             }
-
           </form>
       </div>
   )
