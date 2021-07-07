@@ -9,6 +9,7 @@ class Profile extends Component{
     this.state = {
       display_name: '',
       dob: '',
+      //name of dentist- need to add to model in django
       toothbrush_replaced: '',
       ins_card: null,
       preview: '',
@@ -57,7 +58,7 @@ async handleSubmit(e){
   formData.append('display_name', this.state.display_name);
   formData.append('dob', this.state.dob);
   formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
-  
+
 
   const options = {
     method: 'POST',
@@ -72,7 +73,38 @@ async handleSubmit(e){
 
 render(){
   return(
-    // <div>Profile</div>
+    <>
+    {this.state.data
+    ? (
+      <div className="profile-form-div">
+          <div className="form-login p-4 mb-3 login-form-container profile-form-container">
+            <h2>Profile</h2>
+              <div className="form-group">
+                <p className="form-label">Full Name:</p>
+                <p className="login-input">{this.state.data.display_name}</p>
+              </div>
+
+              <div className="form-group">
+                <p className="form-label">Date of Birth:</p>
+                <p className="login-input">{this.state.data.dob}</p>
+              </div>
+
+              <div className="form-group">
+                <p className="form-label">Toothbrush Replaced:</p>
+                <p className="login-input">{this.state.data.toothbrush_replaced}</p>
+              </div>
+
+              <div className="form-group">
+                <p className="form-label">Dental Insurance Card:</p>
+                <p className="login-input">{this.state.data.toothbrush_replaced}</p>
+                <img className="ins-card" src={this.state.data.ins_card} alt=""/>
+              </div>
+
+          </div>
+      </div>
+
+      )
+    :
     //
     <div className="profile-form-div">
       <form className="form-login p-4 mb-3 login-form-container profile-form-container" onSubmit={this.handleSubmit}>
@@ -101,15 +133,16 @@ render(){
         <br/>
         <input style={{width: "220px"}} type="file" name="ins_card" onChange={this.handleImage}/>
         {this.state.ins_card
-              ? <img style={{width: "220px"}} className="ins-card-preview" src={this.state.preview} alt=""/>
+              ? <img className="ins-card" src={this.state.preview} alt=""/>
               : null
             }
       </div>
-
         <button className="btn btn-primary" type="submit">Submit</button>
         </form>
     </div>
     //
+}
+  </>
   )
 
 }
