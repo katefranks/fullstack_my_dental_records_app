@@ -13,6 +13,7 @@ class Profile extends Component{
       toothbrush_replaced: '',
       ins_card: null,
       preview: '',
+      isEditing: false,
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleImage = this.handleImage.bind(this);
@@ -27,7 +28,7 @@ componentDidMount(){
       }
       return response.json();
     })
-    .then(data => this.setState({ data }))
+    .then(data => this.setState({ ...data }))
     .catch(error => {
       console.error('There has been a problem with your fetch operation: ', error);
     });
@@ -53,12 +54,14 @@ handleImage(e){
 async handleSubmit(e){
   e.preventDefault();
   let formData = new FormData();
-  formData.append('ins_card', this.state.ins_card);
-  //possibly remove:
   formData.append('display_name', this.state.display_name);
   formData.append('dob', this.state.dob);
   formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
+  if (this.state.ins_card !== null){
+    formData.append('ins_card', this.state.ins_card);
+  }
 
+//type of. Check in js how to do something if type of file. Can't send up url, that's not a type of file.
 
   const options = {
     method: 'POST',
@@ -71,78 +74,57 @@ async handleSubmit(e){
   this.setState({response});
 }
 
+// disabled={this.state.isEditing}
+
 render(){
   return(
-    <>
-    {this.state.data
-    ? (
+
+
       <div className="profile-form-div">
-          <div className="form-login p-4 mb-3 login-form-container profile-form-container">
+        <form className="form-login p-4 mb-3 login-form-container profile-form-container" onSubmit={this.handleSubmit}>
+
             <h2>Profile</h2>
-              <div className="form-group">
-                <p className="form-label">Full Name:</p>
-                <p className="login-input">{this.state.data.display_name}</p>
-              </div>
-
-              <div className="form-group">
-                <p className="form-label">Date of Birth:</p>
-                <p className="login-input">{this.state.data.dob}</p>
-              </div>
-
-              <div className="form-group">
-                <p className="form-label">Toothbrush Replaced:</p>
-                <p className="login-input">{this.state.data.toothbrush_replaced}</p>
-              </div>
-
-              <div className="form-group">
-                <p className="form-label">Dental Insurance Card:</p>
-                <p className="login-input">{this.state.data.toothbrush_replaced}</p>
-                <img className="ins-card" src={this.state.data.ins_card} alt=""/>
-              </div>
-
-          </div>
-      </div>
-
-      )
-    :
-    //
-    <div className="profile-form-div">
-      <form className="form-login p-4 mb-3 login-form-container profile-form-container" onSubmit={this.handleSubmit}>
-      <h2>Create a Profile</h2>
-
-      <div className="form-group">
-        <label for="display_name" className="form-label">Full Name:</label>
-        <br/>
-        <input className="login-input" placeholder="FIRST MIDDLE LAST" name="display_name" type="text" value={this.state.display_name} onChange={this.handleInput}/>
-      </div>
-
-      <div className="form-group">
-        <label for="dob" className="form-label">Date of Birth:</label>
-        <br/>
-        <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="dob" value={this.state.dob} onChange={this.handleInput}/>
-      </div>
-
-      <div className="form-group">
-        <label for="toothbrush_replaced" className="form-label">Toothbrush Replaced On:</label>
-        <br/>
-        <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="toothbrush_replaced" value={this.state.toothbrush_replaced} onChange={this.handleInput}/>
-      </div>
-
-      <div className="form-group">
-        <label for="ins_card" className="form-label">Dental Insurance Card:</label>
-        <br/>
-        <input style={{width: "220px"}} type="file" name="ins_card" onChange={this.handleImage}/>
-        {this.state.ins_card
-              ? <img className="ins-card" src={this.state.preview} alt=""/>
-              : null
+            {
+              this.state.isEditing
+              ? <button type="button" onClick={() => this.setState({isEditing: false})}>save</button>
+              : <button type="button" onClick={() => this.setState({isEditing: true})}>pencil</button>
             }
+
+
+            <div className="form-group">
+              <label for="display_name" className="form-label">Full Name:</label>
+              <br/>
+              <input className="login-input" placeholder="FIRST MIDDLE LAST" name="display_name" type="text" value={this.state.display_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            </div>
+
+            <div className="form-group">
+              <label for="dob" className="form-label">Date of Birth:</label>
+              <br/>
+              <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            </div>
+
+            <div className="form-group">
+              <label for="toothbrush_replaced" className="form-label">Toothbrush Replaced On:</label>
+              <br/>
+              <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="toothbrush_replaced" value={this.state.toothbrush_replaced} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            </div>
+
+            <div className="form-group">
+              <label for="ins_card" className="form-label">Dental Insurance Card:</label>
+              <br/>
+              <input style={{width: "220px"}} type="file" name="ins_card" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
+              {this.state.ins_card
+                    ? <img className="ins-card" src={this.state.preview || this.state.ins_card} alt=""/>
+                    : null
+                  }
+            </div>
+            {this.state.isEditing
+            ?<button className="btn btn-primary" type="submit">Submit</button>
+            :<button className="btn btn-primary" disabled>Logo</button>
+            }
+
+          </form>
       </div>
-        <button className="btn btn-primary" type="submit">Submit</button>
-        </form>
-    </div>
-    //
-}
-  </>
   )
 
 }

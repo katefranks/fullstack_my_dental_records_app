@@ -12,7 +12,7 @@ class Profile(models.Model):
     display_name = models.CharField(max_length=255)
     dob = models.CharField(max_length=255)
     toothbrush_replaced = models.CharField(max_length=255)
-    ins_card = models.ImageField(upload_to='profiles/')
+    ins_card = models.ImageField(null=True, upload_to='profiles/')
 
     def __str__(self):
         return self.display_name
