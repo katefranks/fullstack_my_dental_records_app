@@ -1,8 +1,5 @@
-.map{
-  max-width: 200px;
-  max-height: 200px;
-}
 
+/* login */
 .login-form-container{
   margin-top: 20px;
   display: flex;
@@ -21,6 +18,7 @@
 /* background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C12584, #E1306C, #FD1D1D); */
 }
 
+/* PROFILE */
 .profile-form-div{
   display: flex;
   justify-content: center;
@@ -28,11 +26,6 @@
 
 .profile-form-container{
   max-width: 450px;
-}
-
-.record-form-div{
-  display: flex;
-  justify-content: center;
 }
 
 h1{
@@ -57,4 +50,28 @@ input[type="text"]:disabled {
 input[type="text"]:selection {
   border: 1px solid blue;
   border-radius: 10px;
+}
+
+/* RECORDS */
+.record-form-div{
+  display: flex;
+  justify-content: center;
+}
+
+ul{
+  list-style-type: none;
+}
+
+.li-record{
+  border: solid black 1px;
+  width: 300px;
+  text-align: center;
+  margin: 10px;
+}
+
+
+/* Find Care */
+.map{
+  max-width: 200px;
+  max-height: 200px;
 }

@@ -9,4 +9,11 @@ class RecordListAPIView(generics.ListCreateAPIView):
 
 class RecordDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Record.objects.all()
+    # going to have to over ride to only return the records that belong to the logged in user.
+    #override the get query set method
+
+    # Record.objects.filter(user=self.request.user)
+
+    # need to put the above inside a "get query set method"
+
     serializer_class = RecordSerializer

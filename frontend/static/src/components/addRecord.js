@@ -8,7 +8,7 @@ class AddRecord extends Component{
     super(props);
     this.state = {
       appt_date: '',
-      category:  '',
+      category:  'CLE',
       xrays: false,
       xray_type: '',
       services: '',
@@ -18,8 +18,24 @@ class AddRecord extends Component{
       isEditing: false,
       id: null,
     }
-    //methods
+    this.handleInput = this.handleInput.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
+    // this.handleImage = this.handleImage.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    // this.editRecord = this.editRecord.bind(this);
+    // this.addNewRecord = this.addNewRecord.bind(this);
   }
+
+  handleInput(e){
+    // Computed property names
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
+    this.setState( {[e.target.name]: e.target.value});
+  }
+
+  handleCheckbox(e) {
+    this.setState({[e.target.name]: e.target.checked})
+  }
+
   render(){
     return(
       <>
@@ -27,6 +43,12 @@ class AddRecord extends Component{
     <div className="record-form-div">
       <form className="form-login p-4 mb-3 login-form-container profile-form-container">
 
+
+          <div className="form-group">
+            <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox}/>
+            <br />
+            <label for="xrays" className="form-label">X Rays</label>
+          </div>
 
           <div className="form-group">
             <label for="appt_date" className="form-label">Appointment Date:</label>
@@ -37,7 +59,10 @@ class AddRecord extends Component{
           <div className="form-group">
             <label for="category" className="form-label">Appointment Category</label>
             <br/>
-            <input className="login-input" type="text" placeholder="Cleaning / Restorative" name="category" value={this.state.category} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <select onChange={this.handleInput} name="category" id="category">
+            <option value="CLE">Cleaning</option>
+            <option value="RES">Restorative</option>
+          </select>
           </div>
 
           <div className="form-group">
