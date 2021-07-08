@@ -22,13 +22,3 @@ class Record (models.Model):
     services = models.TextField(blank=True)
     recommendations = models.TextField(blank=True)
     appt_img = models.ImageField(null=True, upload_to='appointment_img/')
-
-
-# appt_date: '',
-# category:  '',
-# xrays: false,
-# xray_type: '',
-# provider_name: '',
-# services: '',
-# recommendations: '',
-# appt_img: null,

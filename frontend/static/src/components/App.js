@@ -13,6 +13,7 @@ import Registration from './registration';
 import Homepage from './homepage';
 import Profile from './profile';
 import Records from './records';
+import AddRecord from './addRecord';
 import FindCare from './findcare';
 import ApiTest from './api_test';
 
@@ -125,6 +126,9 @@ render(){
           </PrivateRoute>
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/records">
              <Records />
+          </PrivateRoute>
+          <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/addRecord">
+             <AddRecord />
           </PrivateRoute>
         </Switch>
       </>

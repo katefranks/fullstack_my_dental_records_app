@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import Cookies from 'js-cookie';
-import recordsNavBar from './recordsNavBar';
+// import recordsNavBar from './recordsNavBar';
 
 class Records extends Component {
   constructor(props){
@@ -14,11 +14,12 @@ class Records extends Component {
   }
   render(){
     return(
-      <div>
-      <recordsNavBar/>
+      
       <div>Record List</div>
-      </div>
+
     );
   }
 }
 export default Records;
+
+      // <recordsNavBar/>
