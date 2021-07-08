@@ -11,6 +11,8 @@ class AddRecord extends Component{
       category:  '',
       xrays: false,
       xray_type: '',
+      services: '',
+      recommendations: '',
       appt_img: null,
     }
     //methods
