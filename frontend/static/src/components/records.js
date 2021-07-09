@@ -13,9 +13,40 @@ class Records extends Component {
     this.state = {
       records: [],
     }
-    //methods
+    this.editRecord = this.editRecord.bind(this);
+    // this.deleteRecord = this.deleteRecord.bind(this);
   }
 // w/in records component write 2 methods- 1 to update and 1 to delete. Will pass these methods down to the profile detail through props.
+
+async editRecord(record){
+  let formData = new FormData();
+
+  formData.append('appt_date', record.appt_date);
+  formData.append('category', record.category);
+  formData.append('xrays', record.xrays);
+  formData.append('xray_type', record.xray_type);
+  formData.append('services', record.services);
+  formData.append('recommendations', record.recommendations);
+  formData.append('appt_img', record.appt_img);
+  // if (this.state.appt_img instanceof File){
+  //   formData.append('appt_img', record.appt_img);
+  // }
+  //
+
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'X-CSRFToken': Cookies.get('csrftoken'),
+    },
+    body: formData,
+  };
+  const response = await fetch(`/api/v1/records/${record.id}/`, options);
+  if(!response.ok) {
+
+  }
+  // this.setState({isEditing: false})
+}
+
 
 componentDidMount(){
     fetch('/api/v1/records/')
@@ -25,7 +56,7 @@ componentDidMount(){
 
   render(){
     const records = this.state.records.map(record =>
-      <RecordDetail key={record.id} record={record} />
+      <RecordDetail key={record.id} record={record} editRecord={this.editRecord}/>
     )
     return(
 

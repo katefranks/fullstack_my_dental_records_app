@@ -8,17 +8,41 @@ class RecordDetail extends Component {
   //set on state key/values of record
   constructor(props){
     super(props);
-    this.state = {...this.props.record}
+    this.state = {
+      ...this.props.record,
+      isEditing: false,
+//unpacking all of the keys/values from record
+    }
+
     // values being passed down are default values, rather than setting the vlaues to an empty string.
     // passing the record down through props
     this.handleInput = this.handleInput.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
+    this.saveRecord = this.saveRecord.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.editRecord = this.editRecord.bind(this);
-    // this.addNewRecord = this.addNewRecord.bind(this);
   }
-//
+
+saveRecord(e){
+  e.preventDefault();
+  // const record = {...this.props.record};
+  // record = this.state.record;
+  const record = this.state;
+
+  if (!(record.appt_img instanceof File)){
+    //"if it's NOT an instance of a file, remove it"
+    delete record.appt_img;
+  }
+
+
+  delete record.isEditing;
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+  this.props.editRecord(record);
+
+  this.setState({isEditing : false});
+
+}
+
 handleInput(e){
   // Computed property names
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
@@ -56,7 +80,7 @@ render(){
         <div className="form-group">
           <label for="category" className="form-label">Appointment Category</label>
           <br/>
-        <select onChange={this.handleInput} name="category" id="category">
+        <select onChange={this.handleInput} value={this.state.category} name="category" id="category" disabled={!this.state?.isEditing}>
           <option value="CLE">Cleaning</option>
           <option value="RES">Restorative</option>
         </select>
@@ -66,12 +90,6 @@ render(){
           <br />
           <label for="xrays" className="form-label">X Rays</label>
         </div>
-        <div className="form-group">
-          <label for="xrays" className="form-label">Xrays:</label>
-          <br/>
-          <input className="login-input" type="text" placeholder="True / False" name="xrays" value={this.state.xrays} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-        </div>
-
         <div className="form-group">
           <label for="category" className="form-label">Xray Type:</label>
           <br/>
@@ -101,7 +119,7 @@ render(){
         </div>
         {!this.state.isEditing
           ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
-          : <button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Save</button>
+          : <button className="btn btn-primary" type="button" onClick={this.saveRecord}>Save</button>
         }
       </form>
   </div>
