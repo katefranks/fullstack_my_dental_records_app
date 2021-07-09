@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import "../index.css";
+import "../index.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';

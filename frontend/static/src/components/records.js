@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import { Button , Modal } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import RecordDetail from './recordDetail'
 import Cookies from 'js-cookie';
@@ -12,11 +14,20 @@ class Records extends Component {
     super(props);
     this.state = {
       records: [],
+      show: false,
     }
     this.editRecord = this.editRecord.bind(this);
     this.deleteRecord = this.deleteRecord.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
-// Passing these methods down to the profile detail through props.
+
+
+  // handleClose = () => this.setState({show: false});
+  // handleShow = () => this.setState({show: true});
+
+  handleModal(){
+    this.setState({show: !this.state.show})
+  }
 
 async editRecord(record){
   let formData = new FormData();
@@ -65,22 +76,45 @@ componentDidMount(){
       .then(data => this.setState({ records : data }));
   }
 
+
+
   render(){
     const records = this.state.records.map(record =>
       <RecordDetail key={record.id} record={record} deleteRecord={this.deleteRecord} editRecord={this.editRecord}/>
     )
+
+
+
+
     return(
 
       <div>
+
+        <Button onClick={()=> (this.handleModal())}>Add New Record</Button>
+          <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" >
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
         <h1>Records</h1>
         <ul>{records}</ul>
       </div>
+
 
     );
   }
 }
 export default Records;
 
+// <Button variant="secondary" onClick={()=> (this.handleModal())}>
+//   Close
+// </Button>
 
 // Fetch records of logged in user
 // get those to display
