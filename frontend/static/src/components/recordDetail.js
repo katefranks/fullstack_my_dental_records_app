@@ -32,8 +32,8 @@ saveRecord(e){
   if (!(record.appt_img instanceof File)){
     //"if it's NOT an instance of a file, remove it"
     delete record.appt_img;
+    //deleting property if not an instance of a file. 
   }
-
 
   delete record.isEditing;
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
@@ -121,17 +121,16 @@ render(){
           ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
           : <button className="btn btn-primary" type="button" onClick={this.saveRecord}>Save</button>
         }
+        <button type="button" className="btn btn-primary"  onClick={() => this.props.deleteRecord(this.props.record.id)}>Delete</button>
       </form>
   </div>
-
-
-    </>
+  </>
   )
 }
 }
 export default RecordDetail;
 
-
+// <button type="button" className="btn btn-primary"  onClick={() => this.props.deleteRecord(this.props.record.id)}>Delete</button>
 
 //
 //   render() {

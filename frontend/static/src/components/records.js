@@ -5,7 +5,7 @@ import RecordDetail from './recordDetail'
 import Cookies from 'js-cookie';
 // import recordsNavBar from './recordsNavBar';
 
-
+//get modal to open and close- react bootstrap modal
 
 class Records extends Component {
   constructor(props){
@@ -14,24 +14,16 @@ class Records extends Component {
       records: [],
     }
     this.editRecord = this.editRecord.bind(this);
-    // this.deleteRecord = this.deleteRecord.bind(this);
+    this.deleteRecord = this.deleteRecord.bind(this);
   }
-// w/in records component write 2 methods- 1 to update and 1 to delete. Will pass these methods down to the profile detail through props.
+// Passing these methods down to the profile detail through props.
 
 async editRecord(record){
   let formData = new FormData();
 
-  formData.append('appt_date', record.appt_date);
-  formData.append('category', record.category);
-  formData.append('xrays', record.xrays);
-  formData.append('xray_type', record.xray_type);
-  formData.append('services', record.services);
-  formData.append('recommendations', record.recommendations);
-  formData.append('appt_img', record.appt_img);
-  // if (this.state.appt_img instanceof File){
-  //   formData.append('appt_img', record.appt_img);
-  // }
-  //
+  const keys = Object.keys(record);
+  keys.forEach(key => formData.append(key, record[key]));
+// for each key were appending the key and value of key (using square bracket notation to access value)
 
   const options = {
     method: 'PATCH',
@@ -44,7 +36,26 @@ async editRecord(record){
   if(!response.ok) {
 
   }
-  // this.setState({isEditing: false})
+}
+
+async deleteRecord(id){
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': Cookies.get('csrftoken')
+    }
+  }
+  fetch(`/api/v1/records/${id}`, options)
+    .then(response => {
+      const records = [...this.state.records];
+      const index = records.findIndex(record => record.id === id);
+      records.splice(index, 1);
+      this.setState({ records });
+    })
+  .catch((error) => {
+    console.error('Error: ', error);
+  });
 }
 
 
@@ -56,7 +67,7 @@ componentDidMount(){
 
   render(){
     const records = this.state.records.map(record =>
-      <RecordDetail key={record.id} record={record} editRecord={this.editRecord}/>
+      <RecordDetail key={record.id} record={record} deleteRecord={this.deleteRecord} editRecord={this.editRecord}/>
     )
     return(
 
@@ -70,18 +81,6 @@ componentDidMount(){
 }
 export default Records;
 
-// appt_date: '',
-// category:  'CLE',
-// xrays: false,
-// xray_type: '',
-// services: '',
-// recommendations: '',
-// appt_img: null,
-// preview: '',
-// isEditing: false,
-// id: null,
-
-      // <recordsNavBar/>
 
 // Fetch records of logged in user
 // get those to display
