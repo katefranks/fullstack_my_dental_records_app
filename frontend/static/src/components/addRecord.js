@@ -20,7 +20,7 @@ class AddRecord extends Component{
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
-    // this.handleImage = this.handleImage.bind(this);
+    this.handleImage = this.handleImage.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
     // this.editRecord = this.editRecord.bind(this);
     // this.addNewRecord = this.addNewRecord.bind(this);
@@ -36,26 +36,35 @@ class AddRecord extends Component{
     this.setState({[e.target.name]: e.target.checked})
   }
 
+  handleImage(e) {
+    let file = e.target.files[0];
+    this.setState({appt_img : file, });
+
+    let reader = new FileReader();
+      reader.onloadend = () => {
+        this.setState({
+          preview: reader.result,
+        });
+      }
+    reader.readAsDataURL(file);
+  }
+
   render(){
     return(
       <>
 
     <div className="record-form-div">
       <form className="form-login p-4 mb-3 login-form-container profile-form-container">
-
-
           <div className="form-group">
             <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox}/>
             <br />
             <label for="xrays" className="form-label">X Rays</label>
           </div>
-
           <div className="form-group">
             <label for="appt_date" className="form-label">Appointment Date:</label>
             <br/>
             <input className="login-input" placeholder="MM/DD/YYYY" name="appt_date" type="text" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
           </div>
-
           <div className="form-group">
             <label for="category" className="form-label">Appointment Category</label>
             <br/>
@@ -64,13 +73,11 @@ class AddRecord extends Component{
             <option value="RES">Restorative</option>
           </select>
           </div>
-
           <div className="form-group">
             <label for="xrays" className="form-label">Xrays:</label>
             <br/>
             <input className="login-input" type="text" placeholder="True / False" name="xrays" value={this.state.xrays} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
           </div>
-
           <div className="form-group">
             <label for="category" className="form-label">Xray Type:</label>
             <br/>
@@ -80,13 +87,13 @@ class AddRecord extends Component{
           <div className="form-group">
             <label for="services" className="form-label">Services Completed:</label>
             <br/>
-            <input className="login-input" type="text" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            <input className="login-input" type="text" name="services" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
           </div>
 
           <div className="form-group">
             <label for="recommendations" className="form-label">Recommendations:</label>
             <br/>
-            <input className="login-input" type="text" placeholder="Recommendations?" value={this.state.recommendations} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            <input className="login-input" type="text" placeholder="Recommendations?" name="recommendations" value={this.state.recommendations} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
           </div>
 
           <div className="form-group">
@@ -94,7 +101,7 @@ class AddRecord extends Component{
             <br/>
             <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
             {this.state.appt_img
-                  ? <img className="appt_img" src={this.state.preview || this.state.appt_img} alt=""/>
+                  ? <img className="appt-img" src={this.state.preview || this.state.appt_img} alt=""/>
                   : null
                 }
           </div>

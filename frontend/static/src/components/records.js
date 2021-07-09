@@ -1,8 +1,11 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
+import RecordDetail from './recordDetail'
 import Cookies from 'js-cookie';
 // import recordsNavBar from './recordsNavBar';
+
+
 
 class Records extends Component {
   constructor(props){
@@ -12,21 +15,8 @@ class Records extends Component {
     }
     //methods
   }
+// w/in records component write 2 methods- 1 to update and 1 to delete. Will pass these methods down to the profile detail through props.
 
-// componentDidMount(){
-//   fetch('/api/v1/records/')
-//     .then(response => {
-//       if(!response.ok){
-//         throw new Error('Network response was not ok');
-//       } return response.JSON();
-//       // console.log(response);
-//     })
-//     .then(data => this.setState({ records : data }))
-//     // .then(data => this.setState({ ...data }))
-//     .catch(error => {
-//       console.log('There has been a problem with your fetch operation: ', error);
-//     });
-// }
 componentDidMount(){
     fetch('/api/v1/records/')
       .then(response => response.json())
@@ -35,14 +25,7 @@ componentDidMount(){
 
   render(){
     const records = this.state.records.map(record =>
-      <li className="li-record" key={record.id}>
-        <p style={{color: "blue"}}>{record.appt_date}</p>
-        <p>{record.category}</p>
-        <p>{record.xrays}</p>
-        <p>{record.xray_type}</p>
-        <p>{record.services}</p>
-        <p>{record.recommendations}</p>
-      </li>
+      <RecordDetail key={record.id} record={record} />
     )
     return(
 
