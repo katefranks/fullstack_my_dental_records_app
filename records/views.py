@@ -25,3 +25,10 @@ class RecordDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class CategoryListAPIView(generics.ListCreateAPIView):
+    serializer_class = RecordSerializer
+
+    def get_queryset(self):
+        selection = self.request.query_params['category']
+        return Record.objects.filter(category=selection)

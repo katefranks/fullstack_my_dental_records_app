@@ -22,6 +22,8 @@ class Records extends Component {
     this.deleteRecord = this.deleteRecord.bind(this);
     this.handleModal = this.handleModal.bind(this);
     this.fetchData = this.fetchData.bind(this);
+    this.filterCleaning = this.filterCleaning.bind(this);
+    this.filterRestorative = this.filterRestorative.bind(this);
   }
 
 
@@ -104,6 +106,32 @@ componentDidMount(){
         .then(data => this.setState({ records : data }));
     }
 
+filterCleaning() {
+   fetch(`/api/v1/records/category/?category=CLE`)
+     .then(response => {
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+       return response.json();
+     })
+     .then(data => this.setState({ records: data })).catch(error => {
+       console.error('There has been a problem with your fetch operation:', error);
+     });
+ }
+
+ filterRestorative() {
+    fetch(`/api/v1/records/category/?category=RES`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ records: data })).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
+
   render(){
     const records = this.state.records.map(record =>
       <RecordDetail key={record.id} record={record} deleteRecord={this.deleteRecord} editRecord={this.editRecord}/>
@@ -115,8 +143,9 @@ componentDidMount(){
     return(
 
       <div>
-
+        <div className="addrecord-button-container">
         <Button onClick={()=> (this.handleModal())}>Add New Record</Button>
+        </div>
           <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
             <Modal.Header closeButton>
               <Modal.Title>Add New Record</Modal.Title>
@@ -125,10 +154,15 @@ componentDidMount(){
               <AddRecord handleModal={this.handleModal} addRecord={this.addRecord}/>
             </Modal.Body>
             <Modal.Footer>
-              
+
             </Modal.Footer>
           </Modal>
         <h1>Records</h1>
+        <div className="appt-filter-container">
+        <Button className="appt-category-button" onClick={()=> (this.filterCleaning())}>Cleaning Appts</Button>
+        <Button className="appt-category-button" onClick={()=> (this.filterRestorative())}>Restorative Appts</Button>
+        <Button className="appt-category-button" onClick={()=> (this.fetchData())}>View All</Button>
+        </div>
         <ul>{records}</ul>
       </div>
 

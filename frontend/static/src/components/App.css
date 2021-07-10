@@ -75,6 +75,24 @@ ul{
   width: 220px;
 }
 
+.appt-filter-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
+
+.appt-category-button{
+  margin: 2px;
+
+}
+
+/* Add Record- modal */
+.addrecord-button-container{
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+}
 
 /* Find Care */
 .map{
