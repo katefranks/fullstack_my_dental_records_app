@@ -133,7 +133,7 @@ render(){
             <div className="form-group">
               <label for="dob" className="form-label">Date of Birth:</label>
               <br/>
-              <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+              <input className="login-input" type="date" placeholder="MM/DD/YYYY" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div className="form-group">
@@ -163,8 +163,13 @@ render(){
 }
 export default Profile;
 
-//need to implement for dates:
-//type="datetime-local"
+// Prior to implementing type="date" for input field
+// <div className="form-group">
+//   <label for="dob" className="form-label">Date of Birth:</label>
+//   <br/>
+//   <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+// </div>
+//
 
 //Profile model from django (referene):
 // user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True,)
