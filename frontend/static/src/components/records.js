@@ -21,6 +21,7 @@ class Records extends Component {
     this.editRecord = this.editRecord.bind(this);
     this.deleteRecord = this.deleteRecord.bind(this);
     this.handleModal = this.handleModal.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
 
@@ -45,44 +46,9 @@ async addRecord(record){
     body: formData,
   };
   const response = await fetch(`/api/v1/records/`, options);
-  if(!response.ok) {
-  }
-  const records = [...this.state.records];
-      records.push(record);
-      //record instead of form data?
-      this.setState({records});
+  this.setState({response});
+  this.fetchData();
 }
-
-// async addRecord(record) {
-//
-//   console.log(this.state.appt_img instanceof File)
-//   let formData = new FormData();
-//   formData.append('appt_date', this.state.appt_date);
-//   formData.append('category', this.state.category);
-//   formData.append('xrays', this.state.xrays);
-//   formData.append('xray_type', this.state.xray_type);
-//   formData.append('services', this.state.services);
-//   formData.append('recommendations', this.state.recommendations);
-//   if (this.state.appt_img instanceof File){
-//     formData.append('appt_img', this.state.appt_img);
-//   }
-//
-//
-//   const options = {
-//     method: 'POST',
-//     headers: {
-//       'X-CSRFToken': Cookies.get('csrftoken'),
-//     },
-//     body: formData,
-//   }
-//   const response = await fetch('/api/v1/records/', options);
-//   this.setState({response});
-//
-//   const records = [...this.state.records];
-//         records.push({record});
-//         //record instead of form data?
-//         this.setState({records});
-// }
 
 async editRecord(record){
   let formData = new FormData();
@@ -100,8 +66,9 @@ async editRecord(record){
   };
   const response = await fetch(`/api/v1/records/${record.id}/`, options);
   if(!response.ok) {
-
+  throw new Error('Network response was not ok');
   }
+  this.setState({response});
 }
 
 async deleteRecord(id){
@@ -131,7 +98,11 @@ componentDidMount(){
       .then(data => this.setState({ records : data }));
   }
 
-
+  fetchData(){
+      fetch('/api/v1/records/')
+        .then(response => response.json())
+        .then(data => this.setState({ records : data }));
+    }
 
   render(){
     const records = this.state.records.map(record =>
@@ -151,10 +122,10 @@ componentDidMount(){
               <Modal.Title>Add New Record</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <AddRecord addRecord={this.addRecord}/>
+              <AddRecord handleModal={this.handleModal} addRecord={this.addRecord}/>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" >Save</Button>
+              
             </Modal.Footer>
           </Modal>
         <h1>Records</h1>
