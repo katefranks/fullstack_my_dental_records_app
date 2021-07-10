@@ -75,7 +75,7 @@ render(){
         <div className="form-group">
           <label for="appt_date" className="form-label">Appointment Date:</label>
           <br/>
-          <input className="login-input" placeholder="MM/DD/YYYY" name="appt_date" type="text" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <input className="login-input" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>
         <div className="form-group">
           <label for="category" className="form-label">Appointment Category</label>
@@ -100,6 +100,12 @@ render(){
           <label for="services" className="form-label">Services Completed:</label>
           <br/>
           <input className="login-input" type="text" name="services" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+        </div>
+        
+        <div className="form-group">
+          <label for="services" className="form-label">Provider's Name:</label>
+          <br/>
+          <input className="login-input" type="text" name="provider_name" placeholder="Name of Provider" value={this.state.provider_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>
 
         <div className="form-group">

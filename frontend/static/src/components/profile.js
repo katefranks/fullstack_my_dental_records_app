@@ -133,13 +133,13 @@ render(){
             <div className="form-group">
               <label for="dob" className="form-label">Date of Birth:</label>
               <br/>
-              <input className="login-input" type="date" placeholder="MM/DD/YYYY" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+              <input className="login-input" type="date" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div className="form-group">
               <label for="toothbrush_replaced" className="form-label">Toothbrush Replaced On:</label>
               <br/>
-              <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="toothbrush_replaced" value={this.state.toothbrush_replaced} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+              <input className="login-input" type="date" name="toothbrush_replaced" value={this.state.toothbrush_replaced} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div className="form-group">
