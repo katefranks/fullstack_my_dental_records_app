@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom
 import { Button , Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import RecordDetail from './recordDetail'
+import RecordDetail from './recordDetail';
+import AddRecord from './addRecord';
 import Cookies from 'js-cookie';
 // import recordsNavBar from './recordsNavBar';
 
@@ -93,13 +94,13 @@ componentDidMount(){
         <Button onClick={()=> (this.handleModal())}>Add New Record</Button>
           <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Add New Record</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Body>
+              <AddRecord />
+            </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" >
-                Save Changes
-              </Button>
+              <Button variant="primary" >Save</Button>
             </Modal.Footer>
           </Modal>
         <h1>Records</h1>

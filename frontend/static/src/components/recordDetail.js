@@ -32,7 +32,7 @@ saveRecord(e){
   if (!(record.appt_img instanceof File)){
     //"if it's NOT an instance of a file, remove it"
     delete record.appt_img;
-    //deleting property if not an instance of a file. 
+    //deleting property if not an instance of a file.
   }
 
   delete record.isEditing;

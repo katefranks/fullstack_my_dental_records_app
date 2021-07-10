@@ -56,14 +56,9 @@ class AddRecord extends Component{
     <div className="record-form-div">
       <form className="form-login p-4 mb-3 login-form-container profile-form-container">
           <div className="form-group">
-            <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox}/>
-            <br />
-            <label for="xrays" className="form-label">X Rays</label>
-          </div>
-          <div className="form-group">
             <label for="appt_date" className="form-label">Appointment Date:</label>
             <br/>
-            <input className="login-input" placeholder="MM/DD/YYYY" name="appt_date" type="text" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            <input className="login-input" placeholder="MM/DD/YYYY" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
           </div>
           <div className="form-group">
             <label for="category" className="form-label">Appointment Category</label>
@@ -72,6 +67,12 @@ class AddRecord extends Component{
             <option value="CLE">Cleaning</option>
             <option value="RES">Restorative</option>
           </select>
+          </div>
+          <div className="form-group">
+            <label for="xrays" className="form-label">X Rays</label>
+            <br/>
+            <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox} disabled={!this.state?.isEditing}/>
+            <br />
           </div>
           <div className="form-group">
             <label for="xrays" className="form-label">Xrays:</label>

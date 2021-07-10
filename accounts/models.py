@@ -10,7 +10,8 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True,)
     display_name = models.CharField(max_length=255)
-    dob = models.CharField(max_length=255)
+    # dob = models.DateField(auto_now=False, blank=True, null=True,)
+    dob = models.CharField(max_length=225, null=True)
     toothbrush_replaced = models.CharField(max_length=255)
     ins_card = models.ImageField(null=True, upload_to='profiles/')
 

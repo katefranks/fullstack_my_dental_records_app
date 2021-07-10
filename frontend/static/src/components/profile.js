@@ -76,7 +76,6 @@ async addProfile(e) {
     formData.append('ins_card', this.state.ins_card);
   }
 
-//type of. Check in js how to do something if type of file. Can't send up url, that's not a type of file.
 
   const options = {
     method: 'POST',
@@ -92,7 +91,9 @@ async addProfile(e) {
 async editProfile(e){
 
   let formData = new FormData();
-
+  formData.append('display_name', this.state.display_name);
+  formData.append('dob', this.state.dob);
+  formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
   if (this.state.ins_card instanceof File){
     formData.append('ins_card', this.state.ins_card);
   }
@@ -161,6 +162,9 @@ render(){
 }
 }
 export default Profile;
+
+//need to implement for dates:
+//type="datetime-local"
 
 //Profile model from django (referene):
 // user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True,)
