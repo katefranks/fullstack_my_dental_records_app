@@ -15,7 +15,32 @@
 .login-form-div{
   display: flex;
   justify-content: center;
-/* background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C12584, #E1306C, #FD1D1D); */
+}
+
+/* Homepage */
+
+.homepage-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.homepage-link{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
 }
 
 /* PROFILE */

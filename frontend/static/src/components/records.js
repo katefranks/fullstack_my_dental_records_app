@@ -6,6 +6,7 @@ import './App.css';
 import RecordDetail from './recordDetail';
 import AddRecord from './addRecord';
 import Cookies from 'js-cookie';
+import Homepage from './homepage';
 // import recordsNavBar from './recordsNavBar';
 
 //get modal to open and close- react bootstrap modal
@@ -24,6 +25,7 @@ class Records extends Component {
     this.fetchData = this.fetchData.bind(this);
     this.filterCleaning = this.filterCleaning.bind(this);
     this.filterRestorative = this.filterRestorative.bind(this);
+    this.filterXrays = this.filterXrays.bind(this);
   }
 
 
@@ -132,14 +134,24 @@ filterCleaning() {
       });
   }
 
+  filterXrays() {
+    fetch(`/api/v1/records/xrays/?xrays=True`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => this.setState({ records: data })).catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+  }
+//
   render(){
     const records = this.state.records.map(record =>
       <RecordDetail key={record.id} record={record} deleteRecord={this.deleteRecord} editRecord={this.editRecord}/>
     )
-
-
-
-
+  
     return(
 
       <div>
@@ -153,14 +165,13 @@ filterCleaning() {
             <Modal.Body>
               <AddRecord handleModal={this.handleModal} addRecord={this.addRecord}/>
             </Modal.Body>
-            <Modal.Footer>
-
-            </Modal.Footer>
+            <Modal.Footer></Modal.Footer>
           </Modal>
         <h1>Records</h1>
         <div className="appt-filter-container">
         <Button className="appt-category-button" onClick={()=> (this.filterCleaning())}>Cleaning Appts</Button>
         <Button className="appt-category-button" onClick={()=> (this.filterRestorative())}>Restorative Appts</Button>
+        <Button className="appt-category-button" onClick={()=> (this.filterXrays())}>Xrays</Button>
         <Button className="appt-category-button" onClick={()=> (this.fetchData())}>View All</Button>
         </div>
         <ul>{records}</ul>
@@ -172,9 +183,9 @@ filterCleaning() {
 }
 export default Records;
 
-// <Button variant="secondary" onClick={()=> (this.handleModal())}>
-//   Close
-// </Button>
+
+
+
 
 // Fetch records of logged in user
 // get those to display

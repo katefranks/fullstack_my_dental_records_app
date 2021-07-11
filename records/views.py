@@ -32,3 +32,10 @@ class CategoryListAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         selection = self.request.query_params['category']
         return Record.objects.filter(category=selection)
+
+class XrayListAPIView(generics.ListCreateAPIView):
+    serializer_class = RecordSerializer
+
+    def get_queryset(self):
+        selection = self.request.query_params['xrays']
+        return Record.objects.filter(xrays=selection)
