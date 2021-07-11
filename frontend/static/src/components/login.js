@@ -10,6 +10,7 @@ class Login extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.toggleRegistration = this.toggleRegistration.bind(this);
   }
   handleInput(e) {
     this.setState({ [e.target.name]: e.target.value});
@@ -18,7 +19,11 @@ class Login extends Component {
     e.preventDefault();
     this.props.handleLogin(this.state);
   }
-//
+
+  toggleRegistration(e){
+    e.preventDefault();
+    this.props.history.push("/registration");
+  }
 
 render(){
   return(
@@ -43,7 +48,7 @@ render(){
       </div>
         <button className="btn btn-primary" type="submit">Submit</button>
         <div className="divider">New here? Register!</div>
-        <button className="btn btn-primary toggle-register">Create New Account</button>
+        <button onClick={this.toggleRegistration} type="button"className="btn btn-primary toggle-register">Create New Account</button>
         </form>
     </div>
 
@@ -52,6 +57,8 @@ render(){
 }
 
 export default Login;
+
+
 
 //need to add back in functionality to toggle register/login.
 // <button className="btn btn-primary toggle-register" onClick={() => this.props.handleNavigation('register')}>Create New Account</button>

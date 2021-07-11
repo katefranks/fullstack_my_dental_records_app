@@ -11,6 +11,7 @@ class Registration extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.toggleLogin = this.toggleLogin.bind(this);
   }
   handleInput(e){
     this.setState({[e.target.name]: e.target.value});
@@ -18,6 +19,11 @@ class Registration extends Component {
   handleSubmit(e){
     e.preventDefault();
     this.props.handleRegistration(this.state);
+  }
+
+  toggleLogin(e){
+    e.preventDefault();
+    this.props.history.push('/login');
   }
 //
 render(){
@@ -46,8 +52,8 @@ render(){
     <input className="login-input" type="password" placeholder="Re-enter Password" name="password2" value={this.state.password} onChange={this.handleInput}/>
   </div>
     <button className="btn btn-primary" type="submit">Submit</button>
-    <div className="divider">New here? Register!</div>
-    <button className="btn btn-primary toggle-register" >Create New Account</button>
+    <div className="divider">Have an Account?</div>
+    <button type="button" onClick={this.toggleLogin} className="btn btn-primary toggle-register" >Sign In</button>
     </form>
 </div>
 );
