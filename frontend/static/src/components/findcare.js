@@ -1,27 +1,55 @@
 import React, { Component } from 'react';
 import './App.css';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { Loader } from "@googlemaps/js-api-loader"
+// import { Loader } from "@googlemaps/js-api-loader"
 
-class FindCare extends Component {
-render(){
-  return(
-    <div className="map-container">
-        <h2>Find Care:</h2>
-        <Map className="map" google={this.props.google} zoom={14}>
+export class MapContainer extends Component {
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+    // mapCenter: {
+    //   lat: 34.8526,
+    //   lng: 82.3940,
+    // },
+  };
 
-            <Marker onClick={this.onMarkerClick}
-                    name={'Current location'} />
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
 
-            <InfoWindow onClose={this.onInfoWindowClose}>
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
 
-            </InfoWindow>
-          </Map>
-    </div>
-  );
+  render() {
+    return (
+      <Map google={this.props.google}
+          onClick={this.onMapClicked}>
+        <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
+
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
+      </Map>
+    )
+  }
 }
-}
+
 
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
-})(FindCare)
+})(MapContainer)

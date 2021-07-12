@@ -15,9 +15,10 @@ import Homepage from './homepage';
 import Profile from './profile';
 import Records from './records';
 import AddRecord from './addRecord';
-import FindCare from './findcare';
+// import FindCare from './findcare';
 import ApiTest from './api_test';
-
+//
+import GoogleMap from './findcare';
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -118,6 +119,12 @@ render(){
                 <Registration {...props} handleRegistration={this.handleRegistration} />
               )}
             />
+            <Route
+              path='/findcare'
+              render={(props) => (
+                <GoogleMap />
+              )}
+            />
 
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} exact path="/">
              <Homepage addRecord={this.addRecord} records={this.records} />
@@ -130,6 +137,9 @@ render(){
           </PrivateRoute>
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/addRecord">
              <AddRecord />
+          </PrivateRoute>
+          <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/api_test">
+             <ApiTest />
           </PrivateRoute>
         </Switch>
       </>
