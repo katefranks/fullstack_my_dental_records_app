@@ -126,6 +126,11 @@ render(){
               )}
             />
 
+          <Route
+            path ='/api_test'
+            render={(props) => (<ApiTest />)}
+          />
+
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} exact path="/">
              <Homepage addRecord={this.addRecord} records={this.records} />
           </PrivateRoute>
@@ -138,9 +143,7 @@ render(){
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/addRecord">
              <AddRecord />
           </PrivateRoute>
-          <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/api_test">
-             <ApiTest />
-          </PrivateRoute>
+
         </Switch>
       </>
 
@@ -149,6 +152,11 @@ render(){
 }
 
 export default withRouter(App);
+
+// <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/api_test">
+//    <ApiTest />
+// </PrivateRoute>
+
 
   // <PrivateRoute isAuthenticated={this.state.isAuthenticated} />
 //
