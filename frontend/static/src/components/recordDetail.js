@@ -90,34 +90,59 @@ render(){
           <br />
           <label for="xrays" className="form-label">X Rays</label>
         </div>
-        <div className="form-group">
+
+        {!this.state.isEditing && this.state.xrays &&
+        (<div className="form-group">
           <label for="category" className="form-label">Xray Type:</label>
           <br/>
-          <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-        </div>
+          <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} disabled={!this.state?.isEditing} />
+        </div>)
+        }
 
-        <div className="form-group">
+        {this.state.isEditing &&
+          <div className="form-group">
+            <label for="category" className="form-label">Xray Type:</label>
+            <br/>
+            <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} />
+          </div>
+        }
+
+        {((!this.state.isEditing && this.state.services) || this.state.isEditing )
+        ?(<div className="form-group">
           <label for="services" className="form-label">Services Completed:</label>
           <br/>
           <input className="login-input" type="text" name="services" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-        </div>
-        
-        <div className="form-group">
-          <label for="services" className="form-label">Provider's Name:</label>
+        </div>)
+        : null
+        }
+
+        {((!this.state.isEditing && this.state.provider_name) || this.state.isEditing )
+        ?(<div className="form-group">
+          <label for="provider_name" className="form-label">Provider's Name:</label>
           <br/>
           <input className="login-input" type="text" name="provider_name" placeholder="Name of Provider" value={this.state.provider_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-        </div>
+        </div>)
+        : null
+        }
 
-        <div className="form-group">
+        {((!this.state.isEditing && this.state.recommendations) || this.state.isEditing )
+        ? (<div className="form-group">
           <label for="recommendations" className="form-label">Recommendations:</label>
           <br/>
           <input className="login-input" type="text" placeholder="Recommendations?" name="recommendations" value={this.state.recommendations} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-        </div>
+        </div>)
+        : null
+      }
 
         <div className="form-group">
+          {this.state.isEditing ?
+          (<>
           <label for="appt_img" className="form-label">Upload xrays or photos:</label>
           <br/>
           <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
+          </>)
+          : null
+          }
           {this.state.appt_img
                 ? <img className="appt-img" src={this.state.preview || this.state.appt_img} alt=""/>
                 : null
@@ -136,21 +161,12 @@ render(){
 }
 export default RecordDetail;
 
-// <button type="button" className="btn btn-primary"  onClick={() => this.props.deleteRecord(this.props.record.id)}>Delete</button>
+
 
 //
-//   render() {
-//     const record = this.props.record;
-//     return(
-//       <li className="li-record">
-//         <p style={{color: "blue"}}>{record.appt_date}</p>
-//         <p>{record.category}</p>
-//         <p>{record.xrays}</p>
-//         <p>{record.xray_type}</p>
-//         <p>{record.services}</p>
-//         <p>{record.recommendations}</p>
-//       </li>
-//     );
-//   }
-// }
-// export default RecordDetail;
+
+// <div className="form-group">
+//   <label for="category" className="form-label">Xray Type:</label>
+//   <br/>
+//   <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+// </div>

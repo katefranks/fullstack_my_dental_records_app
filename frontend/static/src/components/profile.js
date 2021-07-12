@@ -9,7 +9,7 @@ class Profile extends Component{
     this.state = {
       display_name: '',
       dob: '',
-      //name of dentist- need to add to model in django
+      dentist: '',
       toothbrush_replaced: '',
       ins_card: null,
       preview: '',
@@ -71,6 +71,7 @@ async addProfile(e) {
   let formData = new FormData();
   formData.append('display_name', this.state.display_name);
   formData.append('dob', this.state.dob);
+  formData.append('dentist', this.state.dentist);
   formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
   if (this.state.ins_card instanceof File){
     formData.append('ins_card', this.state.ins_card);
@@ -93,6 +94,7 @@ async editProfile(e){
   let formData = new FormData();
   formData.append('display_name', this.state.display_name);
   formData.append('dob', this.state.dob);
+  formData.append('dentist', this.state.dentist);
   formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
   if (this.state.ins_card instanceof File){
     formData.append('ins_card', this.state.ins_card);
@@ -134,6 +136,12 @@ render(){
               <label for="dob" className="form-label">Date of Birth:</label>
               <br/>
               <input className="login-input" type="date" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            </div>
+
+            <div className="form-group">
+              <label for="dentist" className="form-label">Dentist/Dental Office:</label>
+              <br/>
+              <input className="login-input" placeholder="Dental Office's Name" name="dentist" type="text" value={this.state.dentist} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div className="form-group">

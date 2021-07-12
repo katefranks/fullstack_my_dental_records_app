@@ -86,22 +86,19 @@ class AddRecord extends Component{
             </select>
             </div>
             <div className="form-group">
-              <label for="xrays" className="form-label">X Rays</label>
+              <label for="xrays" className="form-label">Were Xrays Taken? </label>
               <br/>
               <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox} />
               <br />
             </div>
-            <div className="form-group">
-              <label for="xrays" className="form-label">Xrays:</label>
-              <br/>
-              <input className="login-input" type="text" placeholder="True / False" name="xrays" value={this.state.xrays} onChange={this.handleInput} />
-            </div>
-            <div className="form-group">
+            {this.state.xrays
+            ?<div className="form-group">
               <label for="category" className="form-label">Xray Type:</label>
               <br/>
               <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} />
             </div>
-
+            : null
+            }
             <div className="form-group">
               <label for="services" className="form-label">Services Completed:</label>
               <br/>
