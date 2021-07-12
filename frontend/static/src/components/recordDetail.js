@@ -160,13 +160,3 @@ render(){
 }
 }
 export default RecordDetail;
-
-
-
-//
-
-// <div className="form-group">
-//   <label for="category" className="form-label">Xray Type:</label>
-//   <br/>
-//   <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-// </div>

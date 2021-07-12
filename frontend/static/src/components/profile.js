@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
 
 class Profile extends Component{
@@ -153,11 +155,17 @@ render(){
             <div className="form-group">
               <label for="ins_card" className="form-label">Dental Insurance Card:</label>
               <br/>
+              {this.state.isEditing ?
               <input style={{width: "220px"}} type="file" name="ins_card" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
-              {this.state.ins_card
-                    ? <img className="ins-card" src={this.state.preview || this.state.ins_card} alt=""/>
+              : null
+              }
+              {this.state.ins_card ?
+                    <img className="ins-card" src={this.state.preview || this.state.ins_card} alt=""/>
                     : null
-                  }
+              }
+              {!this.state.isEditing && !this.state.ins_card &&
+                <Button type="button" onClick={() => this.setState({isEditing: true})}>Add Insurance Card</Button>
+              }
             </div>
             {!this.state.isEditing
               ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
@@ -171,17 +179,18 @@ render(){
 }
 export default Profile;
 
-// Prior to implementing type="date" for input field
-// <div className="form-group">
-//   <label for="dob" className="form-label">Date of Birth:</label>
-//   <br/>
-//   <input className="login-input" type="text" placeholder="MM/DD/YYYY" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-// </div>
 //
-
-//Profile model from django (referene):
-// user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True,)
-// display_name = models.CharField(max_length=255)
-// dob = models.CharField(max_length=255)
-// toothbrush_replaced = models.CharField(max_length=255)
-// ins_card = models.ImageField(upload_to='profiles/')
+// <div className="form-group">
+//   {this.state.isEditing ?
+//   (<>
+//   <label for="appt_img" className="form-label">Upload xrays or photos:</label>
+//   <br/>
+//   <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
+//   </>)
+//   : null
+//   }
+//   {this.state.appt_img
+//         ? <img className="appt-img" src={this.state.preview || this.state.appt_img} alt=""/>
+//         : null
+//       }
+// </div>
