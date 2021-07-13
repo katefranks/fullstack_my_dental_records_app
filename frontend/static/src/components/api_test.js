@@ -9,14 +9,16 @@ class ApiTest extends Component{
 
   componentDidMount(){
 
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=411+University+Ridge,+Greenville,+SC&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+    // fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=411+University+Ridge,+Greenville,+SC&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+
+    fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=34.852619,-82.394012&radius=1500&type=dentist&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
 
     // fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-34.8526,82.3940&radius=1500&type=dentist&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
 
     .then(response => {
-      if (!response.ok){
-        throw new Error ('Network response was not ok');
-      }
+      // if (!response.ok){
+      //   throw new Error ('Network response was not ok');
+      // }
       return response.json();
     })
     .then(data => console.log('API test: ', { data })).catch(error => {

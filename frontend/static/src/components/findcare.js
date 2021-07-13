@@ -16,10 +16,42 @@ export class MapContainer extends Component {
 
       mapCenter: {
         lat: 34.852619,
-        lng: -82.394010,
+        lng: -82.394012,
       }
     }
+    // this.initialize = this.initialize.bind(this);
   };
+
+  fetchPlaces(mapProps, map) {
+  const { google } = mapProps;
+  // const service = new google.maps.places.PlacesService(map);
+
+  const service = new google.maps.places.PlacesService(map);
+
+
+  var greenville = new google.maps.LatLng(34.852619,-82.394012);
+
+  var request = {
+    location: greenville,
+    radius: '500',
+    query: 'dentist'
+  };
+
+service.textSearch(request, function(results, status){
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      console.log(results[i]);
+    }
+  }
+});
+
+// console.log(request);
+
+};
+
+
+
 
   handleChange = address => {
       this.setState({ address });
@@ -77,7 +109,9 @@ export class MapContainer extends Component {
           </div>
         )}
       </PlacesAutocomplete>
-        <Map google={this.props.google}
+        <Map
+          onReady={this.fetchPlaces}
+          google={this.props.google}
           initialCenter={{
             lat: this.state.mapCenter.lat,
             lng: this.state.mapCenter.lng,
@@ -104,3 +138,12 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
+
+
+//within map component    on ready property
+// on ready= fetch places.    Look in npm
+// google maps react library from doc to fire off  on ready- by default will be passed map object
+// (mapprops, map)
+
+// text search
+//current location -nav geo location
