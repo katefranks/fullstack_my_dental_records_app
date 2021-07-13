@@ -37,21 +37,38 @@ export class MapContainer extends Component {
     query: 'dentist'
   };
 
+// Prior to adding place details
 service.textSearch(request, function(results, status){
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      console.log(results[i]);
+      console.log('name: ',place.name, 'formatted_address: ',place.formatted_address,);
     }
   }
 });
 
-// console.log(request);
+// service.textSearch(request, function(results, status){
+//   if (status === google.maps.places.PlacesServiceStatus.OK) {
+//     for (var i = 0; i < results.length; i++) {
+//       const place = results[i];
+//       // console.log('name: ',place.name, 'formatted_address: ',place.formatted_address,);
+//       console.log(place);
+//       const
+//     }
+//   }
+// });
+
+//
+// service.getDetails(request, function(results, status){
+//   if (status === google.maps.places.PlacesServiceStatus.OK){
+//     for (var i = 0; i < results.length; i++) {
+//       var place = results[i];
+//       console.log(place);
+//     }
+//   }
+// })
 
 };
-
-
-
 
   handleChange = address => {
       this.setState({ address });
@@ -110,6 +127,7 @@ service.textSearch(request, function(results, status){
         )}
       </PlacesAutocomplete>
         <Map
+          style={{width: "500px", height: "500px"}}
           onReady={this.fetchPlaces}
           google={this.props.google}
           initialCenter={{
