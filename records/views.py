@@ -18,13 +18,7 @@ class RecordListAPIView(generics.ListCreateAPIView):
 
 class RecordDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RecordSerializer
-    # queryset = Record.objects.all()
-    # going to have to over ride to only return the records that belong to the logged in user.
-    #override the get query set method
 
-    # Record.objects.filter(user=self.request.user)
-
-    # need to put the above inside a "get query set method"
     def get_queryset(self):
         selection = self.request.user
         return Record.objects.filter(user=self.request.user)
@@ -37,19 +31,12 @@ class CategoryListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         selection = self.request.query_params['category']
-        return Record.objects.filter(category=selection)
+        return Record.objects.filter(category=selection, user=self.request.user)
 
-    # def get_queryset(self):
-    #     selection = self.request.user
-    #     return Record.objects.filter(user=self.request.user)
 
 class XrayListAPIView(generics.ListCreateAPIView):
     serializer_class = RecordSerializer
 
     def get_queryset(self):
         selection = self.request.query_params['xrays']
-        return Record.objects.filter(xrays=selection)
-
-    # def get_queryset(self):
-    #     selection = self.request.user
-    #     return Record.objects.filter(user=self.request.user)
+        return Record.objects.filter(xrays=selection, user=self.request.user)

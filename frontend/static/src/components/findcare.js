@@ -81,8 +81,6 @@ export class MapContainer extends Component {
             // const {formatted_phone_number, geometry} = place;
             // results[i] = {...results[i], formatted_phone_number, geometry};
 
-
-
             // const placeDetails = place;
             // // console.log('name: ', placeDetails.name, 'number: ', placeDetails.formatted_phone_number);
             // console.log('Name: ',place.name, 'Address: ',place.formatted_address, 'number: ', placeDetails.formatted_phone_number);
@@ -98,16 +96,16 @@ export class MapContainer extends Component {
 
 //map over results property on state, and for each one create a marker. ch
 
-createMarker(mapProps, map, place) {
-  // const { google } = mapProps;
-  // for (let i = 0; i < place.length; i++) {
-  //   const marker = new google.maps.Marker({
-  //     position: place[i].position,
-  //
-  //     map: map,
-  //   });
-  // }
-}
+// createMarker(mapProps, map, results) {
+//   const { google } = mapProps;
+//   for (let i = 0; i < place.length; i++) {
+//   //   const marker = new google.maps.Marker({
+//   //     position: place[i].position,
+//   //
+//   //     map: map,
+//   //   });
+//   // }
+// }
 
 
   handleChange = address => {
