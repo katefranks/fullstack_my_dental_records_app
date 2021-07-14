@@ -9,7 +9,8 @@ export class MapContainer extends Component {
     super(props);
     this.state = {
       address: '',
-
+      userLat: '',
+      userLng: '',
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
@@ -17,67 +18,77 @@ export class MapContainer extends Component {
       mapCenter: {
         lat: 34.852619,
         lng: -82.394012,
+        // lat: 'userLat',
+        // lng: 'userLng',
       }
     }
-    // this.initialize = this.initialize.bind(this);
+    this.getCoordinates = this.getCoordinates.bind(this);
+  };
+
+  // componentDidMount() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.watchPosition(function(position) {
+  //       console.log("Latitude is :", position.coords.latitude);
+  //       console.log("Longitude is :", position.coords.longitude);
+  //     });
+  //   }
+  // }
+
+  componentDidMount() {
+    this.getCoordinates();
+  }
+  getCoordinates = () => {
+    let a;
+    let b;
+
+    navigator.geolocation.getCurrentPosition(position => {
+      a = position.coords.latitude;
+      b = position.coords.longitude;
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+      this.setState({
+        userLat: a,
+        userLng: b
+      });
+    });
   };
 
   fetchPlaces(mapProps, map) {
   const { google } = mapProps;
-  // const service = new google.maps.places.PlacesService(map);
-
   const service = new google.maps.places.PlacesService(map);
 
 
-  var greenville = new google.maps.LatLng(34.852619,-82.394012);
+  // var greenville = new google.maps.LatLng(34.852619,-82.394012);
+  var currentLocation = new google.maps.LatLng(this.userLat,this.userLng);
 
   var request = {
-    location: greenville,
+    location: currentLocation,
     radius: '500',
     query: 'dentist'
   };
 
-// Prior to adding place details
-service.textSearch(request, function(results, status){
-  if (status === google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      var place = results[i];
-      // console.log('Name: ',place.name, 'Address: ',place.formatted_address,);
-      console.log(place);
-      var request = {
-        placeId: `${place.place_id}`,
-        fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
-      };
-      service.getDetails(request, function (place, status) {
-  if (status === google.maps.places.PlacesServiceStatus.OK) {
-    console.log(place);
-  }
-});
+  service.textSearch(request, function(results, status){
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        const place = results[i];
+        // console.log('Name: ',place.name, 'Address: ',place.formatted_address,);
+        // console.log(place);
+        var request = {
+          placeId: `${place.place_id}`,
+          fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
+        };
+        service.getDetails(request, function (place, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            const placeDetails = place;
+            // console.log('name: ', placeDetails.name, 'number: ', placeDetails.formatted_phone_number);
+            console.log('Name: ',place.name, 'Address: ',place.formatted_address, 'number: ', placeDetails.formatted_phone_number);
+          }
+
+        });
+
+      }
     }
-  }
-});
-
-// service.textSearch(request, function(results, status){
-//   if (status === google.maps.places.PlacesServiceStatus.OK) {
-//     for (var i = 0; i < results.length; i++) {
-//       const place = results[i];
-//       // console.log('name: ',place.name, 'formatted_address: ',place.formatted_address,);
-//       console.log(place);
-//       const
-//     }
-//   }
-// });
-
-//
-// service.getDetails(request, function(results, status){
-//   if (status === google.maps.places.PlacesServiceStatus.OK){
-//     for (var i = 0; i < results.length; i++) {
-//       var place = results[i];
-//       console.log(place);
-//     }
-//   }
-// })
-
+  });
 };
 
   handleChange = address => {
@@ -96,6 +107,7 @@ service.textSearch(request, function(results, status){
     };
 
   render() {
+
     return (
       <div id="googleMap">
         <PlacesAutocomplete
@@ -167,6 +179,10 @@ export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
 
+// initialCenter={{
+//   lat: this.state.mapCenter.lat,
+//   lng: this.state.mapCenter.lng,
+// }}
 
 //within map component    on ready property
 // on ready= fetch places.    Look in npm
