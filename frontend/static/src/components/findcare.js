@@ -75,22 +75,20 @@ export class MapContainer extends Component {
 
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             results[i].formatted_phone_number = place.formatted_phone_number;
-            results[i].geometry = place.geometry;
+            results[i].geometry.location = place.geometry.location;
 
 
             // const {formatted_phone_number, geometry} = place;
             // results[i] = {...results[i], formatted_phone_number, geometry};
 
-            // const placeDetails = place;
-            // // console.log('name: ', placeDetails.name, 'number: ', placeDetails.formatted_phone_number);
-            // console.log('Name: ',place.name, 'Address: ',place.formatted_address, 'number: ', placeDetails.formatted_phone_number);
           }
         })
-
       }
     }
+    console.log('geometry: ', results[0].geometry.location);
     console.log(results);
     this.setState({ locations: results });
+    this.createMarker(results);
   });
 };
 
@@ -106,6 +104,18 @@ export class MapContainer extends Component {
 //   //   });
 //   // }
 // }
+createMarker(mapProps, map){
+  const { google } = mapProps;
+  const locations = {...this.state.locations};
+  for (let i = 0; i < locations.length; i++) {
+      const marker = new google.maps.Marker({
+        position: locations[i].geometry.location,
+        // icon: icons[locations[i].type].icon,
+        map: map,
+      });
+    }
+
+}
 
 
   handleChange = address => {
@@ -124,9 +134,17 @@ export class MapContainer extends Component {
     };
 
   render() {
+    const locations = this.state.locations.map((location) =>
+    <li className="form-login p-4 mb-3 login-form-container" key="location.place_id">
+      <p>{location.name}</p>
+      <p>{location.formatted_phone_number}</p>
+      <p>{location.formatted_address}</p>
 
+    </li>
+  )
     return (
       <div id="googleMap">
+        <ul>{locations}</ul>
         <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
@@ -185,6 +203,7 @@ export class MapContainer extends Component {
           }}
         />
         </Map>
+
       </div>
 
     )
@@ -197,6 +216,13 @@ export default GoogleApiWrapper({
 })(MapContainer)
 
 
+// const markers = this.state.locations.geometry.locations.map((location) =>
+// <Marker onClick={this.onMarkerClick} name = {this.state.location.name}
+//     position = {
+//       lat: location.geometry.location.lat,
+//       lng: location.geometry.location.lng
+//     } />
+// );
 
 // initialCenter={{
 //   lat: this.state.mapCenter.lat,
