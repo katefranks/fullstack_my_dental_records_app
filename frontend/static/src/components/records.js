@@ -37,21 +37,8 @@ class Records extends Component {
   }
 
 async addRecord(record){
-  let formData = new FormData();
-
-  const keys = Object.keys(record);
-  keys.forEach(key => formData.append(key, record[key]));
-
-  const options = {
-    method: 'POST',
-    headers: {
-      'X-CSRFToken': Cookies.get('csrftoken'),
-    },
-    body: formData,
-  };
-  const response = await fetch(`/api/v1/records/`, options);
-  this.setState({response});
-  this.fetchData();
+  const records = [...this.state.records, record];
+  this.setState({ records });
 }
 
 async editRecord(record){
@@ -97,9 +84,7 @@ async deleteRecord(id){
 
 
 componentDidMount(){
-    fetch('/api/v1/records/')
-      .then(response => response.json())
-      .then(data => this.setState({ records : data }));
+    this.fetchData();
   }
 
   fetchData(){
@@ -151,7 +136,7 @@ filterCleaning() {
     const records = this.state.records.map(record =>
       <RecordDetail key={record.id} record={record} deleteRecord={this.deleteRecord} editRecord={this.editRecord}/>
     )
-  
+
     return(
 
       <div>

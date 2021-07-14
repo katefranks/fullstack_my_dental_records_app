@@ -49,22 +49,39 @@ class AddRecord extends Component{
     reader.readAsDataURL(file);
   }
 
-  handleSubmit(e){
+  async handleSubmit(e){
     e.preventDefault();
     // const record = {...this.props.record};
     // record = this.state.record;
-    const record = this.state;
+    const record = { ...this.state };
 
     if (!(record.appt_img instanceof File)){
       //"if it's NOT an instance of a file, remove it"
       delete record.appt_img;
       //deleting property if not an instance of a file.
     }
-
     delete record.isEditing;
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
-    this.props.addRecord(record);
-    this.props.handleModal();
+
+    let formData = new FormData();
+
+    const keys = Object.keys(record);
+    keys.forEach(key => formData.append(key, record[key]));
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+      body: formData,
+    };
+    const response = await fetch(`/api/v1/records/`, options);
+    const data = await response.json();
+
+    if(!!this.props.addRecord) {
+      this.props.addRecord(data);
+      this.props.handleModal();
+    }
   }
 
   render(){

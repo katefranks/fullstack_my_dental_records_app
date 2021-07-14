@@ -8,6 +8,7 @@ export class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      locations: [],
       address: '',
       userLat: '',
       userLng: '',
@@ -21,6 +22,8 @@ export class MapContainer extends Component {
       }
     }
     this.getCoordinates = this.getCoordinates.bind(this);
+    this.createMarker = this.createMarker.bind(this);
+    this.fetchPlaces = this.fetchPlaces.bind(this);
   };
 
   componentDidMount() {
@@ -43,38 +46,69 @@ export class MapContainer extends Component {
   };
 
   fetchPlaces(mapProps, map) {
-  const { google } = mapProps;
-  const service = new google.maps.places.PlacesService(map);
+    const { google } = mapProps;
+    const service = new google.maps.places.PlacesService(map);
 
-  var currentLocation = new google.maps.LatLng(this.userLat,this.userLng);
+    const currentLocation = new google.maps.LatLng(this.userLat,this.userLng);
 
-  var request = {
-    location: currentLocation,
-    radius: '500',
-    query: 'dentist'
-  };
+    const request = {
+      location: currentLocation,
+      radius: '500',
+      query: 'dentist'
+    };
 
-  service.textSearch(request, function(results, status){
+  service.textSearch(request, (results, status) => {
+
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        const place = results[i];
+      for (let i = 0; i < results.length; i++) {
+        const placeId = results[i].place_id;
         // console.log('Name: ',place.name, 'Address: ',place.formatted_address,);
         // console.log(place);
-        var request = {
-          placeId: `${place.place_id}`,
+        const request = {
+          placeId,
           fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
         };
-        service.getDetails(request, function (place, status) {
+
+        service.getDetails(request, (place, status) => {
+          // you still have access results[i]
+          // target results[i] and add the phone_number
+
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            const placeDetails = place;
-            // console.log('name: ', placeDetails.name, 'number: ', placeDetails.formatted_phone_number);
-            console.log('Name: ',place.name, 'Address: ',place.formatted_address, 'number: ', placeDetails.formatted_phone_number);
+            results[i].formatted_phone_number = place.formatted_phone_number;
+            results[i].geometry = place.geometry;
+
+
+            // const {formatted_phone_number, geometry} = place;
+            // results[i] = {...results[i], formatted_phone_number, geometry};
+
+
+
+            // const placeDetails = place;
+            // // console.log('name: ', placeDetails.name, 'number: ', placeDetails.formatted_phone_number);
+            // console.log('Name: ',place.name, 'Address: ',place.formatted_address, 'number: ', placeDetails.formatted_phone_number);
           }
-        });
+        })
+
       }
     }
+    console.log(results);
+    this.setState({ locations: results });
   });
 };
+
+//map over results property on state, and for each one create a marker. ch
+
+createMarker(mapProps, map, place) {
+  // const { google } = mapProps;
+  // for (let i = 0; i < place.length; i++) {
+  //   const marker = new google.maps.Marker({
+  //     position: place[i].position,
+  //
+  //     map: map,
+  //   });
+  // }
+}
+
 
   handleChange = address => {
       this.setState({ address });
@@ -182,11 +216,3 @@ export default GoogleApiWrapper({
 //     lng: this.state.mapCenter.lng,
 //   }}
 // />
-
-//within map component    on ready property
-// on ready= fetch places.    Look in npm
-// google maps react library from doc to fire off  on ready- by default will be passed map object
-// (mapprops, map)
-
-// text search
-//current location -nav geo location
