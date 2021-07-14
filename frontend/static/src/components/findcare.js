@@ -16,23 +16,12 @@ export class MapContainer extends Component {
       selectedPlace: {},
 
       mapCenter: {
-        lat: 34.852619,
-        lng: -82.394012,
-        // lat: 'userLat',
-        // lng: 'userLng',
+        // lat: 34.852619,
+        // lng: -82.394012,
       }
     }
     this.getCoordinates = this.getCoordinates.bind(this);
   };
-
-  // componentDidMount() {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.watchPosition(function(position) {
-  //       console.log("Latitude is :", position.coords.latitude);
-  //       console.log("Longitude is :", position.coords.longitude);
-  //     });
-  //   }
-  // }
 
   componentDidMount() {
     this.getCoordinates();
@@ -57,8 +46,6 @@ export class MapContainer extends Component {
   const { google } = mapProps;
   const service = new google.maps.places.PlacesService(map);
 
-
-  // var greenville = new google.maps.LatLng(34.852619,-82.394012);
   var currentLocation = new google.maps.LatLng(this.userLat,this.userLng);
 
   var request = {
@@ -83,9 +70,7 @@ export class MapContainer extends Component {
             // console.log('name: ', placeDetails.name, 'number: ', placeDetails.formatted_phone_number);
             console.log('Name: ',place.name, 'Address: ',place.formatted_address, 'number: ', placeDetails.formatted_phone_number);
           }
-
         });
-
       }
     }
   });
@@ -153,18 +138,18 @@ export class MapContainer extends Component {
           onReady={this.fetchPlaces}
           google={this.props.google}
           initialCenter={{
-            lat: this.state.mapCenter.lat,
-            lng: this.state.mapCenter.lng,
+            lat: this.state.userLat,
+            lng: this.state.userLng,
           }}
           center={{
-            lat: this.state.mapCenter.lat,
-            lng: this.state.mapCenter.lng,
+            lat: this.state.userLat,
+            lng: this.state.userLng,
           }}
         >
         <Marker
           position={{
-            lat: this.state.mapCenter.lat,
-            lng: this.state.mapCenter.lng,
+            lat: this.state.userLat,
+            lng: this.state.userLng,
           }}
         />
         </Map>
@@ -179,10 +164,24 @@ export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
 
+
+
 // initialCenter={{
 //   lat: this.state.mapCenter.lat,
 //   lng: this.state.mapCenter.lng,
 // }}
+
+// center={{
+//   lat: this.state.mapCenter.lat,
+//   lng: this.state.mapCenter.lng,
+// }}
+
+// <Marker
+//   position={{
+//     lat: this.state.mapCenter.lat,
+//     lng: this.state.mapCenter.lng,
+//   }}
+// />
 
 //within map component    on ready property
 // on ready= fetch places.    Look in npm
