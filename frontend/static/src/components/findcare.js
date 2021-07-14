@@ -42,7 +42,17 @@ service.textSearch(request, function(results, status){
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      console.log('name: ',place.name, 'formatted_address: ',place.formatted_address,);
+      // console.log('Name: ',place.name, 'Address: ',place.formatted_address,);
+      console.log(place);
+      var request = {
+        placeId: `${place.place_id}`,
+        fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
+      };
+      service.getDetails(request, function (place, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    console.log(place);
+  }
+});
     }
   }
 });
@@ -127,7 +137,7 @@ service.textSearch(request, function(results, status){
         )}
       </PlacesAutocomplete>
         <Map
-          style={{width: "500px", height: "500px"}}
+          style={{width: "500px", height: "500px", border: "solid black 5px"}}
           onReady={this.fetchPlaces}
           google={this.props.google}
           initialCenter={{
