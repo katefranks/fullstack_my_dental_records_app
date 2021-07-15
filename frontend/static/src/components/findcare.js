@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import PlacesAutocomplete, {geocodeByAddress,  getLatLng,} from 'react-places-autocomplete';
 // import { Loader } from "@googlemaps/js-api-loader"
 
@@ -22,9 +22,9 @@ export class MapContainer extends Component {
       }
     }
     this.getCoordinates = this.getCoordinates.bind(this);
-    this.createMarker = this.createMarker.bind(this);
     this.fetchPlaces = this.fetchPlaces.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
   };
 
   componentDidMount() {
@@ -56,7 +56,6 @@ export class MapContainer extends Component {
       location: currentLocation,
       radius: '500',
       query: 'dentist'
-      // type: ['dentist']
     };
 
   service.textSearch(request, (results, status) => {
@@ -78,11 +77,9 @@ export class MapContainer extends Component {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             results[i].formatted_phone_number = place.formatted_phone_number;
             results[i].geometry.location = place.geometry.location;
-
-
+            // alternative syntax for above:
             // const {formatted_phone_number, geometry} = place;
             // results[i] = {...results[i], formatted_phone_number, geometry};
-
           }
         })
       }
@@ -90,40 +87,24 @@ export class MapContainer extends Component {
     console.log('geometry: ', results[0].geometry.location);
     console.log(results);
     this.setState({ locations: results });
-    // this.createMarker(results);
   });
 };
 
-//map over results property on state, and for each one create a marker. ch
-
-// createMarker(mapProps, map, results) {
-//   const { google } = mapProps;
-//   for (let i = 0; i < place.length; i++) {
-//   //   const marker = new google.maps.Marker({
-//   //     position: place[i].position,
-//   //
-//   //     map: map,
-//   //   });
-//   // }
-// }
-createMarker(mapProps, map){
-  // const { google } = mapProps;
-  // const locations = {...this.state.locations};
-  // for (let i = 0; i < locations.length; i++) {
-  //     const marker = new google.maps.Marker({
-  //       position: locations[i].geometry.location,
-  //       // icon: icons[locations[i].type].icon,
-  //       map: map,
-  //     });
-  //   }
-
-}
 onMarkerClick = (props, marker, e) =>
   this.setState({
     selectedPlace: props,
     activeMarker: marker,
     showingInfoWindow: true
   });
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
 
   handleChange = address => {
       this.setState({ address });
@@ -215,9 +196,15 @@ onMarkerClick = (props, marker, e) =>
           }}
         >
 
-
-
         {markers}
+
+        <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}>
+              <div>
+                <h1>{this.state.selectedPlace.name}</h1>
+              </div>
+        </InfoWindow>
 
         </Map>
 
@@ -231,6 +218,10 @@ onMarkerClick = (props, marker, e) =>
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
+
+// get one infowindow to show
+// may need to allow each marker to manage whether or not it's showing
+
 
 // <ul>{locations}</ul>
 
