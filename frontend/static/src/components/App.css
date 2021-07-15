@@ -124,3 +124,13 @@ ul{
   max-width: 200px;
   max-height: 200px;
 }
+
+
+.findcare-container{
+  display: flex;
+}
+
+.findcare-locationsList-container{
+  display: flex;
+  
+}

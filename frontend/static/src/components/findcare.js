@@ -25,11 +25,13 @@ export class MapContainer extends Component {
     this.fetchPlaces = this.fetchPlaces.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
+    this.changeMapCenter = this.changeMapCenter.bind(this);
   };
 
   componentDidMount() {
     this.getCoordinates();
   }
+
   getCoordinates = () => {
     let a;
     let b;
@@ -45,12 +47,18 @@ export class MapContainer extends Component {
       });
     });
   };
+//prior to calling setState, need to check if there's something to set there.
 
   fetchPlaces(mapProps, map) {
+    console.log('this', this);
+    console.log('lat', this.userLat);
+    console.log('lng', this.userLng);
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
 
-    const currentLocation = new google.maps.LatLng(this.userLat,this.userLng);
+
+    const currentLocation = new google.maps.LatLng(this.state.userLat, this.state.userLng);
+    // console.log('current location', currentLocation);
 
     const request = {
       location: currentLocation,
@@ -73,10 +81,12 @@ export class MapContainer extends Component {
         service.getDetails(request, (place, status) => {
           // you still have access results[i]
           // target results[i] and add the phone_number
+          console.log('place', place, status);
 
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             results[i].formatted_phone_number = place.formatted_phone_number;
             results[i].geometry.location = place.geometry.location;
+
             // alternative syntax for above:
             // const {formatted_phone_number, geometry} = place;
             // results[i] = {...results[i], formatted_phone_number, geometry};
@@ -84,7 +94,7 @@ export class MapContainer extends Component {
         })
       }
     }
-    console.log('geometry: ', results[0].geometry.location);
+    // console.log('geometry: ', results[0].geometry.location);
     console.log(results);
     this.setState({ locations: results });
   });
@@ -115,34 +125,38 @@ onMarkerClick = (props, marker, e) =>
         .then(results => getLatLng(results[0]))
         .then(latLng => {
           console.log('Success', latLng)
-          this.setState({ address });
-          this.setState({ mapCenter: latLng });
+          this.setState({ address, mapCenter: latLng });
         })
         .catch(error => console.error('Error', error));
     };
 
+    changeMapCenter(e){
+      e.preventDefault();
+      // this.setState({mapCenter : {place.geometry.location}})
+    };
+
   render() {
-    //
-    // <Marker
-    //   position={{
-    //     lat: this.state.userLat,
-    //     lng: this.state.userLng,
-    //   }}
-    // />
+    const locationsList = this.state.locations.map((place) =>
+    <li key={place.place_id} className="form-login p-4 mb-3 login-form-container" onClick={this.changeMapCenter} >
+      <p>{place.name}</p>
+      <p>{place.formatted_phone_number}</p>
+      <p>{place.formatted_address}</p>
+    </li>
+  )
 
     const markers = this.state.locations.map((place) => (
           <Marker key={place.place_id} onClick={this.onMarkerClick}
             name = {place.name}
+            phoneNumber = {place.formatted_phone_number}
             address = {place.formatted_address}
-            position= {
-              place.geometry.location
-            }
+            position= {place.geometry.location}
           />
       ))
 
 
     return (
-      <div id="googleMap">
+      <div className="findcare-container">
+      <div id="googleMap" >
 
         <PlacesAutocomplete
         value={this.state.address}
@@ -183,7 +197,7 @@ onMarkerClick = (props, marker, e) =>
         )}
       </PlacesAutocomplete>
         <Map
-          style={{width: "500px", height: "500px", border: "solid black 5px"}}
+          style={{width: "500px", height: "500px", border: "solid black 5px", position: "relative"}}
           onReady={this.fetchPlaces}
           google={this.props.google}
           initialCenter={{
@@ -195,6 +209,13 @@ onMarkerClick = (props, marker, e) =>
             lng: this.state.userLng,
           }}
         >
+        <Marker
+
+          position={{
+            lat: this.state.userLat,
+            lng: this.state.userLng,
+          }}
+        />
 
         {markers}
 
@@ -202,14 +223,17 @@ onMarkerClick = (props, marker, e) =>
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}>
               <div>
-                <h1>{this.state.selectedPlace.name}</h1>
+                <h2>{this.state.selectedPlace.name}</h2>
+                <a href={`tel:+${this.state.selectedPlace.phoneNumber}`}>{this.state.selectedPlace.phoneNumber}</a>
+                <p>{this.state.selectedPlace.address}</p>
               </div>
         </InfoWindow>
 
         </Map>
+          <ul>{locationsList}</ul>
 
       </div>
-
+</div>
     )
   }
 }
@@ -219,9 +243,10 @@ export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
 
-// get one infowindow to show
-// may need to allow each marker to manage whether or not it's showing
-
+// const currentLocation =
+// !!this.state.address  ?
+// new google.maps.LatLng(this.userLat,this.userLng)
+// : this.state.address ;
 
 // <ul>{locations}</ul>
 
@@ -232,25 +257,12 @@ export default GoogleApiWrapper({
 //   }}
 // />
 
-
 // <li className="form-login p-4 mb-3 login-form-container" key="location.place_id">
 //   <p>{location.name}</p>
 //   <p>{location.formatted_phone_number}</p>
 //   <p>{location.formatted_address}</p>
 // </li>
 //
-
-// const locations = this.state.locations.map((place, i) =>
-// <Marker key={i} position={{lat: place.geometry.location.lat(), lng: place.geometry.location.lng()}}/>
-// )
-
-// const markers = this.state.locations.geometry.locations.map((location) =>
-// <Marker onClick={this.onMarkerClick} name = {this.state.location.name}
-//     position = {
-//       lat: location.geometry.location.lat,
-//       lng: location.geometry.location.lng
-//     } />
-// );
 
 // initialCenter={{
 //   lat: this.state.mapCenter.lat,

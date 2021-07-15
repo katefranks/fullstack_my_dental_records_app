@@ -4,3 +4,9 @@ Switch:
   Router, switch, components
 
 When a component is rendered via react router, there's different props that get passed down. There may be a time in the future that you need to use these props that get passed down. Ex. dynamic url, id in URL. If you need to access these props, your components need to be wrapped in the router. That way if you ever need to access these props the app has access to them by being wrapped in the router.
+
+
+const currentLocation =
+!!this.state.address  ?
+new google.maps.LatLng(this.userLat,this.userLng)
+: this.state.address ;

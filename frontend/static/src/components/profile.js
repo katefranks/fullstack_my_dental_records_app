@@ -100,7 +100,8 @@ async editProfile(e){
   formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
   if (this.state.ins_card instanceof File){
     formData.append('ins_card', this.state.ins_card);
-  }
+  };
+
 
   const options = {
     method: 'PATCH',
@@ -108,17 +109,20 @@ async editProfile(e){
       'X-CSRFToken': Cookies.get('csrftoken'),
     },
     body: formData,
-  };
 
+  };
   const response = await fetch(`/api/v1/users/profiles/user/`, options);
   if(!response.ok) {
-
   }
-
   this.setState({isEditing: false})
 }
 
-// disabled={this.state.isEditing}
+async deleteInsCard(e){
+this.setState({ins_card: null});
+this.editProfile();
+
+}
+
 
 render(){
   return(
@@ -163,6 +167,14 @@ render(){
                     <img className="ins-card" src={this.state.preview || this.state.ins_card} alt=""/>
                     : null
               }
+
+
+
+              {this.state.isEditing && this.state.ins_card &&
+                <Button type="button" onClick={()=> this.deleteInsCard()}>Remove Card</Button>
+              }
+
+
               {!this.state.isEditing && !this.state.ins_card &&
                 <Button type="button" onClick={() => this.setState({isEditing: true})}>Add Insurance Card</Button>
               }
@@ -178,6 +190,8 @@ render(){
 }
 }
 export default Profile;
+
+
 
 //
 // <div className="form-group">
