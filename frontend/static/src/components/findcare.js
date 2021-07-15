@@ -24,6 +24,7 @@ export class MapContainer extends Component {
     this.getCoordinates = this.getCoordinates.bind(this);
     this.createMarker = this.createMarker.bind(this);
     this.fetchPlaces = this.fetchPlaces.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
   };
 
   componentDidMount() {
@@ -55,10 +56,11 @@ export class MapContainer extends Component {
       location: currentLocation,
       radius: '500',
       query: 'dentist'
+      // type: ['dentist']
     };
 
   service.textSearch(request, (results, status) => {
-
+  // service.nearbySearch(request, (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (let i = 0; i < results.length; i++) {
         const placeId = results[i].place_id;
@@ -88,7 +90,7 @@ export class MapContainer extends Component {
     console.log('geometry: ', results[0].geometry.location);
     console.log(results);
     this.setState({ locations: results });
-    this.createMarker(results);
+    // this.createMarker(results);
   });
 };
 
@@ -105,18 +107,23 @@ export class MapContainer extends Component {
 //   // }
 // }
 createMarker(mapProps, map){
-  const { google } = mapProps;
-  const locations = {...this.state.locations};
-  for (let i = 0; i < locations.length; i++) {
-      const marker = new google.maps.Marker({
-        position: locations[i].geometry.location,
-        // icon: icons[locations[i].type].icon,
-        map: map,
-      });
-    }
+  // const { google } = mapProps;
+  // const locations = {...this.state.locations};
+  // for (let i = 0; i < locations.length; i++) {
+  //     const marker = new google.maps.Marker({
+  //       position: locations[i].geometry.location,
+  //       // icon: icons[locations[i].type].icon,
+  //       map: map,
+  //     });
+  //   }
 
 }
-
+onMarkerClick = (props, marker, e) =>
+  this.setState({
+    selectedPlace: props,
+    activeMarker: marker,
+    showingInfoWindow: true
+  });
 
   handleChange = address => {
       this.setState({ address });
@@ -134,17 +141,28 @@ createMarker(mapProps, map){
     };
 
   render() {
-    const locations = this.state.locations.map((location) =>
-    <li className="form-login p-4 mb-3 login-form-container" key="location.place_id">
-      <p>{location.name}</p>
-      <p>{location.formatted_phone_number}</p>
-      <p>{location.formatted_address}</p>
+    //
+    // <Marker
+    //   position={{
+    //     lat: this.state.userLat,
+    //     lng: this.state.userLng,
+    //   }}
+    // />
 
-    </li>
-  )
+    const markers = this.state.locations.map((place) => (
+          <Marker key={place.place_id} onClick={this.onMarkerClick}
+            name = {place.name}
+            address = {place.formatted_address}
+            position= {
+              place.geometry.location
+            }
+          />
+      ))
+
+
     return (
       <div id="googleMap">
-        <ul>{locations}</ul>
+
         <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
@@ -196,12 +214,11 @@ createMarker(mapProps, map){
             lng: this.state.userLng,
           }}
         >
-        <Marker
-          position={{
-            lat: this.state.userLat,
-            lng: this.state.userLng,
-          }}
-        />
+
+
+
+        {markers}
+
         </Map>
 
       </div>
@@ -215,6 +232,26 @@ export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
 
+// <ul>{locations}</ul>
+
+// <Marker
+//   position={{
+//     lat: this.state.userLat,
+//     lng: this.state.userLng,
+//   }}
+// />
+
+
+// <li className="form-login p-4 mb-3 login-form-container" key="location.place_id">
+//   <p>{location.name}</p>
+//   <p>{location.formatted_phone_number}</p>
+//   <p>{location.formatted_address}</p>
+// </li>
+//
+
+// const locations = this.state.locations.map((place, i) =>
+// <Marker key={i} position={{lat: place.geometry.location.lat(), lng: place.geometry.location.lng()}}/>
+// )
 
 // const markers = this.state.locations.geometry.locations.map((location) =>
 // <Marker onClick={this.onMarkerClick} name = {this.state.location.name}

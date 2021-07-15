@@ -15,7 +15,7 @@ import Homepage from './homepage';
 import Profile from './profile';
 import Records from './records';
 import AddRecord from './addRecord';
-// import FindCare from './findcare';
+import FindCare from './findcare';
 import ApiTest from './api_test';
 //
 import GoogleMap from './findcare';
@@ -122,7 +122,7 @@ render(){
             <Route
               path='/findcare'
               render={(props) => (
-                <GoogleMap />
+                <FindCare />
               )}
             />
 
