@@ -50,6 +50,7 @@ export class MapContainer extends Component {
 //prior to calling setState, need to check if there's something to set there.
 
   fetchPlaces(mapProps, map) {
+    console.log('mapProps', mapProps, 'map', map)
     console.log('this', this);
     console.log('lat', this.userLat);
     console.log('lng', this.userLng);
@@ -125,7 +126,10 @@ onMarkerClick = (props, marker, e) =>
         .then(results => getLatLng(results[0]))
         .then(latLng => {
           console.log('Success', latLng)
-          this.setState({ address, mapCenter: latLng });
+
+          // what is the userLat and userLng to set on state
+          this.setState({ userLat: latLng.lat, userLng: latLng.lng });
+          // this.fetchPlaces();
         })
         .catch(error => console.error('Error', error));
     };
@@ -280,3 +284,7 @@ export default GoogleApiWrapper({
 //     lng: this.state.mapCenter.lng,
 //   }}
 // />
+
+// passing map props & map to fetch places (when called w/in autocomplete function)
+// To load front end urls through heroku
+// Talk about tests

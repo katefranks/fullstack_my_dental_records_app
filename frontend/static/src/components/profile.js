@@ -23,6 +23,7 @@ class Profile extends Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.editProfile = this.editProfile.bind(this);
     this.addProfile = this.addProfile.bind(this);
+    this.deleteInsCard = this.deleteInsCard.bind(this);
   }
 
 componentDidMount(){
@@ -98,9 +99,10 @@ async editProfile(e){
   formData.append('dob', this.state.dob);
   formData.append('dentist', this.state.dentist);
   formData.append('toothbrush_replaced', this.state.toothbrush_replaced);
+
   if (this.state.ins_card instanceof File){
     formData.append('ins_card', this.state.ins_card);
-  };
+  }
 
 
   const options = {
@@ -117,11 +119,25 @@ async editProfile(e){
   this.setState({isEditing: false})
 }
 
-async deleteInsCard(e){
-this.setState({ins_card: null});
-this.editProfile();
-
+deleteInsCard(){
+  this.setState({ins_card: new File([], '')});
 }
+
+
+  // async deleteInsCard(e){
+  //   this.setState({ins_card: null});
+  //   const profile = this.state;
+  //
+  //   if (!(profile.ins_card instanceof File) && (profile.ins_card === null)){
+  //   //"if it's NOT an instance of a file, remove it"
+  //     delete profile.ins_card;
+  //   //deleting property if not an instance of a file & ins_card on state === null.
+  //   }
+  //   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+  //   this.editProfile(profile);
+  //     //passing profile data to edit profile method which does the patch request.
+  //   //
+  // }
 
 
 render(){
@@ -171,7 +187,7 @@ render(){
 
 
               {this.state.isEditing && this.state.ins_card &&
-                <Button type="button" onClick={()=> this.deleteInsCard()}>Remove Card</Button>
+                <Button type="button" onClick={this.deleteInsCard}>Remove Card</Button>
               }
 
 
