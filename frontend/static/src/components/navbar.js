@@ -14,7 +14,8 @@ class Navigation extends Component {
             {!!Cookies.get('Authorization') && <NavLink to='/' className="mr-2">Home</NavLink> }
             {!!Cookies.get('Authorization') && <NavLink to='/profile' className="mr-2">Profile</NavLink> }
             {!!Cookies.get('Authorization') && <NavLink to='/records' className="mr-2">Records</NavLink> }
-             <NavLink to='/findcare' className="mr-2">FindCare</NavLink> 
+            {!!Cookies.get('Authorization') && <NavLink to='/medications' className="mr-2">Medications</NavLink> }
+             <NavLink to='/findcare' className="mr-2">FindCare</NavLink>
             {!Cookies.get('Authorization') && <NavLink to='/login' className="mr-2">Login</NavLink> }
             {!Cookies.get('Authorization') && <NavLink to='/registration' className="mr-2">Register</NavLink>}
             {!!Cookies.get('Authorization') && <button className="btn" onClick={() => this.props.handleLogout()}>Logout</button>}

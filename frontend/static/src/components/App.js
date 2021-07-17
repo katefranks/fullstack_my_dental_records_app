@@ -17,6 +17,8 @@ import Records from './records';
 import AddRecord from './addRecord';
 import FindCare from './findcare';
 import ApiTest from './api_test';
+import Medications from './medications';
+import AddMedication from './addMedications';
 //
 import GoogleMap from './findcare';
 
@@ -142,6 +144,13 @@ render(){
           </PrivateRoute>
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/addRecord">
              <AddRecord />
+          </PrivateRoute>
+
+          <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/medications">
+             <Medications />
+          </PrivateRoute>
+          <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/addMedication">
+             <AddMedication />
           </PrivateRoute>
 
         </Switch>

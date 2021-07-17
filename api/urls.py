@@ -7,4 +7,5 @@ from .import views
 urlpatterns = [
     path('users/', include('accounts.urls')),
     path('records/', include('records.urls')),
+    path('medications/', include('medications.urls')),
 ]

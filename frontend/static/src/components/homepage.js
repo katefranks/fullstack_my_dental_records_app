@@ -27,6 +27,8 @@ render(){
         <NavLink  to='/profile' className="homepage-link  btn btn-primary btn-circle btn-xl">Profile</NavLink>
         <NavLink  to='/records' className="homepage-link  btn btn-primary btn-circle btn-xl">Records</NavLink>
         <NavLink to='/addRecord' className="homepage-link  btn btn-primary btn-circle btn-xl">Add<br/>Record</NavLink>
+        <NavLink  to='/medications' className="homepage-link  btn btn-primary btn-circle btn-xl">Medications</NavLink>
+        <NavLink to='/addMedication' className="homepage-link  btn btn-primary btn-circle btn-xl">Add<br/>Medication</NavLink>
         <NavLink  to='/findcare' className="homepage-link  btn btn-primary btn-circle btn-xl">Find<br/>Care</NavLink>
         <button type="button" className="btn btn-primary btn-circle btn-xl" onClick={() => this.props.handleLogout()}>Logout</button>
 

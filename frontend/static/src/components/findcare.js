@@ -25,7 +25,6 @@ export class MapContainer extends Component {
     this.fetchPlaces = this.fetchPlaces.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
-    this.changeMapCenter = this.changeMapCenter.bind(this);
   };
 
   componentDidMount() {
@@ -125,23 +124,19 @@ onMarkerClick = (props, marker, e) =>
       geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
         .then(latLng => {
-          console.log('Success', latLng)
-
-          // what is the userLat and userLng to set on state
+          console.log('Success', latLng);
+          // setting autocomplete coordinates to be coordinates on state- will be used for place query.
           this.setState({ userLat: latLng.lat, userLng: latLng.lng });
-          // this.fetchPlaces();
+          // passing map props & map to fetch places (when called w/in autocomplete function)
+          this.fetchPlaces();
         })
         .catch(error => console.error('Error', error));
     };
 
-    changeMapCenter(e){
-      e.preventDefault();
-      // this.setState({mapCenter : {place.geometry.location}})
-    };
 
   render() {
     const locationsList = this.state.locations.map((place) =>
-    <li key={place.place_id} className="form-login p-4 mb-3 login-form-container" onClick={this.changeMapCenter} >
+    <li key={place.place_id} className="form-login p-4 mb-3 login-form-container"  >
       <p>{place.name}</p>
       <p>{place.formatted_phone_number}</p>
       <p>{place.formatted_address}</p>
@@ -186,12 +181,7 @@ onMarkerClick = (props, marker, e) =>
                   ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                   : { backgroundColor: '#ffffff', cursor: 'pointer' };
                 return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
-                    })}
-                  >
+                  <div {...getSuggestionItemProps(suggestion, {className, style,})}>
                     <span>{suggestion.description}</span>
                   </div>
                 );
