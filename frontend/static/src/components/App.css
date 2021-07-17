@@ -1,3 +1,22 @@
+/* Main */
+body {
+    background: transparent url(./css/background.jpeg) no-repeat fixed center center/cover;
+    margin: 0 auto;
+    position: relative;
+}
+#header-title{
+  /* color: linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%);
+  font-size: 72px; */
+  background: -webkit-linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#main-navbar{
+width: 100%;
+}
+/* background-image: linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%); */
+/* position: absolute; */
 
 /* login */
 .login-form-container{
@@ -6,7 +25,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 300px;
+  width: 90%;
   background-color: #FFF;
   border-radius: 10px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
@@ -132,5 +151,5 @@ ul{
 
 .findcare-locationsList-container{
   display: flex;
-  
+
 }

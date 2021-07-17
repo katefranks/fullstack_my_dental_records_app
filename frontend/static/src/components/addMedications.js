@@ -83,6 +83,7 @@ class AddMedication extends Component{
     const response = await fetch(`/api/v1/medications/`, options);
     const data = await response.json();
 
+
     if(!!this.props.addMedication) {
       this.props.addMedication(data);
       this.props.handleModal();
@@ -114,6 +115,7 @@ class AddMedication extends Component{
               <label for="category" className="form-label">Currenty Taking?</label>
               <br/>
             <select onChange={this.handleInput} name="category" id="category">
+
               <option value="CUR">Currently Taking</option>
               <option value="PAS">No Longer Taking</option>
             </select>

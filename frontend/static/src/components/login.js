@@ -50,6 +50,7 @@ render(){
         <div className="divider">New here? Register!</div>
         <button onClick={this.toggleRegistration} type="button"className="btn btn-primary toggle-register">Create New Account</button>
         </form>
+        <footer></footer>
     </div>
 
   );

@@ -7,9 +7,7 @@ import MedicationDetail from './medicationDetail';
 import AddMedication from './addMedications';
 import Cookies from 'js-cookie';
 import Homepage from './homepage';
-// import medicationsNavBar from './medicationsNavBar';
 
-//get modal to open and close- react bootstrap modal
 
 class Medications extends Component {
   constructor(props){

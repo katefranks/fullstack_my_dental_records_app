@@ -22,7 +22,7 @@ class Homepage extends Component {
 render(){
   return(
     <div>
-    <h1>Welcome to the Homepage!</h1>
+    <h1>Welcome to My Dental Records</h1>
       <nav className="homepage-container" >
         <NavLink  to='/profile' className="homepage-link  btn btn-primary btn-circle btn-xl">Profile</NavLink>
         <NavLink  to='/records' className="homepage-link  btn btn-primary btn-circle btn-xl">Records</NavLink>
