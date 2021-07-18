@@ -29,9 +29,9 @@ class Profile extends Component{
     this.handleModal = this.handleModal.bind(this);
   }
 
-  handleModal(){
-    this.setState({show: !this.state.show})
-  }
+handleModal(){
+  this.setState({show: !this.state.show})
+}
 
 componentDidMount(){
   fetch('/api/v1/users/profiles/user/')

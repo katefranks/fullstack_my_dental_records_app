@@ -324,11 +324,38 @@ ul{
 /* Add Record- modal */
 .addrecord-button-container{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 20px;
+
 }
 
+.addRecord-form-container{
+  width: 90%;
+  line-height: .75rem;
+  /* padding-top: 10px !important;
+  padding-bottom: 5px !important; */
+  padding: 0px;
+  margin-top: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+  .addRecord-form-container{
+    width:40%;
+    margin-top: 100px;
+  }
+}
+
+
 /* Record Detail */
+
+.recordDetail-form-container{
+  width: 80%;
+  line-height: .75rem;
+  /* padding-top: 10px !important;
+  padding-bottom: 5px !important; */
+  padding: 0px;
+  margin: 0px;
+}
 
 .record-detail-button{
   margin: 2px;
@@ -362,11 +389,24 @@ color: rgb(84, 84, 84);
 -webkit-appearance: none;
 padding-left: 60px;
 padding-bottom: 2px;
+line-height: 1.2rem;
 }
 
 #xrays{
   width: 215px;
 }
+
+.record-detail-button{
+  border: none;
+  padding: 0px;
+  font-size: 1.2rem;
+  box-shadow: unset !important;
+}
+
+.record-detail-button:seleted{
+  box-shadow: unset;
+}
+
 /* Find Care */
 .map{
   max-width: 200px;
@@ -376,6 +416,7 @@ padding-bottom: 2px;
 
 .findcare-container{
   display: flex;
+  justify-content: center;
 }
 
 .findcare-locationsList-container{

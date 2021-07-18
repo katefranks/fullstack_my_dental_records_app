@@ -2,8 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import Cookies from 'js-cookie';
-import { FaEdit , FaTrash, FaRegSave} from 'react-icons/fa';
-
+import { FaEdit , FaTrash, FaRegSave, FaSearchPlus, FaRegWindowClose} from 'react-icons/fa';
 
 class RecordDetail extends Component {
   //set on state key/values of record
@@ -12,6 +11,7 @@ class RecordDetail extends Component {
     this.state = {
       ...this.props.record,
       isEditing: false,
+      selected: false,
 //unpacking all of the keys/values from record
     }
 
@@ -21,6 +21,7 @@ class RecordDetail extends Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.saveRecord = this.saveRecord.bind(this);
+    this.selectRecord = this.selectRecord.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -67,31 +68,47 @@ handleImage(e) {
   reader.readAsDataURL(file);
 }
 
+selectRecord(){
+  this.setState({selected: !this.state.selected})
+}
+// handleModal(){
+//   this.setState({selected: !this.state.selected})
+// }
+
 render(){
 
   return(
   <>
   <div className="record-form-div">
-    <form className="form-login p-4 mb-3 login-form-container profile-form-container">
+    <form className="form-login p-4 mb-3 login-form-container recordDetail-form-container">
+      <button type="button" className="btn btn-outline-dark record-detail-button" onClick={()=> (this.selectRecord())}>
+        {!this.state.selected
+         ?<FaSearchPlus/>
+         :<FaRegWindowClose/>
+        }
+      </button>
         <div className="form-group">
           <label for="appt_date" className="form-label record-form-label">Appointment Date:</label>
           <br/>
           <input className="record-input record-input-date" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>
         <div className="form-group">
-          <label for="category" className="form-label record-form-label">Appointment Category</label>
+          <label for="category" className="form-label record-form-label">Appointment Type</label>
           <br/>
         <select onChange={this.handleInput} value={this.state.category} name="category" id="category" disabled={!this.state?.isEditing}>
           <option value="CLE">Cleaning</option>
           <option value="RES">Restorative</option>
         </select>
         </div>
+
+        {this.state.isEditing?
         <div className="form-group">
           <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox} disabled={!this.state?.isEditing}/>
           <br />
           <label for="xrays" className="form-label record-form-label">X Rays</label>
         </div>
-
+        : null
+        }
         {!this.state.isEditing && this.state.xrays &&
         (<div className="form-group">
           <label for="category" className="form-label record-form-label">Xray Type:</label>
@@ -156,6 +173,7 @@ render(){
         }
         <button type="button" className="btn btn-outline-dark record-detail-button"  onClick={() => this.props.deleteRecord(this.props.record.id)}><FaTrash/></button>
         </div>
+
       </form>
   </div>
   </>

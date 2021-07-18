@@ -88,14 +88,14 @@ class AddRecord extends Component{
     return(
       <>
       <div className="record-form-div">
-        <form className="form-login p-4 mb-3 login-form-container profile-form-container">
+        <form className="form-login p-4 mb-3 login-form-container addRecord-form-container">
             <div className="form-group">
               <label for="appt_date" className="form-label record-form-label">Appointment Date:</label>
               <br/>
               <input className="login-input" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} />
             </div>
             <div className="form-group">
-              <label for="category" className="form-label record-form-label">Appointment Category</label>
+              <label for="category" className="form-label record-form-label">Appointment Type</label>
               <br/>
             <select onChange={this.handleInput} name="category" id="category">
               <option value="CLE">Cleaning</option>
