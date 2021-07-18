@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import Cookies from 'js-cookie';
+import { FaEdit , FaTrash, FaRegSave} from 'react-icons/fa';
 
 
 class RecordDetail extends Component {
@@ -149,10 +150,10 @@ render(){
               }
         </div>
         {!this.state.isEditing
-          ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
-          : <button className="btn btn-primary" type="button" onClick={this.saveRecord}>Save</button>
+          ? <button type="button" className="btn btn-secondary record-detail-button" onClick={() => this.setState({isEditing: true})}><FaEdit /></button>
+          : <button className="btn btn-secondary record-detail-button" type="button" onClick={this.saveRecord}><FaRegSave /></button>
         }
-        <button type="button" className="btn btn-primary"  onClick={() => this.props.deleteRecord(this.props.record.id)}>Delete</button>
+        <button type="button" className="btn btn-secondary record-detail-button"  onClick={() => this.props.deleteRecord(this.props.record.id)}><FaTrash/></button>
       </form>
   </div>
   </>

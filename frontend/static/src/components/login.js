@@ -46,11 +46,11 @@ render(){
         <br/>
         <input className="login-input" type="password" placeholder="password" name="password" value={this.state.password} onChange={this.handleInput}/>
       </div>
-        <button className="btn btn-primary" type="submit">Submit</button>
-        <div className="divider">New here? Register!</div>
-        <button onClick={this.toggleRegistration} type="button"className="btn btn-primary toggle-register">Create New Account</button>
+        <button className="btn btn-secondary" type="submit">Submit</button>
+        <div className="divider login-divider">New here? Register!</div>
+        <button onClick={this.toggleRegistration} type="button"className="btn btn-secondary toggle-register">Create New Account</button>
         </form>
-        <footer></footer>
+
     </div>
 
   );

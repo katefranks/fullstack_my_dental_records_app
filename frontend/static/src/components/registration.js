@@ -51,9 +51,9 @@ render(){
     <br/>
     <input className="login-input" type="password" placeholder="Re-enter Password" name="password2" value={this.state.password} onChange={this.handleInput}/>
   </div>
-    <button className="btn btn-primary" type="submit">Submit</button>
-    <div className="divider">Have an Account?</div>
-    <button type="button" onClick={this.toggleLogin} className="btn btn-primary toggle-register" >Sign In</button>
+    <button className="btn btn-secondary" type="submit">Submit</button>
+    <div className="divider login-divider">Have an Account?</div>
+    <button type="button" onClick={this.toggleLogin} className="btn btn-secondary toggle-register" >Sign In</button>
     </form>
 </div>
 );

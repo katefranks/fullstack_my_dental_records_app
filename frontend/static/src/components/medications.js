@@ -127,7 +127,7 @@ filterCurrent() {
 
       <div>
         <div className="addrecord-button-container">
-        <Button onClick={()=> (this.handleModal())}>Add New Medication</Button>
+        <Button className="btn btn-dark" onClick={()=> (this.handleModal())}>Add New Medication</Button>
         </div>
           <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
             <Modal.Header closeButton>
@@ -140,9 +140,9 @@ filterCurrent() {
           </Modal>
         <h1>Medications</h1>
         <div className="appt-filter-container">
-        <Button className="appt-category-button" onClick={()=> (this.filterCurrent())}>Currently Taking</Button>
-        <Button className="appt-category-button" onClick={()=> (this.filterPast())}>Previously Taken</Button>
-        <Button className="appt-category-button" onClick={()=> (this.fetchData())}>View All</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.filterCurrent())}>Currently Taking</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.filterPast())}>Previously Taken</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.fetchData())}>View All</Button>
         </div>
         <ul>{medications}</ul>
       </div>

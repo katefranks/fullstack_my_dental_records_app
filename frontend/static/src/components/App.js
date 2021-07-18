@@ -21,6 +21,14 @@ import Medications from './medications';
 import AddMedication from './addMedications';
 //
 import GoogleMap from './findcare';
+import { FaTooth } from 'react-icons/fa';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import { fab } from "@fortawesome/free-brands-svg-icons";
+// import { fasTooth } from "@fortawesome/free-solid-svg-icons";
+// library.add(fab,  fasTooth );
+//
+// const element = <FontAwesomeIcon icon={fasTooth} />
 
 // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -106,7 +114,13 @@ async handleLogout(){
 render(){
   return(
     <>
+    <div className="content-container">
+
+      <header className="bg-dark" id="main-header">
+
         <Navbar handleLogout={this.handleLogout} />
+        <h2 className="" id="header-title">My Dental Records</h2>
+      </header>
 
         <Switch>
             <Route
@@ -154,6 +168,12 @@ render(){
           </PrivateRoute>
 
         </Switch>
+      </div>
+        <footer className="main-footer bg-dark footer--pin">
+          <a  href="http://www.kateloves2code.com" target="_blank">
+          <h1 id="footer-text"><FaTooth /></h1>
+          </a>
+        </footer>
       </>
 
   );
@@ -162,72 +182,15 @@ render(){
 
 export default withRouter(App);
 
-// <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/api_test">
-//    <ApiTest />
-// </PrivateRoute>
-
-
-  // <PrivateRoute isAuthenticated={this.state.isAuthenticated} />
-//
-// Prior to React router:
-// render(){
-//   return(
-//     <div className="main-container">
-//         <h1>My Dental Records</h1>
-//         <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation} />
-//         <Registration handleRegistration={this.handleRegistration} handleNavigation={this.handleNavigation}/>
-//         <Homepage selection={this.state.selection} handleNavigation={this.handleNavigation} handleLogin={this.handleLogin} handleLogout={this.handleLogout} />
-//         <FindCare handleNavigation={this.handleNavigation}/>
-//         <ApiTest />
-//     </div>
-//   );
-// }
-// }
-
-// export default App;
+// <h1 id="footer-text"><FaTooth /></h1>
 
 
 
-//
-// export default GoogleApiWrapper({
-//   apiKey: (API_KEY)
-// })(App)
 
 
-//REACT ROUTER:
-// render (){
-//   return (
-//      <Router>
-//        <div>
-//          <nav>
-//            <ul>
-//              <li>
-//                <Link to="/articles">Articles</Link>
-//              </li>
-//              <li>
-//                <Link to="/profile">Profile</Link>
-//              </li>
-//              <li>
-//                <Link to="/login">Login</Link>
-//              </li>
-//            </ul>
-//          </nav>
-//
-//          <Switch>
-//            <Route path="/profile">
-//              <Profile />
-//            </Route>
-//            <Route path="/articles">
-//              <Articles />
-//            </Route>
-//            <Route path="/login">
-//              <Login handleLogin={this.handleLogin} handleNavigation={this.handleNavigation} />
-//            </Route>
-//          </Switch>
-//        </div>
-//      </Router>
-//    );
-//   }
-//
-// }
-// export default App;
+// <FaTooth />
+// <footer className="main-footer bg-dark ">
+//   <a  href="http://www.kateloves2code.com" target="_blank">
+//   <h1 id="footer-text"><FaTooth /></h1>
+//   </a>
+// </footer>

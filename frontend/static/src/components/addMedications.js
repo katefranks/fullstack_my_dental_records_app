@@ -148,7 +148,7 @@ class AddMedication extends Component{
                     : null
                   }
             </div>
-             <button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Save</button>
+             <button className="btn btn-dark" type="button" onClick={this.handleSubmit}>Save</button>
           </form>
       </div>
 

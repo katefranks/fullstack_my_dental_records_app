@@ -4,6 +4,7 @@ import './App.css';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
+import { FaEdit , FaRegSave} from 'react-icons/fa';
 
 class Profile extends Component{
   constructor(props){
@@ -172,7 +173,7 @@ render(){
               <input className="login-input" type="date" name="toothbrush_replaced" value={this.state.toothbrush_replaced} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
-            <div className="form-group">
+            <div id="ins-card-container" className="form-group">
               <label for="ins_card" className="form-label">Dental Insurance Card:</label>
               <br/>
               {this.state.isEditing ?
@@ -187,17 +188,17 @@ render(){
 
 
               {this.state.isEditing && this.state.ins_card &&
-                <Button type="button" onClick={this.deleteInsCard}>Remove Card</Button>
+                <Button type="button" className="btn btn-secondary" onClick={this.deleteInsCard}>Remove Card</Button>
               }
 
 
               {!this.state.isEditing && !this.state.ins_card &&
-                <Button type="button" onClick={() => this.setState({isEditing: true})}>Add Insurance Card</Button>
+                <Button type="button" className="btn btn-secondary" onClick={() => this.setState({isEditing: true})}>Add Insurance Card</Button>
               }
             </div>
             {!this.state.isEditing
-              ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
-              : <button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Save</button>
+              ? <button type="button" className="btn btn-secondary" onClick={() => this.setState({isEditing: true})}><FaEdit/></button>
+              : <button className="btn btn-secondary edit-profile-button" type="button" onClick={this.handleSubmit}><FaRegSave /></button>
             }
           </form>
       </div>
@@ -206,21 +207,3 @@ render(){
 }
 }
 export default Profile;
-
-
-
-//
-// <div className="form-group">
-//   {this.state.isEditing ?
-//   (<>
-//   <label for="appt_img" className="form-label">Upload xrays or photos:</label>
-//   <br/>
-//   <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
-//   </>)
-//   : null
-//   }
-//   {this.state.appt_img
-//         ? <img className="appt-img" src={this.state.preview || this.state.appt_img} alt=""/>
-//         : null
-//       }
-// </div>

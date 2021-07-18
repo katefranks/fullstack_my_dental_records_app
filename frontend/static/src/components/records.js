@@ -141,7 +141,7 @@ filterCleaning() {
 
       <div>
         <div className="addrecord-button-container">
-        <Button onClick={()=> (this.handleModal())}>Add New Record</Button>
+          <Button className="category-button btn btn-dark" onClick={()=> (this.handleModal())}>Add New Record</Button>
         </div>
           <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
             <Modal.Header closeButton>
@@ -154,10 +154,11 @@ filterCleaning() {
           </Modal>
         <h1>Records</h1>
         <div className="appt-filter-container">
-        <Button className="appt-category-button" onClick={()=> (this.filterCleaning())}>Cleaning Appts</Button>
-        <Button className="appt-category-button" onClick={()=> (this.filterRestorative())}>Restorative Appts</Button>
-        <Button className="appt-category-button" onClick={()=> (this.filterXrays())}>Xrays</Button>
-        <Button className="appt-category-button" onClick={()=> (this.fetchData())}>View All</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.handleModal())}>Add New Record</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.filterCleaning())}>Cleaning Appts</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.filterRestorative())}>Restorative Appts</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.filterXrays())}>Xrays</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.fetchData())}>View All</Button>
         </div>
         <ul>{records}</ul>
       </div>

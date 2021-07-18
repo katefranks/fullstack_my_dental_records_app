@@ -22,15 +22,15 @@ class Homepage extends Component {
 render(){
   return(
     <div>
-    <h1>Welcome to My Dental Records</h1>
+    <h1 id="homepage-h1">Welcome!</h1>
       <nav className="homepage-container" >
-        <NavLink  to='/profile' className="homepage-link  btn btn-primary btn-circle btn-xl">Profile</NavLink>
-        <NavLink  to='/records' className="homepage-link  btn btn-primary btn-circle btn-xl">Records</NavLink>
-        <NavLink to='/addRecord' className="homepage-link  btn btn-primary btn-circle btn-xl">Add<br/>Record</NavLink>
-        <NavLink  to='/medications' className="homepage-link  btn btn-primary btn-circle btn-xl">Medications</NavLink>
-        <NavLink to='/addMedication' className="homepage-link  btn btn-primary btn-circle btn-xl">Add<br/>Medication</NavLink>
-        <NavLink  to='/findcare' className="homepage-link  btn btn-primary btn-circle btn-xl">Find<br/>Care</NavLink>
-        <button type="button" className="btn btn-primary btn-circle btn-xl" onClick={() => this.props.handleLogout()}>Logout</button>
+        <NavLink  to='/profile' className="homepage-link  btn btn-dark btn-circle btn-xl">Profile</NavLink>
+        <NavLink  to='/records' className="homepage-link  btn btn-dark btn-circle btn-xl">Records</NavLink>
+        <NavLink to='/addRecord' className="homepage-link  btn btn-dark btn-circle btn-xl">Add<br/>Record</NavLink>
+        <NavLink  to='/medications' className="homepage-link  btn btn-dark btn-circle btn-xl">Medications</NavLink>
+        <NavLink to='/addMedication' className="homepage-link  btn btn-dark btn-circle btn-xl">Add<br/>Medication</NavLink>
+        <NavLink  to='/findcare' className="homepage-link  btn btn-dark btn-circle btn-xl">Find<br/>Care</NavLink>
+        <button type="button" className="btn btn-dark btn-circle btn-xl" onClick={() => this.props.handleLogout()}>Logout</button>
 
       </nav>
     </div>

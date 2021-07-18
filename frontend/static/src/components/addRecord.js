@@ -137,7 +137,7 @@ class AddRecord extends Component{
                     : null
                   }
             </div>
-             <button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Save</button>
+             <button className="btn btn-dark" type="button" onClick={this.handleSubmit}>Save</button>
           </form>
       </div>
 
@@ -146,70 +146,3 @@ class AddRecord extends Component{
   }
 }
 export default AddRecord;
-
-
-
-//
-
-// <div className="record-form-div">
-//   <form onSubmit={this.handleSubmit} className="form-login p-4 mb-3 login-form-container profile-form-container">
-//       <div className="form-group">
-//         <label for="appt_date" className="form-label">Appointment Date:</label>
-//         <br/>
-//         <input className="login-input" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-//       </div>
-//       <div className="form-group">
-//         <label for="category" className="form-label">Appointment Category</label>
-//         <br/>
-//       <select onChange={this.handleInput} value={this.state.category} name="category" id="category" disabled={!this.state?.isEditing}>
-//         <option value="CLE">Cleaning</option>
-//         <option value="RES">Restorative</option>
-//       </select>
-//       </div>
-//       <div className="form-group">
-//         <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox} disabled={!this.state?.isEditing}/>
-//         <br />
-//         <label for="xrays" className="form-label">X Rays</label>
-//       </div>
-//       <div className="form-group">
-//         <label for="category" className="form-label">Xray Type:</label>
-//         <br/>
-//         <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-//       </div>
-//
-//       <div className="form-group">
-//         <label for="services" className="form-label">Services Completed:</label>
-//         <br/>
-//         <input className="login-input" type="text" name="services" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-//       </div>
-//
-//       <div className="form-group">
-//         <label for="services" className="form-label">Provider's Name:</label>
-//         <br/>
-//         <input className="login-input" type="text" name="provider_name" placeholder="Name of Provider" value={this.state.provider_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-//       </div>
-//
-//       <div className="form-group">
-//         <label for="recommendations" className="form-label">Recommendations:</label>
-//         <br/>
-//         <input className="login-input" type="text" placeholder="Recommendations?" name="recommendations" value={this.state.recommendations} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-//       </div>
-//
-//       <div className="form-group">
-//         <label for="appt_img" className="form-label">Upload xrays or photos:</label>
-//         <br/>
-//         <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
-//         {this.state.appt_img
-//               ? <img className="appt-img" src={this.state.preview || this.state.appt_img} alt=""/>
-//               : null
-//             }
-//       </div>
-//       {!this.state.isEditing
-//         ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
-//         : <button className="btn btn-primary" type="submit" >Save</button>
-//       }
-//       <button type="button" className="btn btn-primary"  onClick={() => this.props.deleteRecord(this.props.record.id)}>Delete</button>
-//     </form>
-// </div>
-
-//

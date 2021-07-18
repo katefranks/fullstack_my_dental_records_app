@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import Cookies from 'js-cookie';
+import { FaEdit , FaTrash, FaRegSave} from 'react-icons/fa';
 
 
 class MedicationDetail extends Component {
@@ -119,10 +120,11 @@ render(){
               }
         </div>
         {!this.state.isEditing
-          ? <button type="button" className="btn btn-primary" onClick={() => this.setState({isEditing: true})}>Edit</button>
-          : <button className="btn btn-primary" type="button" onClick={this.saveMedication}>Save</button>
+          ? <button type="button" className="btn btn-secondary record-detail-button" onClick={() => this.setState({isEditing: true})}><FaEdit /></button>
+          : <button className="btn btn-secondary record-detail-button" type="button" onClick={this.saveMedication}><FaRegSave /></button>
         }
-        <button type="button" className="btn btn-primary"  onClick={() => this.props.deleteMedication(this.props.medication.id)}>Delete</button>
+        <button type="button" className="btn btn-secondary record-detail-button"  onClick={() => this.props.deleteMedication(this.props.medication.id)}><FaTrash/></button>
+
       </form>
   </div>
   </>
