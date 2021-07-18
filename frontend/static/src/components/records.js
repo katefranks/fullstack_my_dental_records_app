@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import { Button , Modal } from 'react-bootstrap';
+import { FaPlus} from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import RecordDetail from './recordDetail';
@@ -139,9 +140,10 @@ filterCleaning() {
 
     return(
 
-      <div>
+      <div >
         <div className="addrecord-button-container">
-          <Button className="category-button btn btn-dark" onClick={()=> (this.handleModal())}>Add New Record</Button>
+          <h1>Records</h1>
+          <Button className="category-button btn btn-dark" alt="Add Record" onClick={()=> (this.handleModal())}><FaPlus/></Button>
         </div>
           <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
             <Modal.Header closeButton>
@@ -152,13 +154,12 @@ filterCleaning() {
             </Modal.Body>
             <Modal.Footer></Modal.Footer>
           </Modal>
-        <h1>Records</h1>
+
         <div className="appt-filter-container">
-        <Button className="category-button btn btn-dark" onClick={()=> (this.handleModal())}>Add New Record</Button>
+        <Button className="category-button btn btn-dark" onClick={()=> (this.fetchData())}>View All</Button>
         <Button className="category-button btn btn-dark" onClick={()=> (this.filterCleaning())}>Cleaning Appts</Button>
         <Button className="category-button btn btn-dark" onClick={()=> (this.filterRestorative())}>Restorative Appts</Button>
         <Button className="category-button btn btn-dark" onClick={()=> (this.filterXrays())}>Xrays</Button>
-        <Button className="category-button btn btn-dark" onClick={()=> (this.fetchData())}>View All</Button>
         </div>
         <ul>{records}</ul>
       </div>

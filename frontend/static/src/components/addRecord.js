@@ -90,12 +90,12 @@ class AddRecord extends Component{
       <div className="record-form-div">
         <form className="form-login p-4 mb-3 login-form-container profile-form-container">
             <div className="form-group">
-              <label for="appt_date" className="form-label">Appointment Date:</label>
+              <label for="appt_date" className="form-label record-form-label">Appointment Date:</label>
               <br/>
               <input className="login-input" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} />
             </div>
             <div className="form-group">
-              <label for="category" className="form-label">Appointment Category</label>
+              <label for="category" className="form-label record-form-label">Appointment Category</label>
               <br/>
             <select onChange={this.handleInput} name="category" id="category">
               <option value="CLE">Cleaning</option>
@@ -103,33 +103,33 @@ class AddRecord extends Component{
             </select>
             </div>
             <div className="form-group">
-              <label for="xrays" className="form-label">Were Xrays Taken? </label>
+              <label for="xrays" className="form-label record-form-label">Were Xrays Taken? </label>
               <br/>
               <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox} />
               <br />
             </div>
             {this.state.xrays
             ?<div className="form-group">
-              <label for="category" className="form-label">Xray Type:</label>
+              <label for="category" className="form-label record-form-label">Xray Type:</label>
               <br/>
               <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} />
             </div>
             : null
             }
             <div className="form-group">
-              <label for="services" className="form-label">Services Completed:</label>
+              <label for="services" className="form-label record-form-label">Services Completed:</label>
               <br/>
               <input className="login-input" type="text" name="services" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} />
             </div>
 
             <div className="form-group">
-              <label for="recommendations" className="form-label">Recommendations:</label>
+              <label for="recommendations" className="form-label record-form-label">Recommendations:</label>
               <br/>
               <input className="login-input" type="text" placeholder="Recommendations?" name="recommendations" value={this.state.recommendations} onChange={this.handleInput} />
             </div>
 
             <div className="form-group">
-              <label for="appt_img" className="form-label">Upload xrays or photos:</label>
+              <label for="appt_img" className="form-label record-form-label">Upload xrays or photos:</label>
               <br/>
               <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} />
               {this.state.appt_img

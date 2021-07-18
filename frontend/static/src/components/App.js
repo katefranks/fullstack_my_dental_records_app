@@ -148,7 +148,7 @@ render(){
           />
 
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} exact path="/">
-             <Homepage addRecord={this.addRecord} records={this.records} />
+             <Homepage addRecord={this.addRecord} records={this.records} handleLogout={this.handleLogout}/>
           </PrivateRoute>
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} path="/profile">
              <Profile />

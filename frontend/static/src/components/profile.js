@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
-import { Button } from 'react-bootstrap';
+import { Button , Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
-import { FaEdit , FaRegSave} from 'react-icons/fa';
+import { FaEdit , FaRegSave , FaSearchPlus} from 'react-icons/fa';
 
 class Profile extends Component{
   constructor(props){
@@ -18,6 +18,7 @@ class Profile extends Component{
       preview: '',
       isEditing: false,
       id: null,
+      show: false,
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleImage = this.handleImage.bind(this);
@@ -25,6 +26,11 @@ class Profile extends Component{
     this.editProfile = this.editProfile.bind(this);
     this.addProfile = this.addProfile.bind(this);
     this.deleteInsCard = this.deleteInsCard.bind(this);
+    this.handleModal = this.handleModal.bind(this);
+  }
+
+  handleModal(){
+    this.setState({show: !this.state.show})
   }
 
 componentDidMount(){
@@ -125,57 +131,39 @@ deleteInsCard(){
 }
 
 
-  // async deleteInsCard(e){
-  //   this.setState({ins_card: null});
-  //   const profile = this.state;
-  //
-  //   if (!(profile.ins_card instanceof File) && (profile.ins_card === null)){
-  //   //"if it's NOT an instance of a file, remove it"
-  //     delete profile.ins_card;
-  //   //deleting property if not an instance of a file & ins_card on state === null.
-  //   }
-  //   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
-  //   this.editProfile(profile);
-  //     //passing profile data to edit profile method which does the patch request.
-  //   //
-  // }
-
-
 render(){
   return(
-
-
       <div className="profile-form-div">
         <form className="form-login p-4 mb-3 login-form-container profile-form-container">
 
-            <h2>Profile</h2>
+            <h2 id="profile-h2">Profile</h2>
             <div className="form-group">
-              <label for="display_name" className="form-label">Full Name:</label>
+              <label for="display_name" className="profile-form-label form-label"></label>
               <br/>
-              <input className="login-input" placeholder="FIRST MIDDLE LAST" name="display_name" type="text" value={this.state.display_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+              <input className="profile-input login-input" placeholder="FIRST MIDDLE LAST" name="display_name" type="text" value={this.state.display_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div className="form-group">
-              <label for="dob" className="form-label">Date of Birth:</label>
+              <label for="dob" className="profile-form-label form-label">Date of Birth:</label>
               <br/>
-              <input className="login-input" type="date" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+              <input className="profile-input login-input" type="date" name="dob" value={this.state.dob} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div className="form-group">
-              <label for="dentist" className="form-label">Dentist/Dental Office:</label>
+              <label for="dentist" className="profile-form-label form-label">Dentist/Dental Office:</label>
               <br/>
-              <input className="login-input" placeholder="Dental Office's Name" name="dentist" type="text" value={this.state.dentist} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+              <input className="profile-input login-input" placeholder="Dental Office's Name" name="dentist" type="text" value={this.state.dentist} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div className="form-group">
-              <label for="toothbrush_replaced" className="form-label">Toothbrush Replaced On:</label>
+              <label for="toothbrush_replaced" className="profile-form-label form-label">Toothbrush Replaced On:</label>
               <br/>
-              <input className="login-input" type="date" name="toothbrush_replaced" value={this.state.toothbrush_replaced} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+              <input className="profile-input login-input" type="date" name="toothbrush_replaced" value={this.state.toothbrush_replaced} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
             </div>
 
             <div id="ins-card-container" className="form-group">
-              <label for="ins_card" className="form-label">Dental Insurance Card:</label>
-              <br/>
+              <label for="ins_card" className="profile-form-label form-label">Dental Insurance Card <button type="button" className="btn btn-outline-dark profile-button" onClick={()=> (this.handleModal())}><FaSearchPlus/></button></label>
+
               {this.state.isEditing ?
               <input style={{width: "220px"}} type="file" name="ins_card" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
               : null
@@ -184,7 +172,6 @@ render(){
                     <img className="ins-card" src={this.state.preview || this.state.ins_card} alt=""/>
                     : null
               }
-
 
 
               {this.state.isEditing && this.state.ins_card &&
@@ -197,10 +184,17 @@ render(){
               }
             </div>
             {!this.state.isEditing
-              ? <button type="button" className="btn btn-secondary" onClick={() => this.setState({isEditing: true})}><FaEdit/></button>
-              : <button className="btn btn-secondary edit-profile-button" type="button" onClick={this.handleSubmit}><FaRegSave /></button>
+              ? <button type="button" className="btn btn-outline-dark profile-button" onClick={() => this.setState({isEditing: true})}><FaEdit/></button>
+              : <button className="btn btn-outline-dark profile-button" type="button" onClick={this.handleSubmit}><FaRegSave /></button>
             }
           </form>
+          <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
+            <Modal.Header closeButton>Dental Insurance Card</Modal.Header>
+            <Modal.Body className="profile-modal-body">
+              <img className="ins-card-modal" src={this.state.ins_card} handleModal={this.handleModal} alt=""/>
+            </Modal.Body>
+
+          </Modal>
       </div>
   )
 

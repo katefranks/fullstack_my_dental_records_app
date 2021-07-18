@@ -74,12 +74,12 @@ render(){
   <div className="record-form-div">
     <form className="form-login p-4 mb-3 login-form-container profile-form-container">
         <div className="form-group">
-          <label for="appt_date" className="form-label">Appointment Date:</label>
+          <label for="appt_date" className="form-label record-form-label">Appointment Date:</label>
           <br/>
-          <input className="login-input" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <input className="record-input record-input-date" name="appt_date" type="date" value={this.state.appt_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>
         <div className="form-group">
-          <label for="category" className="form-label">Appointment Category</label>
+          <label for="category" className="form-label record-form-label">Appointment Category</label>
           <br/>
         <select onChange={this.handleInput} value={this.state.category} name="category" id="category" disabled={!this.state?.isEditing}>
           <option value="CLE">Cleaning</option>
@@ -89,48 +89,48 @@ render(){
         <div className="form-group">
           <input id="xrays" name="xrays" type="checkbox" checked={this.state.xrays} onChange={this.handleCheckbox} disabled={!this.state?.isEditing}/>
           <br />
-          <label for="xrays" className="form-label">X Rays</label>
+          <label for="xrays" className="form-label record-form-label">X Rays</label>
         </div>
 
         {!this.state.isEditing && this.state.xrays &&
         (<div className="form-group">
-          <label for="category" className="form-label">Xray Type:</label>
+          <label for="category" className="form-label record-form-label">Xray Type:</label>
           <br/>
-          <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} disabled={!this.state?.isEditing} />
+          <input className="record-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} disabled={!this.state?.isEditing} />
         </div>)
         }
 
         {this.state.isEditing &&
           <div className="form-group">
-            <label for="category" className="form-label">Xray Type:</label>
+            <label for="category" className="form-label record-form-label">Xray Type:</label>
             <br/>
-            <input className="login-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} />
+            <input className="record-input" type="text" placeholder="BWX FMX Pano PA" name="xray_type" value={this.state.xray_type} onChange={this.handleInput} />
           </div>
         }
 
         {((!this.state.isEditing && this.state.services) || this.state.isEditing )
         ?(<div className="form-group">
-          <label for="services" className="form-label">Services Completed:</label>
+          <label for="services" className="form-label record-form-label">Services Completed:</label>
           <br/>
-          <input className="login-input" type="text" name="services" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <input className="record-input" type="text" name="services" placeholder="Services Completed?" value={this.state.services} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>)
         : null
         }
 
         {((!this.state.isEditing && this.state.provider_name) || this.state.isEditing )
         ?(<div className="form-group">
-          <label for="provider_name" className="form-label">Provider's Name:</label>
+          <label for="provider_name" className="form-label record-form-label">Provider's Name:</label>
           <br/>
-          <input className="login-input" type="text" name="provider_name" placeholder="Name of Provider" value={this.state.provider_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <input className="record-input" type="text" name="provider_name" placeholder="Name of Provider" value={this.state.provider_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>)
         : null
         }
 
         {((!this.state.isEditing && this.state.recommendations) || this.state.isEditing )
         ? (<div className="form-group">
-          <label for="recommendations" className="form-label">Recommendations:</label>
+          <label for="recommendations" className="form-label record-form-label">Recommendations:</label>
           <br/>
-          <input className="login-input" type="text" placeholder="Recommendations?" name="recommendations" value={this.state.recommendations} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <input className="record-input" type="text" placeholder="Recommendations?" name="recommendations" value={this.state.recommendations} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>)
         : null
       }
@@ -138,7 +138,7 @@ render(){
         <div className="form-group">
           {this.state.isEditing ?
           (<>
-          <label for="appt_img" className="form-label">Upload xrays or photos:</label>
+          <label for="appt_img" className="form-label record-form-label">Upload xrays or photos:</label>
           <br/>
           <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
           </>)
@@ -149,11 +149,13 @@ render(){
                 : null
               }
         </div>
+        <div className="record-button-container">
         {!this.state.isEditing
-          ? <button type="button" className="btn btn-secondary record-detail-button" onClick={() => this.setState({isEditing: true})}><FaEdit /></button>
-          : <button className="btn btn-secondary record-detail-button" type="button" onClick={this.saveRecord}><FaRegSave /></button>
+          ? <button type="button" className="btn btn-outline-dark record-detail-button" onClick={() => this.setState({isEditing: true})}><FaEdit /></button>
+          : <button className="btn btn-outline-dark record-detail-button" type="button" onClick={this.saveRecord}><FaRegSave /></button>
         }
-        <button type="button" className="btn btn-secondary record-detail-button"  onClick={() => this.props.deleteRecord(this.props.record.id)}><FaTrash/></button>
+        <button type="button" className="btn btn-outline-dark record-detail-button"  onClick={() => this.props.deleteRecord(this.props.record.id)}><FaTrash/></button>
+        </div>
       </form>
   </div>
   </>
