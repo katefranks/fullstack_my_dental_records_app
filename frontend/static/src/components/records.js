@@ -145,12 +145,12 @@ filterCleaning() {
           <h1>Records</h1>
           <Button className="category-button btn btn-dark" alt="Add Record" onClick={()=> (this.handleModal())}><FaPlus/></Button>
         </div>
-          <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
+          <Modal className="record-modal" show={this.state.show} onHide={()=> (this.handleModal())}>
             <Modal.Header closeButton>
               <Modal.Title>Add New Record</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <AddRecord handleModal={this.handleModal} addRecord={this.addRecord}/>
+              <AddRecord style={{boxShadow: "none"}} id="addrecord-modal" handleModal={this.handleModal} addRecord={this.addRecord}/>
             </Modal.Body>
             <Modal.Footer></Modal.Footer>
           </Modal>

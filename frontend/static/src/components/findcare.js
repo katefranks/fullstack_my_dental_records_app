@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import PlacesAutocomplete, {geocodeByAddress,  getLatLng,} from 'react-places-autocomplete';
 // import { Loader } from "@googlemaps/js-api-loader"
+
+const style = {
+ maxWidth: "700px",
+ height: "100%",
+ overflowX: "hidden",
+ overflowY: "hidden"
+};
+const containerStyle = {
+ maxWidth: "700px",
+ height: "500px"
+};
 
 export class MapContainer extends Component {
   constructor(props) {
@@ -26,6 +38,7 @@ export class MapContainer extends Component {
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
   };
+
 
   componentDidMount() {
     this.getCoordinates();
@@ -154,14 +167,15 @@ onMarkerClick = (props, marker, e) =>
 
 
     return (
-      <div className="findcare-container">
+      <div className="container" id="findcare-container">
+      <div className="row">
+      <div className="col-md-6"  id="main-map-container">
       <div id="googleMap" >
-
         <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
-      >
+        >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
             <input
@@ -191,7 +205,6 @@ onMarkerClick = (props, marker, e) =>
         )}
       </PlacesAutocomplete>
         <Map
-          style={{width: "500px", height: "500px", border: "solid black 5px", position: "relative"}}
           onReady={this.fetchPlaces}
           google={this.props.google}
           initialCenter={{
@@ -202,6 +215,7 @@ onMarkerClick = (props, marker, e) =>
             lat: this.state.userLat,
             lng: this.state.userLng,
           }}
+          style={style} containerStyle={containerStyle}
         >
         <Marker
 
@@ -224,9 +238,12 @@ onMarkerClick = (props, marker, e) =>
         </InfoWindow>
 
         </Map>
-          <ul>{locationsList}</ul>
-
       </div>
+      </div>
+      <div className="col-md-6"  id="locations-list-container">
+          <ul>{locationsList}</ul>
+      </div>
+</div>
 </div>
     )
   }
@@ -236,6 +253,8 @@ onMarkerClick = (props, marker, e) =>
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
+
+// style={{width: "500px", height: "500px", border: "solid black 5px", position: "relative"}}
 
 // const currentLocation =
 // !!this.state.address  ?

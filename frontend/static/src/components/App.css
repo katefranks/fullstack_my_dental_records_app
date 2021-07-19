@@ -348,6 +348,10 @@ ul{
 
 /* Record Detail */
 
+.record-modal > .addrecord-modal{
+  box-shadow: none;
+}
+
 .recordDetail-form-container{
   width: 80%;
   line-height: .75rem;
@@ -408,18 +412,29 @@ line-height: 1.2rem;
 }
 
 /* Find Care */
-.map{
-  max-width: 200px;
-  max-height: 200px;
-}
-
-
-.findcare-container{
+/* #findcare-container{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+} */
+
+/* @media only screen and (min-width: 960px){
+#main-map-container{
+width: 300px;
+height: 300px;
+position: -webkit-sticky;
+position: sticky;
+top: 0;
+align-self: flex-start;
 }
+} */
 
-.findcare-locationsList-container{
-  display: flex;
+/* #main-map-container{
+width: 40%;
+} */
 
+#locations-list-container{
+margin-top: 20px;
+display: flex;
+justify-content: center;
 }
