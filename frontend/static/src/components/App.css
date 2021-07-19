@@ -67,6 +67,8 @@ height: 65px;
 
 .dropdown-item{
   width: 100%;
+  padding: unset;
+  padding-left: 3px;
 }
 
 .footer--pin{
@@ -412,6 +414,7 @@ line-height: 1.2rem;
 }
 
 /* Find Care */
+
 /* #findcare-container{
   display: flex;
   justify-content: space-between;
@@ -437,4 +440,9 @@ width: 40%;
 margin-top: 20px;
 display: flex;
 justify-content: center;
+}
+
+.map{
+  width: 500px;
+  height: 500px;
 }

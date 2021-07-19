@@ -134,12 +134,17 @@ onMarkerClick = (props, marker, e) =>
     };
 
     handleSelect = address => {
+      console.log('address1', address);
       geocodeByAddress(address)
+
         .then(results => getLatLng(results[0]))
+
         .then(latLng => {
           console.log('Success', latLng);
+          console.log('address2', address);
           // setting autocomplete coordinates to be coordinates on state- will be used for place query.
           this.setState({ userLat: latLng.lat, userLng: latLng.lng });
+          this.setState({address});
           // passing map props & map to fetch places (when called w/in autocomplete function)
           this.fetchPlaces();
         })
@@ -158,6 +163,7 @@ onMarkerClick = (props, marker, e) =>
 
     const markers = this.state.locations.map((place) => (
           <Marker key={place.place_id} onClick={this.onMarkerClick}
+            icon = "https://img.icons8.com/offices/30/000000/tooth.png"
             name = {place.name}
             phoneNumber = {place.formatted_phone_number}
             address = {place.formatted_address}
@@ -253,6 +259,10 @@ onMarkerClick = (props, marker, e) =>
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
+
+// icons
+// https://img.icons8.com/offices/30/000000/tooth.png
+// https://img.icons8.com/fluent/48/000000/tooth.png
 
 // style={{width: "500px", height: "500px", border: "solid black 5px", position: "relative"}}
 
