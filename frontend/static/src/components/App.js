@@ -157,7 +157,11 @@ render(){
              <Records />
           </PrivateRoute>
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/addRecord">
-             <AddRecord />
+          <div id="add-record-route">
+            <div className="addrecord-form-container">
+             <div className="login-form-div" id="addrecord-component-container"><AddRecord /></div>
+            </div>
+          </div>
           </PrivateRoute>
 
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/medications">

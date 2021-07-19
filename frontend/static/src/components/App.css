@@ -105,7 +105,7 @@ margin-bottom: 0px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 625px) {
   .login-form-container{
     width:40%;
   }
@@ -330,9 +330,10 @@ ul{
   margin: 20px;
 
 }
-
-.addRecord-form-container{
+#addrecord-component-container{
+  /* margin-top: 40px; */
   width: 90%;
+  /* width: 40%; */
   line-height: .75rem;
   /* padding-top: 10px !important;
   padding-bottom: 5px !important; */
@@ -340,19 +341,31 @@ ul{
   margin-top: 10px;
 }
 
-@media only screen and (min-width: 600px) {
-  .addRecord-form-container{
+.addrecord-form-container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (min-width: 625px) {
+  .addrecord-form-container{
     width:40%;
-    margin-top: 100px;
   }
 }
 
+#add-record-route{
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
 
 /* Record Detail */
-
-.record-modal > .addrecord-modal{
-  box-shadow: none;
-}
 
 .recordDetail-form-container{
   width: 80%;

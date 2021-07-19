@@ -83,12 +83,13 @@ class AddRecord extends Component{
       this.props.handleModal();
     }
   }
-
+// #addrecord-component-container
+// login-form-container
   render(){
     return(
       <>
       <div className="record-form-div">
-        <form className="form-login p-4 mb-3 login-form-container addRecord-form-container">
+        <form className="form-login p-4 mb-3 ">
             <div className="form-group">
               <label for="appt_date" className="form-label record-form-label">Appointment Date:</label>
               <br/>

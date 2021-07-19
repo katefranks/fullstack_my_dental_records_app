@@ -10,8 +10,6 @@ class Navigation extends Component {
     return(
       <Navbar  expand="" className="navbar navbar-dark bg-dark" id="main-navbar">
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-dark" />
-
-
         <Navbar.Collapse id="basic-navbar-nav" className="bg-dark">
           <Nav className="mr-auto align-items-baseline">
             {!!Cookies.get('Authorization') && <NavLink to='/' className="mr-2 bg-dark dropdown-item text-white">Home</NavLink> }
