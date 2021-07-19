@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import Cookies from 'js-cookie';
-import { FaEdit , FaTrash, FaRegSave} from 'react-icons/fa';
+import { FaEdit , FaTrash, FaRegSave, FaSearchPlus, FaRegWindowClose} from 'react-icons/fa';
 
 
 class MedicationDetail extends Component {
@@ -12,6 +12,7 @@ class MedicationDetail extends Component {
     this.state = {
       ...this.props.medication,
       isEditing: false,
+      selected: false,
 //unpacking all of the keys/values from medication
     }
 
@@ -21,6 +22,7 @@ class MedicationDetail extends Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.saveMedication = this.saveMedication.bind(this);
+    this.selectMed = this.selectMed.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -29,9 +31,9 @@ saveMedication(e){
 
   const medication = this.state;
 
-  if (!(medication.appt_img instanceof File)){
+  if (!(medication.label_img instanceof File)){
     //"if it's NOT an instance of a file, remove it"
-    delete medication.appt_img;
+    delete medication.label_img;
     //deleting property if not an instance of a file.
   }
 
@@ -55,7 +57,7 @@ handleCheckbox(e) {
 
 handleImage(e) {
   let file = e.target.files[0];
-  this.setState({appt_img : file, });
+  this.setState({label_img : file, });
 
   let reader = new FileReader();
     reader.onloadend = () => {
@@ -66,51 +68,67 @@ handleImage(e) {
   reader.readAsDataURL(file);
 }
 
+selectMed(){
+  this.setState({selected: !this.state.selected})
+}
+
 render(){
 
   return(
   <>
   <div className="record-form-div">
-    <form className="form-login p-4 mb-3 login-form-container profile-form-container">
+    <form className="form-login p-4 mb-3 login-form-container recordDetail-form-container">
+      <button type="button" className="btn btn-outline-dark record-detail-button" onClick={()=> (this.selectMed())}>
+        {!this.state.selected
+         ?<FaSearchPlus/>
+         :<FaRegWindowClose/>
+        }
+      </button>
         <div className="form-group">
-          <label for="med_date" className="form-label">Date Prescribed:</label>
+          <label for="med_date" className="form-label record-form-label">Date Prescribed:</label>
           <br/>
-          <input className="login-input" name="med_date" type="date" value={this.state.med_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <input className="record-input record-input-date" name="med_date" type="date" value={this.state.med_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>
-
         <div className="form-group">
-          <label for="category" className="form-label">Currenty Taking?</label>
+          <label for="category" className="form-label record-form-label">Currenty Taking?</label>
           <br/>
-        <select onChange={this.handleInput} name="category" id="category" disabled={!this.state?.isEditing}>
+        <select onChange={this.handleInput} value={this.state.category} name="category" id="category" disabled={!this.state?.isEditing}>
           <option value="CUR">Currently Taking</option>
-          <option value="PAS">No Longer Taking</option>
+          <option value="PAS">Not Currently Taking</option>
         </select>
         </div>
 
-        <div className="form-group">
-          <label for="dosage" className="form-label">Dosage:</label>
+    {((!this.state.isEditing && this.state.dosage) || this.state.isEditing )
+        ?(<div className="form-group">
+          <label for="dosage" className="form-label record-form-label">Dosage:</label>
           <br/>
-          <input className="login-input" type="text" name="dosage" placeholder="Dosage (if known)" value={this.state.dosage} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
-        </div>
-        <div className="form-group">
-          <label for="prescriber" className="form-label">Prescriber:</label>
+          <input className="record-input" type="text" name="dosage" placeholder="Dosage:" value={this.state.dosage} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+        </div>)
+        :null
+      }
+
+    {((!this.state.isEditing && this.state.prescriber) || this.state.isEditing )
+        ?(<div className="form-group">
+          <label for="prescriber" className="form-label record-form-label">Prescriber:</label>
           <br/>
-          <input className="login-input" type="text" name="prescriber" placeholder="Who Prescribed It?" value={this.state.prescriber} onChange={this.handleInput} />
-        </div>
-
-        <div className="form-group">
-          <label for="reason" className="form-label">Reason for Taking:</label>
+          <input className="login-input" type="text" name="prescriber" placeholder="Who Prescribed It?" value={this.state.prescriber} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+        </div>)
+        : null
+      }
+      {((!this.state.isEditing && this.state.prescriber) || this.state.isEditing )
+        ?(<div className="form-group">
+          <label for="reason" className="form-label record-form-label">Reason for Taking:</label>
           <br/>
-          <input className="login-input" type="text" placeholder="ex. Asthma" name="reason" value={this.state.reason} onChange={this.handleInput} />
-        </div>
-
-
+          <input className="login-input" type="text" placeholder="ex. Asthma" name="reason" value={this.state.reason} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+        </div>)
+        : null
+      }
         <div className="form-group">
           {this.state.isEditing ?
           (<>
-          <label for="label_img" className="form-label">Bottle Label Picture:</label>
+          <label for="label_img" className="form-label record-form-label">Bottle Label Picture:</label>
           <br/>
-          <input style={{width: "220px"}} type="file" name="appt_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
+          <input style={{width: "220px"}} type="file" name="label_img" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
           </>)
           : null
           }
@@ -119,12 +137,13 @@ render(){
                 : null
               }
         </div>
+        <div className="record-button-container">
         {!this.state.isEditing
-          ? <button type="button" className="btn btn-secondary record-detail-button" onClick={() => this.setState({isEditing: true})}><FaEdit /></button>
-          : <button className="btn btn-secondary record-detail-button" type="button" onClick={this.saveMedication}><FaRegSave /></button>
+          ? <button type="button" className="btn btn-outline-dark record-detail-button" onClick={() => this.setState({isEditing: true})}><FaEdit /></button>
+          : <button className="btn btn-outline-dark record-detail-button" type="button" onClick={this.saveMedication}><FaRegSave /></button>
         }
-        <button type="button" className="btn btn-secondary record-detail-button"  onClick={() => this.props.deleteMedication(this.props.medication.id)}><FaTrash/></button>
-
+        <button type="button" className="btn btn-outline-dark record-detail-button"  onClick={() => this.props.deleteMedication(this.props.medication.id)}><FaTrash/></button>
+        </div>
       </form>
   </div>
   </>

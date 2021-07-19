@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import { Button , Modal } from 'react-bootstrap';
+import { FaPlus} from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MedicationDetail from './medicationDetail';
@@ -127,27 +128,26 @@ filterCurrent() {
 
       <div>
         <div className="addrecord-button-container">
-        <Button className="btn btn-dark" onClick={()=> (this.handleModal())}>Add New Medication</Button>
+          <h1>Medications</h1>
+          <Button className="category-button btn btn-dark" onClick={()=> (this.handleModal())}><FaPlus/></Button>
         </div>
-          <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
-            <Modal.Header closeButton>
-              <Modal.Title>Add New Medication</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <AddMedication handleModal={this.handleModal} addMedication={this.addMedication}/>
-            </Modal.Body>
-            <Modal.Footer></Modal.Footer>
-          </Modal>
-        <h1>Medications</h1>
+        <Modal className="record-modal" show={this.state.show} onHide={()=> (this.handleModal())}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add New Medication</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <AddMedication handleModal={this.handleModal} addMedication={this.addMedication}/>
+          </Modal.Body>
+          <Modal.Footer></Modal.Footer>
+        </Modal>
+
         <div className="appt-filter-container">
+        <Button className="category-button btn btn-dark" onClick={()=> (this.fetchData())}>View All</Button>
         <Button className="category-button btn btn-dark" onClick={()=> (this.filterCurrent())}>Currently Taking</Button>
         <Button className="category-button btn btn-dark" onClick={()=> (this.filterPast())}>Previously Taken</Button>
-        <Button className="category-button btn btn-dark" onClick={()=> (this.fetchData())}>View All</Button>
         </div>
         <ul>{medications}</ul>
       </div>
-
-
     );
   }
 }
