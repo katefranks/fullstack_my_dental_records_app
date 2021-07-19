@@ -33,6 +33,7 @@ export class MapContainer extends Component {
         // lng: -82.394012,
       }
     }
+    // this.mapRef = React.createRef();
     this.getCoordinates = this.getCoordinates.bind(this);
     this.fetchPlaces = this.fetchPlaces.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
@@ -62,16 +63,11 @@ export class MapContainer extends Component {
 //prior to calling setState, need to check if there's something to set there.
 
   fetchPlaces(mapProps, map) {
-    console.log('mapProps', mapProps, 'map', map);
-    console.log('this', this);
-    console.log('lat', this.userLat);
-    console.log('lng', this.userLng);
+    console.log('lat', this.userLat, 'lng', this.userLng);
     const { google } = mapProps;
     const service = new google.maps.places.PlacesService(map);
 
-
     const currentLocation = new google.maps.LatLng(this.state.userLat, this.state.userLng);
-    // console.log('current location', currentLocation);
 
     const request = {
       location: currentLocation,
@@ -80,32 +76,11 @@ export class MapContainer extends Component {
     };
 
   service.textSearch(request, (results, status) => {
-  // service.nearbySearch(request, (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (let i = 0; i < results.length; i++) {
-        const placeId = results[i].place_id;
-        // console.log('Name: ',place.name, 'Address: ',place.formatted_address,);
-        // console.log(place);
-        const request = {
-          placeId,
-          fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
-        };
+      this.setState({
+          locations: results
+        });
 
-        service.getDetails(request, (place, status) => {
-          // you still have access results[i]
-          // target results[i] and add the phone_number
-          // console.log('place', place, status);
-
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            results[i].formatted_phone_number = place.formatted_phone_number;
-            results[i].geometry.location = place.geometry.location;
-
-            // alternative syntax for above:
-            // const {formatted_phone_number, geometry} = place;
-            // results[i] = {...results[i], formatted_phone_number, geometry};
-          }
-        })
-      }
     }
     // console.log('geometry: ', results[0].geometry.location);
     console.log(results);
@@ -113,12 +88,21 @@ export class MapContainer extends Component {
   });
 };
 
-onMarkerClick = (props, marker, e) =>
-  this.setState({
-    selectedPlace: props,
-    activeMarker: marker,
-    showingInfoWindow: true
-  });
+
+  onMarkerClick(props, marker, e){
+    const{google, map, id} = props;
+    const service = new google.maps.places.PlacesService(map);
+    service.getDetails({
+      placeId: id
+      }, (place, status) => {
+      this.setState({
+        selectedPlace: {...props, phoneNumber: place.formatted_phone_number},
+        activeMarker: marker,
+        showingInfoWindow: true
+      });
+});
+}
+
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -170,6 +154,7 @@ onMarkerClick = (props, marker, e) =>
             phoneNumber = {place.formatted_phone_number}
             address = {place.formatted_address}
             position= {place.geometry.location}
+            id={place.place_id}
           />
       ))
 
@@ -214,6 +199,7 @@ onMarkerClick = (props, marker, e) =>
         )}
       </PlacesAutocomplete>
         <Map
+          ref={this.mapRef}
           onReady={this.fetchPlaces}
           google={this.props.google}
           initialCenter={{
