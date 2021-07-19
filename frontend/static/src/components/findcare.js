@@ -9,7 +9,7 @@ const style = {
  maxWidth: "700px",
  height: "100%",
  overflowX: "hidden",
- overflowY: "hidden"
+ overflowY: "hidden",
 };
 const containerStyle = {
  maxWidth: "700px",
@@ -62,7 +62,7 @@ export class MapContainer extends Component {
 //prior to calling setState, need to check if there's something to set there.
 
   fetchPlaces(mapProps, map) {
-    console.log('mapProps', mapProps, 'map', map)
+    console.log('mapProps', mapProps, 'map', map);
     console.log('this', this);
     console.log('lat', this.userLat);
     console.log('lng', this.userLng);
@@ -94,7 +94,7 @@ export class MapContainer extends Component {
         service.getDetails(request, (place, status) => {
           // you still have access results[i]
           // target results[i] and add the phone_number
-          console.log('place', place, status);
+          // console.log('place', place, status);
 
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             results[i].formatted_phone_number = place.formatted_phone_number;
@@ -109,7 +109,7 @@ export class MapContainer extends Component {
     }
     // console.log('geometry: ', results[0].geometry.location);
     console.log(results);
-    this.setState({ locations: results });
+    this.setState({ locations: results, map: map });
   });
 };
 
@@ -133,23 +133,25 @@ onMarkerClick = (props, marker, e) =>
       this.setState({ address });
     };
 
-    handleSelect = address => {
-      console.log('address1', address);
-      geocodeByAddress(address)
+  handleSelect = address => {
+    console.log('this', this)
+    console.log('address1', address);
+    geocodeByAddress(address)
 
-        .then(results => getLatLng(results[0]))
+      .then(results => getLatLng(results[0]))
 
-        .then(latLng => {
-          console.log('Success', latLng);
-          console.log('address2', address);
-          // setting autocomplete coordinates to be coordinates on state- will be used for place query.
-          this.setState({ userLat: latLng.lat, userLng: latLng.lng });
-          this.setState({address});
-          // passing map props & map to fetch places (when called w/in autocomplete function)
-          this.fetchPlaces();
-        })
-        .catch(error => console.error('Error', error));
-    };
+      .then(latLng => {
+        console.log('Success', latLng);
+        console.log('address2', address);
+        // setting autocomplete coordinates to be coordinates on state- will be used for place query.
+        this.setState({ userLat: latLng.lat, userLng: latLng.lng });
+        this.setState({address});
+        // passing map props & map to fetch places (when called w/in autocomplete function)
+        this.fetchPlaces(this.props, this.state.map);
+        console.log('fetchplaces', this.fetchPlaces);
+      })
+      .catch(error => console.error('Error', error));
+  };
 
 
   render() {
@@ -181,6 +183,7 @@ onMarkerClick = (props, marker, e) =>
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
+
         >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
