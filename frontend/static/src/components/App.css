@@ -41,6 +41,7 @@ z-index: 2;
   width: 100%;
   padding: unset;
   padding-left: 3px;
+  margin-right: unset !important;
 }
 
 #footer{
@@ -396,4 +397,8 @@ line-height: 1.2rem;
 #map-container-center{
   display: flex;
   justify-content: center;
+}
+
+.infowindow-marker{
+  
 }
