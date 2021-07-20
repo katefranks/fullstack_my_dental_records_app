@@ -231,12 +231,13 @@ export class MapContainer extends Component {
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}>
               <div className="infowindow-marker">
-                <h2 style={{textAlign: "center"}}>{this.state.selectedPlace.name}</h2>
-                <a href={`tel:+${this.state.selectedPlace.phoneNumber}`}><FaPhoneAlt/> {this.state.selectedPlace.phoneNumber}</a>
+                <h2 id="infowindow-h2" style={{textAlign: "center"}}>{this.state.selectedPlace.name}</h2>
+                <a className="infowindow-a" href={`tel:+${this.state.selectedPlace.phoneNumber}`}><FaPhoneAlt/> {this.state.selectedPlace.phoneNumber}</a>
                 <br/>
-                <a href={this.state.selectedPlace.website} target="_blank"><FaGlobeAmericas/>  {this.state.selectedPlace.website}</a>
-                <br/>
-                <a href={`https://maps.google.com/?q=${this.state.selectedPlace.address}`} target="_blank"><FaMapMarkerAlt/> {this.state.selectedPlace.address}</a>
+                {this.state.selectedPlace.website &&
+                <a className="infowindow-a" href={this.state.selectedPlace.website} target="_blank"><FaGlobeAmericas/>  {this.state.selectedPlace.website}<br/></a>
+                }
+                <a className="infowindow-a" href={`https://maps.google.com/?q=${this.state.selectedPlace.address}`} target="_blank"><FaMapMarkerAlt/> {this.state.selectedPlace.address}</a>
               </div>
         </InfoWindow>
 

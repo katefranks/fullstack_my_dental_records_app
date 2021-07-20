@@ -400,5 +400,17 @@ line-height: 1.2rem;
 }
 
 .infowindow-marker{
-  
+
+}
+
+#infowindow-h2{
+  font-size: 1.5rem;
+  background: -webkit-linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.infowindow-a{
+  /* color: #CA344F; */
+  /* color: #80005A; */
 }
