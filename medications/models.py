@@ -14,6 +14,7 @@ class Medication (models.Model):
     ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    med_name = models.CharField(max_length=255, blank=True, null=True,)
     med_date = models.DateField(auto_now=False, blank=True, null=True,)
     prescriber = models.CharField(max_length=255, blank=True,)
     category = models.CharField(max_length=3, choices=CATEGORY_CHOICES, null=True, default='CUR')

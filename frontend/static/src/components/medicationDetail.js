@@ -85,7 +85,7 @@ render(){
         }
       </button>
         <div className="form-group">
-          <label for="med_name" className="form-label record-form-label">Medicine Name:</label>
+          <label for="med_name" className="form-label record-form-label">Medication Name:</label>
           <br/>
           <input className="record-input" type="text" name="med_name" placeholder="ex. Allegra" value={this.state.med_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>

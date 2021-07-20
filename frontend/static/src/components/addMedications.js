@@ -101,7 +101,7 @@ class AddMedication extends Component{
             <div className="form-group">
               <label for="med_name" className="form-label record-form-label">Medication Name:</label>
               <br/>
-              <input className="login-input" type="text" name="med_name" placeholder="ex. Allegra" value={this.state.med_name} onChange={this.handleInput} />
+              <input className="login-input" name="med_name" type="text"  placeholder="ex. Allegra" value={this.state.med_name} onChange={this.handleInput} />
             </div>
             <div className="form-group">
               <label for="med_date" className="form-label record-form-label">Date Prescribed:</label>
