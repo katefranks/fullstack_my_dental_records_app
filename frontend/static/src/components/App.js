@@ -135,17 +135,10 @@ render(){
                 <Registration {...props} handleRegistration={this.handleRegistration} />
               )}
             />
-            <Route
-              path='/findcare'
-              render={(props) => (
-                <FindCare />
-              )}
-            />
-
-          <Route
-            path ='/api_test'
-            render={(props) => (<ApiTest />)}
-          />
+        
+          <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/findcare">
+             <FindCare />
+          </PrivateRoute>
 
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} exact path="/">
              <Homepage addRecord={this.addRecord} records={this.records} handleLogout={this.handleLogout}/>
@@ -198,7 +191,12 @@ export default withRouter(App);
 
 // <h1 id="footer-text"><FaTooth /></h1>
 
-
+// <Route
+//   path='/findcare'
+//   render={(props) => (
+//     <FindCare />
+//   )}
+// />
 
 
 

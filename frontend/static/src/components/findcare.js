@@ -171,13 +171,12 @@ export class MapContainer extends Component {
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
-
         >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div id="automcomplete-container">
             <input
               {...getInputProps({
-                placeholder: 'Search Places ...',
+                placeholder: 'Search a location, find a dentist!',
                 className: 'location-search-input',
               })}
             />
@@ -250,6 +249,8 @@ export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
 
+//  {/* */}
+
 // icons
 // https://img.icons8.com/offices/30/000000/tooth.png
 // https://img.icons8.com/fluent/48/000000/tooth.png
@@ -265,3 +266,26 @@ export default GoogleApiWrapper({
 // <div className="col-md-6"  id="locations-list-container">
 //     <ul>{locationsList}</ul>
 // </div>
+
+//
+
+// <div id="googleMap" >
+//   <PlacesAutocomplete
+//   value={this.state.address}
+//   onChange={this.handleChange}
+//   onSelect={this.handleSelect}
+//
+//   >
+//   {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+//     <div id="automcomplete-container">
+//       <input
+//         {...getInputProps({
+//           placeholder: 'Search Places ...',
+//           className: 'location-search-input',
+//         })}
+//       />
+//    ........
+// </div>
+// </div>
+// )}
+// </PlacesAutocomplete>

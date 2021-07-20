@@ -44,7 +44,8 @@ z-index: 2;
 }
 
 #footer{
-  position: fixed;
+  /* position: fixed; */
+  position: sticky;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -384,6 +385,7 @@ line-height: 1.2rem;
 }
 
 /* Find Care */
+
 
 #automcomplete-container{
   display: flex;

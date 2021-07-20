@@ -32,17 +32,17 @@ render(){
       <form className="form-login p-4 mb-3 login-form-container" onSubmit={this.handleSubmit}>
       <h2>Login</h2>
       <div className="form-group">
-        <label for="InputUsername" className="form-label"></label>
+        <label for="username" className="form-label"></label>
         <br/>
         <input className="login-input" placeholder="username" name="username" type="text" value={this.state.username} onChange={this.handleInput}/>
       </div>
       <div className="form-group">
-        <label for="InputUsername" className="form-label"></label>
+        <label for="email" className="form-label"></label>
         <br/>
         <input className="login-input" type="email" placeholder="email" name="email" value={this.state.email} onChange={this.handleInput}/>
       </div>
       <div className="form-group">
-        <label for="InputUsername" className="form-label"></label>
+        <label for="password" className="form-label"></label>
         <br/>
         <input className="login-input" type="password" placeholder="password" name="password" value={this.state.password} onChange={this.handleInput}/>
       </div>
