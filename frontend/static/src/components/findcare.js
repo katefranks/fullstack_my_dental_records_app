@@ -8,12 +8,14 @@ import PlacesAutocomplete, {geocodeByAddress,  getLatLng,} from 'react-places-au
 const style = {
  maxWidth: "700px",
  height: "100%",
+ // height: "500px",
  overflowX: "hidden",
  overflowY: "hidden",
 };
 const containerStyle = {
  maxWidth: "700px",
- height: "500px"
+ // height: "500px"
+ height: "100%"
 };
 
 export class MapContainer extends Component {
@@ -160,9 +162,9 @@ export class MapContainer extends Component {
 
 
     return (
-      <div className="container" id="findcare-container">
-      <div className="row">
-      <div className="col-md-6"  id="main-map-container">
+      <div className="" id="findcare-container">
+
+      <div className=""  id="main-map-container">
       <div id="googleMap" >
         <PlacesAutocomplete
         value={this.state.address}
@@ -235,10 +237,6 @@ export class MapContainer extends Component {
         </Map>
       </div>
       </div>
-      <div className="col-md-6"  id="locations-list-container">
-          <ul>{locationsList}</ul>
-      </div>
-</div>
 </div>
     )
   }
@@ -254,3 +252,13 @@ export default GoogleApiWrapper({
 // https://img.icons8.com/fluent/48/000000/tooth.png
 
 // style={{width: "500px", height: "500px", border: "solid black 5px", position: "relative"}}
+/////
+// <div className="container" id="findcare-container">
+// <div className="row">
+// <div className="col-md-6"  id="main-map-container">
+// <div id="googleMap" >
+
+
+// <div className="col-md-6"  id="locations-list-container">
+//     <ul>{locationsList}</ul>
+// </div>

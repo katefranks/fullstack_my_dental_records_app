@@ -17,6 +17,7 @@
 body {
     background: transparent url(./css/background.jpeg) no-repeat fixed center center/cover;
     margin: 0 auto;
+    z-index: 1;
     /* height: 60vh; */
 
     /* position: relative; */
@@ -45,6 +46,7 @@ body {
 #main-navbar{
 width: 10%;
 height: 65px;
+z-index: 2;
 }
 
 .content-container{
