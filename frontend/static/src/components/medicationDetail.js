@@ -85,6 +85,11 @@ render(){
         }
       </button>
         <div className="form-group">
+          <label for="med_name" className="form-label record-form-label">Medicine Name:</label>
+          <br/>
+          <input className="record-input" type="text" name="med_name" placeholder="ex. Allegra" value={this.state.med_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+        </div>
+        <div className="form-group">
           <label for="med_date" className="form-label record-form-label">Date Prescribed:</label>
           <br/>
           <input className="record-input record-input-date" name="med_date" type="date" value={this.state.med_date} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
@@ -102,7 +107,7 @@ render(){
         ?(<div className="form-group">
           <label for="dosage" className="form-label record-form-label">Dosage:</label>
           <br/>
-          <input className="record-input" type="text" name="dosage" placeholder="Dosage:" value={this.state.dosage} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+          <input className="record-input" type="text" name="dosage" placeholder="ex. 25mg" value={this.state.dosage} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
         </div>)
         :null
       }

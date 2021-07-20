@@ -330,7 +330,7 @@ ul{
   margin: 20px;
 
 }
-#addrecord-component-container{
+.addrecord-component-container{
   /* margin-top: 40px; */
   width: 90%;
   /* width: 40%; */
@@ -359,7 +359,7 @@ ul{
   }
 }
 
-#add-record-route{
+.add-record-route{
   width:100%;
   display: flex;
   justify-content: center;
