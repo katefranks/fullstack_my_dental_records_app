@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './App.css';
 import "../index.css";
 import "../index.js";
@@ -12,6 +13,7 @@ import Navbar from './navbar';
 import Login from './login';
 import Registration from './registration';
 import Homepage from './homepage';
+import About from './about';
 import Profile from './profile';
 import Records from './records';
 import AddRecord from './addRecord';
@@ -135,7 +137,13 @@ render(){
                 <Registration {...props} handleRegistration={this.handleRegistration} />
               )}
             />
-        
+            <Route
+              path='/about'
+              render={(props) => (
+                <About handleLogout={this.handleLogout}/>
+              )}
+            />
+
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/findcare">
              <FindCare />
           </PrivateRoute>
@@ -177,9 +185,9 @@ render(){
         </Switch>
       </div>
         <footer id="footer" className="main-footer bg-dark footer--pin">
-          <a  href="http://www.kateloves2code.com" target="_blank">
-          <h1 id="footer-text"><FaTooth /></h1>
-          </a>
+          {!!Cookies.get('Authorization')? <NavLink to='/' className=""><h1 id="footer-text"><FaTooth /></h1></NavLink>
+          :<a  href="http://www.kateloves2code.com" target="_blank"><h1 id="footer-text"><FaTooth /></h1></a>
+          }
         </footer>
       </>
 
@@ -189,8 +197,8 @@ render(){
 
 export default withRouter(App);
 
+// <a  href="http://www.kateloves2code.com" target="_blank"><h1 id="footer-text"><FaTooth /></h1></a>
 // <h1 id="footer-text"><FaTooth /></h1>
-
 // <Route
 //   path='/findcare'
 //   render={(props) => (
