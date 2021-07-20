@@ -183,7 +183,7 @@ render(){
 
         </Switch>
       </div>
-        <footer className="main-footer bg-dark footer--pin">
+        <footer id="footer" className="main-footer bg-dark footer--pin">
           <a  href="http://www.kateloves2code.com" target="_blank">
           <h1 id="footer-text"><FaTooth /></h1>
           </a>

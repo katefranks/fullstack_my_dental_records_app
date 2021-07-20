@@ -7,14 +7,15 @@ import PlacesAutocomplete, {geocodeByAddress,  getLatLng,} from 'react-places-au
 
 const style = {
  maxWidth: "700px",
- height: "100%",
- // height: "500px",
+ // height: "85%",
+  height: "100%",
  overflowX: "hidden",
  overflowY: "hidden",
 };
+
 const containerStyle = {
  maxWidth: "700px",
- // height: "500px"
+ // height: "85%"
  height: "100%"
 };
 

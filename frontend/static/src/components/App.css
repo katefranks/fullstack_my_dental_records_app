@@ -1,27 +1,11 @@
-/* Main */
-/* #root>div {
-  height: 100vh !important;
-
-} */
-
-/* @media only screen and (max-width: 330px) {
-  #root>div {
-    height: 90vh !important;
-  }
-} */
-
-/* [data-reactroot]
-        {height: 100% !important; } */
-
+/* MAIN */
 
 body {
     background: transparent url(./css/background.jpeg) no-repeat fixed center center/cover;
     margin: 0 auto;
     z-index: 1;
-    /* height: 60vh; */
-
-    /* position: relative; */
 }
+
 #header-title{
   background: -webkit-linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%);
   -webkit-background-clip: text;
@@ -53,48 +37,29 @@ z-index: 2;
   min-height: calc(100vh - 45px);
 }
 
-/* .main-footer{
-  position: fixed;
-  height: 10vh;
-  text-align: center;
-  margin-bottom: 0px;
-
-}
-
-.footer-div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 .dropdown-item{
   width: 100%;
   padding: unset;
   padding-left: 3px;
 }
 
-.footer--pin{
-  position: relative;
+#footer{
+  position: fixed;
   left: 0;
   bottom: 0;
-  margin-bottom: 0px;
+  width: 100%;
+  text-align: center;
 }
 
 #footer-text{
 color: #CA344F;
 size: 2rem;
 margin-bottom: 0px;
-
-  /* background:-moz-linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%);
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
- -webkit-text-fill-color:transparent; */
 }
-/* background-image: linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%); */
-/* position: absolute; */
+
 
 /* login */
+
 .login-form-container{
   margin-top: 20px;
   display: flex;
@@ -113,18 +78,19 @@ margin-bottom: 0px;
   }
 }
 
-
 .login-form-div{
   display: flex;
   justify-content: center;
-  /* height: 80VH; */
 }
 
 .login-divider{
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+
 /* Homepage */
+
 #homepage-h1{
   margin-bottom: 25px;
   margin-top: 25px;
@@ -167,7 +133,6 @@ margin-bottom: 0px;
   justify-content: center;
   align-content: center;
   align-items: center;
-
 }
 
 .btn-circle.btn-xl {
@@ -271,17 +236,13 @@ input:-webkit-autofill:active
 
 
 input:disabled {
-/* input[type="text"]:disabled { */
-  /* border-radius: 10px; */
   background: #FFF;
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   text-align: center;
-
 }
 
 input[type="text"]:selection {
   /* border: 1px solid blue; */
-  /* border-radius: 10px; */
 }
 
 .profile-button{
@@ -333,12 +294,8 @@ ul{
 
 }
 .addrecord-component-container{
-  /* margin-top: 40px; */
   width: 90%;
-  /* width: 40%; */
   line-height: .75rem;
-  /* padding-top: 10px !important;
-  padding-bottom: 5px !important; */
   padding: 0px;
   margin-top: 10px;
 }
@@ -372,8 +329,6 @@ ul{
 .recordDetail-form-container{
   width: 80%;
   line-height: .75rem;
-  /* padding-top: 10px !important;
-  padding-bottom: 5px !important; */
   padding: 0px;
   margin: 0px;
 }
@@ -430,34 +385,11 @@ line-height: 1.2rem;
 
 /* Find Care */
 
-/* #findcare-container{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+/* .main-map-container{
+  border: solid black 5px;
 } */
-
-/* @media only screen and (min-width: 960px){
-#main-map-container{
-width: 300px;
-height: 300px;
-position: -webkit-sticky;
-position: sticky;
-top: 0;
-align-self: flex-start;
-}
-} */
-
-/* #main-map-container{
-width: 40%;
-} */
-
-#locations-list-container{
-margin-top: 20px;
-display: flex;
-justify-content: center;
-}
-
+/*
 .map{
-  width: 500px;
   height: 500px;
-}
+  width: 500px;
+} */
