@@ -174,7 +174,7 @@ export class MapContainer extends Component {
 
         >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
+          <div id="automcomplete-container">
             <input
               {...getInputProps({
                 placeholder: 'Search Places ...',
@@ -201,6 +201,7 @@ export class MapContainer extends Component {
           </div>
         )}
       </PlacesAutocomplete>
+      <div id="map-container-center">
         <Map
           ref={this.mapRef}
           onReady={this.fetchPlaces}
@@ -236,6 +237,7 @@ export class MapContainer extends Component {
         </InfoWindow>
 
         </Map>
+        </div>
       </div>
       </div>
 </div>

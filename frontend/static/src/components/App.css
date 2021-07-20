@@ -385,11 +385,13 @@ line-height: 1.2rem;
 
 /* Find Care */
 
-/* .main-map-container{
-  border: solid black 5px;
-} */
-/*
-.map{
-  height: 500px;
-  width: 500px;
-} */
+#automcomplete-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#map-container-center{
+  display: flex;
+  justify-content: center;
+}
