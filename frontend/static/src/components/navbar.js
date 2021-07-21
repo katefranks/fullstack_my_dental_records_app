@@ -15,11 +15,12 @@ class Navigation extends Component {
             {!!Cookies.get('Authorization') && <NavLink to='/' className="mr-2 bg-dark dropdown-item text-white">Home</NavLink> }
             {!!Cookies.get('Authorization') && <NavLink to='/profile' className="mr-2 bg-dark dropdown-item text-white">Profile</NavLink> }
             {!!Cookies.get('Authorization') && <NavLink to='/records' className="mr-2 bg-dark dropdown-item text-white">Records</NavLink> }
-            {!!Cookies.get('Authorization') && <NavLink to='/medications' className="mr-2 bg-dark dropdown-item text-white">Medications</NavLink> }
             {!!Cookies.get('Authorization') && <NavLink to='/findcare' className="mr-2 bg-dark dropdown-item text-white">FindCare</NavLink> }
+            {!!Cookies.get('Authorization') && <NavLink to='/medications' className="mr-2 bg-dark dropdown-item text-white">Medications</NavLink> }
+
             {!Cookies.get('Authorization') && <NavLink to='/login' className="mr-2 bg-dark dropdown-item text-white">Login</NavLink> }
             {!Cookies.get('Authorization') && <NavLink to='/registration' className="mr-2 bg-dark dropdown-item text-white">Register</NavLink>}
-            <NavLink to='/about' className="mr-2 bg-dark dropdown-item text-white">About</NavLink>
+            <NavLink to='/about' className="mr-2 bg-dark dropdown-item text-white">Contact Us</NavLink>
             {!!Cookies.get('Authorization') && <button className="mr-2 bg-dark dropdown-item text-white" onClick={() => this.props.handleLogout()}>Logout</button>}
 
           </Nav>

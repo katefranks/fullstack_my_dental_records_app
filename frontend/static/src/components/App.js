@@ -186,11 +186,10 @@ render(){
       </div>
         <footer id="footer" className="main-footer bg-dark footer--pin">
           {!!Cookies.get('Authorization')? <NavLink to='/' className=""><h1 id="footer-text"><FaTooth /></h1></NavLink>
-          :<a  href="http://www.kateloves2code.com" target="_blank"><h1 id="footer-text"><FaTooth /></h1></a>
+          :<NavLink to='/about' className="mr-2 bg-dark dropdown-item text-white"><h1 id="footer-text"><FaTooth /></h1></NavLink>
           }
         </footer>
       </>
-
   );
 }
 }
@@ -206,7 +205,7 @@ export default withRouter(App);
 //   )}
 // />
 
-
+// <a  href="http://www.kateloves2code.com" target="_blank"><h1 id="footer-text"><FaTooth /></h1></a>
 
 // <FaTooth />
 // <footer className="main-footer bg-dark ">
