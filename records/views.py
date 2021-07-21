@@ -14,14 +14,14 @@ class RecordListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         selection = self.request.user
-        return Record.objects.filter(user=self.request.user)
+        return Record.objects.filter(user=self.request.user).order_by('appt_date')
 
 class RecordDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RecordSerializer
 
     def get_queryset(self):
         selection = self.request.user
-        return Record.objects.filter(user=self.request.user)
+        return Record.objects.filter(user=self.request.user).order_by('appt_date')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -31,7 +31,7 @@ class CategoryListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         selection = self.request.query_params['category']
-        return Record.objects.filter(category=selection, user=self.request.user)
+        return Record.objects.filter(category=selection, user=self.request.user).order_by('appt_date')
 
 
 class XrayListAPIView(generics.ListCreateAPIView):
@@ -39,4 +39,4 @@ class XrayListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         selection = self.request.query_params['xrays']
-        return Record.objects.filter(xrays=selection, user=self.request.user)
+        return Record.objects.filter(xrays=selection, user=self.request.user).order_by('appt_date')

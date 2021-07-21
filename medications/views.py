@@ -14,7 +14,7 @@ class MedicationListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         selection = self.request.user
-        return Medication.objects.filter(user=self.request.user)
+        return Medication.objects.filter(user=self.request.user).order_by('med_date')
 
 class MedicationDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MedicationSerializer
@@ -24,11 +24,11 @@ class MedicationDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         return Medication.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user).order_by('med_date')
 
 class CategoryListAPIView(generics.ListCreateAPIView):
     serializer_class = MedicationSerializer
 
     def get_queryset(self):
         selection = self.request.query_params['category']
-        return Medication.objects.filter(category=selection, user=self.request.user)
+        return Medication.objects.filter(category=selection, user=self.request.user).order_by('med_date')
