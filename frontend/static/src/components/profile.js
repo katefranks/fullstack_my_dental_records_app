@@ -96,7 +96,8 @@ async addProfile(e) {
     body: formData,
   }
   const response = await fetch('/api/v1/users/profiles/', options);
-  this.setState({response});
+  this.setState({response, isEditing: false});
+
 }
 
 async editProfile(e){
@@ -169,8 +170,8 @@ render(){
               : null
               }
               {this.state.ins_card ?
-                    <img className="ins-card" src={this.state.preview || this.state.ins_card} alt=""/>
-                    : null
+                <img className="ins-card" src={this.state.preview || this.state.ins_card} alt=""/>
+                : null
               }
 
 
