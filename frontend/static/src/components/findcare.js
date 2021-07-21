@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import PlacesAutocomplete, {geocodeByAddress,  getLatLng,} from 'react-places-autocomplete';
 import { FaMapMarkerAlt, FaGlobeAmericas, FaPhoneAlt } from 'react-icons/fa';
-// import { Loader } from "@googlemaps/js-api-loader"
+
 
 const style = {
  maxWidth: "700px",
