@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import { Button , Modal } from 'react-bootstrap';
 import { FaPlus} from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,10 +6,7 @@ import './App.css';
 import RecordDetail from './recordDetail';
 import AddRecord from './addRecord';
 import Cookies from 'js-cookie';
-import Homepage from './homepage';
-// import recordsNavBar from './recordsNavBar';
 
-//get modal to open and close- react bootstrap modal
 
 class Records extends Component {
   constructor(props){
@@ -29,10 +25,6 @@ class Records extends Component {
     this.filterXrays = this.filterXrays.bind(this);
   }
 
-
-  // handleClose = () => this.setState({show: false});
-  // handleShow = () => this.setState({show: true});
-
   handleModal(){
     this.setState({show: !this.state.show})
   }
@@ -47,7 +39,7 @@ async editRecord(record){
 
   const keys = Object.keys(record);
   keys.forEach(key => formData.append(key, record[key]));
-// for each key were appending the key and value of key (using square bracket notation to access value)
+// for each key we're appending the key and value of key (using square bracket notation to access value)
 
   const options = {
     method: 'PATCH',
@@ -171,11 +163,5 @@ filterCleaning() {
 export default Records;
 
 
-
-
-
-// Fetch records of logged in user
-// get those to display
-// allow them to edit and delete records
-// list out user records. edit them and delete them
-// query the records the belong to the logged in user. Return records.obj.all
+// handleClose = () => this.setState({show: false});
+// handleShow = () => this.setState({show: true});

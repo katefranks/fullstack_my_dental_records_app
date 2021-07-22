@@ -177,7 +177,7 @@ render(){
         </Switch>
       </div>
         <footer id="footer" className="main-footer bg-dark footer--pin">
-          {!!Cookies.get('Authorization')? <NavLink to='/' className=""><h1 id="footer-text"><FaHome /></h1></NavLink>
+          {!!Cookies.get('Authorization')? <NavLink to='/' className=""><h1 id="footer-text"><FaTooth /></h1></NavLink>
           :<NavLink to='/about' className="mr-2 bg-dark dropdown-item text-white"><h1 id="footer-text"><FaTooth /></h1></NavLink>
           }
         </footer>

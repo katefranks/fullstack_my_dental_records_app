@@ -1,7 +1,5 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
-import Cookies from 'js-cookie';
 import { FaEdit , FaTrash, FaRegSave, FaSearchPlus, FaRegWindowClose} from 'react-icons/fa';
 
 class RecordDetail extends Component {
@@ -10,9 +8,10 @@ class RecordDetail extends Component {
     super(props);
     this.state = {
       ...this.props.record,
+      //unpacking all of the keys/values from record
       isEditing: false,
       selected: false,
-//unpacking all of the keys/values from record
+
     }
 
     // values being passed down are default values, rather than setting the vlaues to an empty string.
@@ -71,9 +70,7 @@ handleImage(e) {
 selectRecord(){
   this.setState({selected: !this.state.selected})
 }
-// handleModal(){
-//   this.setState({selected: !this.state.selected})
-// }
+
 
 render(){
 

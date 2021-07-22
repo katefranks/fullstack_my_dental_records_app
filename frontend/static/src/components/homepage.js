@@ -1,5 +1,7 @@
 import {Component} from 'react';
 import { NavLink } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import { Button , Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Records from './records';
@@ -26,12 +28,12 @@ render(){
     <h1 id="homepage-h1">Welcome!</h1>
     <div className="homepage-container">
     <nav className="homepage-buttons" >
-        <NavLink  to='/profile' className="homepage-link  btn btn-dark btn-circle btn-xl">Profile</NavLink>
-        <NavLink  to='/records' className="homepage-link  btn btn-dark btn-circle btn-xl">Records</NavLink>
-        <NavLink to='/addRecord' className="homepage-link  btn btn-dark btn-circle btn-xl">Add<br/>Record</NavLink>
-        <NavLink  to='/medications' className="homepage-link  btn btn-dark btn-circle btn-xl">Medications</NavLink>
-        <NavLink to='/addMedication' className="homepage-link  btn btn-dark btn-circle btn-xl">Add<br/>Medication</NavLink>
-        <NavLink  to='/findcare' className="homepage-link  btn btn-dark btn-circle btn-xl">Find<br/>Care</NavLink>
+        <Nav.Link  href='/profile' className="homepage-link  btn btn-dark btn-circle btn-xl">Profile</Nav.Link>
+        <Nav.Link  href='/records' className="homepage-link  btn btn-dark btn-circle btn-xl">Records</Nav.Link>
+        <Nav.Link href='/addRecord' className="homepage-link  btn btn-dark btn-circle btn-xl">Add<br/>Record</Nav.Link>
+        <Nav.Link  href='/medications' className="homepage-link  btn btn-dark btn-circle btn-xl">Medications</Nav.Link>
+        <Nav.Link href='/addMedication' className="homepage-link  btn btn-dark btn-circle btn-xl">Add<br/>Medication</Nav.Link>
+        <Nav.Link  href='/findcare' className="homepage-link  btn btn-dark btn-circle btn-xl">Find<br/>Care</Nav.Link>
         <button type="button" className="homepage-link btn btn-dark btn-circle btn-xl" onClick={() => this.props.handleLogout()}>Logout</button>
 
       </nav>

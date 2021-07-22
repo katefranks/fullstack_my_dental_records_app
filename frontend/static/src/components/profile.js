@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import { Button , Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
