@@ -4,6 +4,7 @@ from .serializers import MedicationSerializer
 # from .permissions import IsAuthOrReadOnly
 # from django.shortcuts import get_object_or_404
 
+
 class MedicationListAPIView(generics.ListCreateAPIView):
     queryset = Medication.objects.all()
     # queryset- (calls the stored information) = getting ALL of the objects from Medication.
@@ -14,7 +15,7 @@ class MedicationListAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         selection = self.request.user
-        return Medication.objects.filter(user=self.request.user).order_by('med_date')
+        return Medication.objects.filter(user=self.request.user).order_by('med_name')
 
 class MedicationDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MedicationSerializer
@@ -24,11 +25,11 @@ class MedicationDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         return Medication.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user).order_by('med_date')
+        serializer.save(user=self.request.user).order_by('med_name')
 
 class CategoryListAPIView(generics.ListCreateAPIView):
     serializer_class = MedicationSerializer
 
     def get_queryset(self):
         selection = self.request.query_params['category']
-        return Medication.objects.filter(category=selection, user=self.request.user).order_by('med_date')
+        return Medication.objects.filter(category=selection, user=self.request.user).order_by('med_name')
