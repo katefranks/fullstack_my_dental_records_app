@@ -24,15 +24,7 @@ import AddMedication from './addMedications';
 //
 import GoogleMap from './findcare';
 import { FaTooth } from 'react-icons/fa';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { library } from "@fortawesome/fontawesome-svg-core";
-// import { fab } from "@fortawesome/free-brands-svg-icons";
-// import { fasTooth } from "@fortawesome/free-solid-svg-icons";
-// library.add(fab,  fasTooth );
-//
-// const element = <FontAwesomeIcon icon={fasTooth} />
 
-// const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 
 class App extends Component {
@@ -87,7 +79,7 @@ async handleRegistration(user){
     this.setState({isAuthenticated: true});
     this.props.history.push('/');
   } else {
-    throw new Error('Network response was not ok');
+    alert('Network issue: Please Verify that Passwords Match & Try Again.');
   }
 }
 
