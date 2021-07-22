@@ -14,8 +14,10 @@ class Navigation extends Component {
   render() {
     return(
       <>
+
       <Navbar collapseOnSelect expand="" bg="dark" variant="dark">
-        <Container>
+
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -33,8 +35,10 @@ class Navigation extends Component {
             {!!Cookies.get('Authorization') &&<Nav.Link onClick={() => this.props.handleLogout()}>Logout</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
-        </Container>
+
       </Navbar>
+
+
 
 
 
@@ -45,7 +49,7 @@ class Navigation extends Component {
 
 export default Navigation;
 
-// <Navbar.Brand href="#home">My Dental Records</Navbar.Brand>
+// <Navbar.Brand href="/">My Dental Records</Navbar.Brand>
 
 //
 // <Navbar  expand="" className="navbar navbar-dark bg-dark" id="main-navbar">

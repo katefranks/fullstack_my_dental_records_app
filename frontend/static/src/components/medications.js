@@ -129,7 +129,7 @@ filterCurrent() {
       <div>
         <div className="addrecord-button-container">
           <h1>Medications</h1>
-          <Button className="category-button btn btn-dark" onClick={()=> (this.handleModal())}><FaPlus/></Button>
+          <Button className="add-record-button-modal btn btn-dark" onClick={()=> (this.handleModal())}><FaPlus/></Button>
         </div>
         <Modal className="record-modal" show={this.state.show} onHide={()=> (this.handleModal())}>
           <Modal.Header closeButton>

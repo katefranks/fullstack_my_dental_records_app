@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+// import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import './App.css';
 import "../index.css";
 import "../index.js";
@@ -110,10 +112,10 @@ render(){
     <>
     <div className="content-container">
 
-      <header className="bg-dark" id="main-header">
 
+      <header className="bg-dark" id="main-header">
         <Navbar handleLogout={this.handleLogout} />
-        <h2 className="" id="header-title">My Dental Records</h2>
+        <a href="/" id="header-title">My Dental Records</a>
       </header>
 
         <Switch>
@@ -188,6 +190,8 @@ render(){
 
 export default withRouter(App);
 
+// <h2 className="" id="header-title">My Dental Records</h2>
+
 // <a  href="http://www.kateloves2code.com" target="_blank"><h1 id="footer-text"><FaTooth /></h1></a>
 // <h1 id="footer-text"><FaTooth /></h1>
 // <Route
@@ -205,3 +209,9 @@ export default withRouter(App);
 //   <h1 id="footer-text"><FaTooth /></h1>
 //   </a>
 // </footer>
+
+//
+//
+//   <Navbar handleLogout={this.handleLogout} />
+//
+// </header>

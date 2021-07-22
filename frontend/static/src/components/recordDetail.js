@@ -78,12 +78,7 @@ render(){
   <>
   <div className="record-form-div">
     <form className="form-login p-4 mb-3 login-form-container recordDetail-form-container">
-      <button type="button" className="btn btn-outline-dark record-detail-button" onClick={()=> (this.selectRecord())}>
-        {!this.state.selected
-         ?<FaSearchPlus/>
-         :<FaRegWindowClose/>
-        }
-      </button>
+
         <div className="form-group">
           <label for="appt_date" className="form-label record-form-label">Appointment Date:</label>
           <br/>
@@ -178,3 +173,11 @@ render(){
 }
 }
 export default RecordDetail;
+
+// For adding modal to view xrays larger:
+// <button type="button" className="btn btn-outline-dark record-detail-button" onClick={()=> (this.selectRecord())}>
+//   {!this.state.selected
+//    ?<FaSearchPlus/>
+//    :<FaRegWindowClose/>
+//   }
+// </button>

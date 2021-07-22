@@ -14,6 +14,8 @@ body {
 }
 
 #header-title{
+  font-size: 30px;
+  font-weight: 500;
   background: -webkit-linear-gradient(90deg,#ffd301 0%,#f4702a 21%,#ee254a 40%,#ed2870 60%,#c52378 80%,#861766 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -288,11 +290,19 @@ ul{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
 .category-button{
   margin: 2px;
+
 }
+
+.add-record-button-modal{
+  height: 39px;
+  margin-top: 22px;
+  margin-left: 2px;
+  }
 
 
 /* Add Record- modal */
@@ -300,6 +310,7 @@ ul{
   display: flex;
   justify-content: center;
   margin: 20px;
+  margin-bottom: 0px;
 
 }
 .addrecord-component-container{
