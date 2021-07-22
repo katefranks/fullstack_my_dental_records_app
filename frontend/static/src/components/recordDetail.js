@@ -29,7 +29,7 @@ saveRecord(e){
   e.preventDefault();
   // const record = {...this.props.record};
   // record = this.state.record;
-  const record = this.state;
+  const record = {...this.state};
 
   if (!(record.appt_img instanceof File)){
     //"if it's NOT an instance of a file, remove it"

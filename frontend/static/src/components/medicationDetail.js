@@ -29,7 +29,7 @@ class MedicationDetail extends Component {
 saveMedication(e){
   e.preventDefault();
 
-  const medication = this.state;
+  const medication = {...this.state};
 
   if (!(medication.label_img instanceof File)){
     //"if it's NOT an instance of a file, remove it"

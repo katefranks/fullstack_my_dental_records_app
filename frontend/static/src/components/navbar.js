@@ -3,12 +3,15 @@ import { NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Cookies from 'js-cookie';
+import { FaTooth, FaHome } from 'react-icons/fa';
 
 
 class Navigation extends Component {
   render() {
     return(
+      <>
       <Navbar  expand="" className="navbar navbar-dark bg-dark" id="main-navbar">
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-dark" />
         <Navbar.Collapse id="basic-navbar-nav" className="bg-dark">
           <Nav className="mr-auto align-items-baseline">
@@ -25,7 +28,11 @@ class Navigation extends Component {
 
           </Nav>
         </Navbar.Collapse>
+      <FaHome style={{color:"white"}} />
       </Navbar>
+
+
+      </>
     )
   }
 }

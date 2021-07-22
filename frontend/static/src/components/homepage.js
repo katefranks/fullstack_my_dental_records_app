@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Records from './records';
 import AddRecord from './addRecord';
 import FindCare from './findcare';
+import { FaTooth } from 'react-icons/fa';
 
 class Homepage extends Component {
   constructor(props){
@@ -41,6 +42,11 @@ render(){
 
 }
 export default Homepage;
+
+// <FaTooth />
+// <h1 id="homepage-h1">Welcome!</h1>
+
+
 
 // <div className="addrecord-button-container">
 // <Button onClick={()=> (this.handleModal())}>Add New Record</Button>
