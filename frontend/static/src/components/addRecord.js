@@ -124,6 +124,12 @@ class AddRecord extends Component{
             </div>
 
             <div className="form-group">
+              <label for="provider_name" className="form-label record-form-label">Provider's Name:</label>
+              <br/>
+              <input className="record-input" type="text" name="provider_name" placeholder="Name of Provider" value={this.state.provider_name} onChange={this.handleInput} disabled={!this.state?.isEditing}/>
+            </div>
+
+            <div className="form-group">
               <label for="recommendations" className="form-label record-form-label">Recommendations:</label>
               <br/>
               <input className="login-input" type="text" placeholder="Recommendations?" name="recommendations" value={this.state.recommendations} onChange={this.handleInput} />
