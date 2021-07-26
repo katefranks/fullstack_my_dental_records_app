@@ -143,13 +143,6 @@ export class MapContainer extends Component {
 
 
   render() {
-    const locationsList = this.state.locations.map((place) =>
-    <li key={place.place_id} className="form-login p-4 mb-3 login-form-container"  >
-      <p>{place.name}</p>
-      <p>{place.formatted_phone_number}</p>
-      <p>{place.formatted_address}</p>
-    </li>
-  )
 
     const markers = this.state.locations.map((place) => (
           <Marker key={place.place_id} onClick={this.onMarkerClick}
@@ -166,106 +159,89 @@ export class MapContainer extends Component {
 
     return (
       <div className="" id="findcare-container">
+        <div className=""  id="main-map-container">
+          <div id="googleMap" >
+            <PlacesAutocomplete
+              value={this.state.address}
+              onChange={this.handleChange}
+              onSelect={this.handleSelect}
+            >
 
-      <div className=""  id="main-map-container">
-      <div id="googleMap" >
-        <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-        >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div id="automcomplete-container">
-            <input
-              {...getInputProps({
-                placeholder: 'Search a location, find a dentist!',
-                className: 'location-search-input',
-              })}
-            />
-            <div className="autocomplete-dropdown-container">
-              {loading && <div>Loading...</div>}
-              {suggestions.map(suggestion => {
-                const className = suggestion.active
-                  ? 'suggestion-item--active'
-                  : 'suggestion-item';
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                return (
-                  <div {...getSuggestionItemProps(suggestion, {className, style,})}>
-                    <span>{suggestion.description}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
-      <div id="map-container-center">
-        <Map
-          ref={this.mapRef}
-          onReady={this.fetchPlaces}
-          google={this.props.google}
-          initialCenter={{
-            lat: this.state.userLat,
-            lng: this.state.userLng,
-          }}
-          center={{
-            lat: this.state.userLat,
-            lng: this.state.userLng,
-          }}
-          style={style} containerStyle={containerStyle}
-        >
-        <Marker
-
-          position={{
-            lat: this.state.userLat,
-            lng: this.state.userLng,
-          }}
-        />
-
-        {markers}
-
-        <InfoWindow
-            marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
-              <div className="infowindow-marker">
-                <h2 id="infowindow-h2" style={{textAlign: "center"}}>{this.state.selectedPlace.name}</h2>
-                <a className="infowindow-a" href={`tel:+${this.state.selectedPlace.phoneNumber}`}><FaPhoneAlt/> {this.state.selectedPlace.phoneNumber}</a>
-                <br/>
-                {this.state.selectedPlace.website &&
-                <a className="infowindow-a" href={this.state.selectedPlace.website} target="_blank"><FaGlobeAmericas/>  {this.state.selectedPlace.website}<br/></a>
-                }
-                <a className="infowindow-a" href={`https://maps.google.com/?q=${this.state.selectedPlace.address}`} target="_blank"><FaMapMarkerAlt/> {this.state.selectedPlace.address}</a>
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <div id="automcomplete-container">
+                <input
+                  {...getInputProps({
+                    placeholder: 'Search a location, find a dentist!',
+                    className: 'location-search-input',
+                  })}
+                />
+                <div className="autocomplete-dropdown-container">
+                  {loading &&
+                    <div>Loading...</div>
+                  }
+                  {suggestions.map(suggestion => {
+                    const className = suggestion.active
+                      ? 'suggestion-item--active'
+                      : 'suggestion-item';
+                    const style = suggestion.active
+                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                    return (
+                      <div {...getSuggestionItemProps(suggestion, {className, style,})}>
+                        <span>{suggestion.description}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-        </InfoWindow>
+            )}
 
-        </Map>
+            </PlacesAutocomplete>
+          <div id="map-container-center">
+            <Map
+              ref={this.mapRef}
+              onReady={this.fetchPlaces}
+              google={this.props.google}
+              initialCenter={{
+                lat: this.state.userLat,
+                lng: this.state.userLng,
+              }}
+              center={{
+                lat: this.state.userLat,
+                lng: this.state.userLng,
+              }}
+              style={style} containerStyle={containerStyle}
+              >
+              <Marker
+                position={{
+                  lat: this.state.userLat,
+                  lng: this.state.userLng,
+                }}
+              />
+              {markers}
+              <InfoWindow
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}>
+                    <div className="infowindow-marker">
+                      <h2 id="infowindow-h2" style={{textAlign: "center"}}>{this.state.selectedPlace.name}</h2>
+                      <a className="infowindow-a" href={`tel:+${this.state.selectedPlace.phoneNumber}`}><FaPhoneAlt/> {this.state.selectedPlace.phoneNumber}</a>
+                      <br/>
+                      {this.state.selectedPlace.website &&
+                      <a className="infowindow-a" href={this.state.selectedPlace.website} target="_blank" rel="noreferrer"><FaGlobeAmericas/>  {this.state.selectedPlace.website}<br/></a>
+                      }
+                      <a className="infowindow-a" href={`https://maps.google.com/?q=${this.state.selectedPlace.address}`} target="_blank" rel="noreferrer"><FaMapMarkerAlt/> {this.state.selectedPlace.address}</a>
+                    </div>
+              </InfoWindow>
+            </Map>
+          </div>
         </div>
       </div>
-      </div>
-</div>
-    )
+    </div>
+      )
+    }
   }
-}
 
 
 export default GoogleApiWrapper({
   apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
 })(MapContainer)
-
-// https://www.google.com/maps/dir//
-// <a href={`https://www.google.com/maps/dir//?q=${this.state.selectedPlace.address}`}><FaMapMarkerAlt/> {this.state.selectedPlace.address}</a>
-
-// https://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003
-
-// <a href={`https://maps.google.com/?q=${this.state.selectedPlace.address}`}><FaMapMarkerAlt/> {this.state.selectedPlace.address}</a>
-
-// <p><FaMapMarkerAlt/> {this.state.selectedPlace.address}</p>
-
-// icons
-// https://img.icons8.com/offices/30/000000/tooth.png
-// https://img.icons8.com/fluent/48/000000/tooth.png
-
-// <a href={this.state.selectedPlace.website} target="_blank"><FaGlobeAmericas/>  {this.state.selectedPlace.website}</a>

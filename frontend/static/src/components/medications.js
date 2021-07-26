@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import { Button , Modal } from 'react-bootstrap';
 import { FaPlus} from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,7 +6,6 @@ import './App.css';
 import MedicationDetail from './medicationDetail';
 import AddMedication from './addMedications';
 import Cookies from 'js-cookie';
-import Homepage from './homepage';
 
 
 class Medications extends Component {

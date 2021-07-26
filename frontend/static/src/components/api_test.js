@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {GoogleApiWrapper} from 'google-maps-react';
 // import { Loader } from "@googlemaps/js-api-loader"
 
 class ApiTest extends Component{

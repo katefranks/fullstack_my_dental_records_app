@@ -5,13 +5,13 @@ html {
 }
 
 body {
-
   background: transparent url(./css/background.jpeg) no-repeat fixed center center/cover;
   height: 100%;
   overflow: auto;
   margin: 0 auto;
   z-index: 1;
 }
+
 
 #header-title{
   font-size: 30px;
@@ -54,12 +54,12 @@ z-index: 2;
 }
 
 #footer{
-  /* position: fixed; */
   position: sticky;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
+  z-index: 2;
 }
 
 #footer-text{
@@ -404,11 +404,12 @@ line-height: 1.2rem;
 }
 
 /* Find Care */
-
-
-#automcomplete-container{
+#findcare-container{
   display: flex;
   justify-content: center;
+}
+
+#automcomplete-container{
   margin-top: 20px;
 }
 

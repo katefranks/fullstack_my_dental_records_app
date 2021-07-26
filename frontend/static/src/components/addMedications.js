@@ -1,14 +1,7 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
 import Cookies from 'js-cookie';
 
-// class Medication (models.Model):
-//     CURRENT = 'CUR'
-//     PAST = 'PAS'
-//     CATEGORY_CHOICES = [
-//         (CURRENT, 'Currently Taking'),
-//         (PAST, 'No Longer Taking'),]
 
 class AddMedication extends Component{
   constructor(props){
@@ -25,7 +18,6 @@ class AddMedication extends Component{
       isEditing: true,
     }
     this.handleInput = this.handleInput.bind(this);
-    // this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -35,9 +27,6 @@ class AddMedication extends Component{
     this.setState( {[e.target.name]: e.target.value});
   }
 
-  // handleCheckbox(e) {
-  //   this.setState({[e.target.name]: e.target.checked})
-  // }
 
   handleImage(e) {
     let file = e.target.files[0];
@@ -86,12 +75,6 @@ class AddMedication extends Component{
       this.props.handleModal();
     }
   }
-  //
-  // prescriber: '',
-  // dosage: '',
-  // reason: '',
-  // label_img: null,
-  //
 
   render(){
     return(

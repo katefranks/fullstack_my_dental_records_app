@@ -27,3 +27,7 @@ Google Places Library
 
 JavaScript (frontend)
 Python (backend)
+
+<!-- ##### Components -->
+
+<!-- ![alt text](http://url/to/img.png) -->

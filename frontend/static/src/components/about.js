@@ -1,8 +1,7 @@
 import {Component} from 'react';
-import { NavLink } from 'react-router-dom';
-import { Button , Modal, Card, ListGroup, ListGroupItem, Link } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {  FaGlobeAmericas, FaLinkedin, FaInstagram, FaInstagramSquare, FaGithub } from 'react-icons/fa';
+import {  FaGlobeAmericas, FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
 import about_kate from './about/about_kate1.JPG';
 
 class About extends Component{
@@ -14,13 +13,13 @@ class About extends Component{
           <Card.Body>
           <Card.Title>Kate Franks</Card.Title>
           <Card.Text>&lt;software developer/&gt;</Card.Text>
-          <Card.Text><p><a href="http://linkedin.com/in/kateloves2code" target="_blank">
+          <Card.Text><p><a href="http://linkedin.com/in/kateloves2code" target="_blank" rel="noreferrer">
           <FaLinkedin/> /in/kateloves2code</a></p></Card.Text>
-          <Card.Text><p><a href="http://www.kateloves2code.com" target="_blank">
+          <Card.Text><p><a href="http://www.kateloves2code.com" target="_blank" rel="noreferrer">
           <FaGlobeAmericas/> kateloves2code.com</a></p></Card.Text>
-          <Card.Text><p><a href="http://github.com/katefranks" target="_blank">
+          <Card.Text><p><a href="http://github.com/katefranks" target="_blank" rel="noreferrer">
           <FaGithub/> github.com/katefranks</a></p></Card.Text>
-          <Card.Text ><p><a href="http://www.instagram.com/kateloves2code/" target="_blank">
+          <Card.Text ><p><a href="http://www.instagram.com/kateloves2code/" target="_blank" rel="noreferrer">
           <FaInstagram/> kateloves2code</a></p></Card.Text>
           </Card.Body>
         </Card>

@@ -1,15 +1,12 @@
-import React, { Component, Fragment } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-// import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
 import './App.css';
 import "../index.css";
 import "../index.js";
+import React, { Component, Fragment } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { FaTooth } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'js-cookie';
-// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-//App Components:
 import PrivateRoute from './privateRoute';
 import Navbar from './navbar';
 import Login from './login';
@@ -20,13 +17,8 @@ import Profile from './profile';
 import Records from './records';
 import AddRecord from './addRecord';
 import FindCare from './findcare';
-import ApiTest from './api_test';
 import Medications from './medications';
 import AddMedication from './addMedications';
-//
-import GoogleMap from './findcare';
-import { FaTooth, FaHome } from 'react-icons/fa';
-
 
 
 class App extends Component {

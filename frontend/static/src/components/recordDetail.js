@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './App.css';
-import { FaEdit , FaTrash, FaRegSave, FaSearchPlus, FaRegWindowClose} from 'react-icons/fa';
+import { FaEdit , FaTrash, FaRegSave} from 'react-icons/fa';
 
 class RecordDetail extends Component {
   //set on state key/values of record
@@ -11,17 +11,13 @@ class RecordDetail extends Component {
       //unpacking all of the keys/values from record
       isEditing: false,
       selected: false,
-
     }
-
     // values being passed down are default values, rather than setting the vlaues to an empty string.
     // passing the record down through props
     this.handleInput = this.handleInput.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.saveRecord = this.saveRecord.bind(this);
-    this.selectRecord = this.selectRecord.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 saveRecord(e){
@@ -66,11 +62,6 @@ handleImage(e) {
     }
   reader.readAsDataURL(file);
 }
-
-selectRecord(){
-  this.setState({selected: !this.state.selected})
-}
-
 
 render(){
 

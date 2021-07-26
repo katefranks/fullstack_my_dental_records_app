@@ -1,8 +1,6 @@
 import { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import './App.css';
-import Cookies from 'js-cookie';
-import { FaEdit , FaTrash, FaRegSave, FaSearchPlus, FaRegWindowClose} from 'react-icons/fa';
+import { FaEdit , FaTrash, FaRegSave } from 'react-icons/fa';
 
 
 class MedicationDetail extends Component {
@@ -12,18 +10,14 @@ class MedicationDetail extends Component {
     this.state = {
       ...this.props.medication,
       isEditing: false,
-      selected: false,
-//unpacking all of the keys/values from medication
     }
-
-    // values being passed down are default values, rather than setting the vlaues to an empty string.
+    //unpacking all of the keys/values from medication
+    // values being passed down are default values, rather than setting the values to an empty string.
     // passing the medication down through props
     this.handleInput = this.handleInput.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.saveMedication = this.saveMedication.bind(this);
-    this.selectMed = this.selectMed.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 saveMedication(e){
@@ -68,9 +62,6 @@ handleImage(e) {
   reader.readAsDataURL(file);
 }
 
-selectMed(){
-  this.setState({selected: !this.state.selected})
-}
 
 render(){
 
@@ -78,12 +69,6 @@ render(){
   <>
   <div className="record-form-div">
     <form className="form-login p-4 mb-3 login-form-container recordDetail-form-container">
-      <button type="button" className="btn btn-outline-dark record-detail-button" onClick={()=> (this.selectMed())}>
-        {!this.state.selected
-         ?<FaSearchPlus/>
-         :<FaRegWindowClose/>
-        }
-      </button>
         <div className="form-group">
           <label for="med_name" className="form-label record-form-label">Medication Name:</label>
           <br/>

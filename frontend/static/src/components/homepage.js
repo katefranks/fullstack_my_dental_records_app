@@ -1,13 +1,7 @@
 import {Component} from 'react';
-import { NavLink } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Button , Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Records from './records';
-import AddRecord from './addRecord';
-import FindCare from './findcare';
-import { FaTooth } from 'react-icons/fa';
+
 
 class Homepage extends Component {
   constructor(props){
@@ -44,21 +38,3 @@ render(){
 
 }
 export default Homepage;
-
-// <FaTooth />
-// <h1 id="homepage-h1">Welcome!</h1>
-
-
-
-// <div className="addrecord-button-container">
-// <Button onClick={()=> (this.handleModal())}>Add New Record</Button>
-// </div>
-//   <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
-//     <Modal.Header closeButton>
-//       <Modal.Title>Add New Record</Modal.Title>
-//     </Modal.Header>
-//     <Modal.Body>
-//       <AddRecord handleModal={this.handleModal} addRecord={this.state.addRecord}/>
-//     </Modal.Body>
-//     <Modal.Footer></Modal.Footer>
-//   </Modal>

@@ -1,11 +1,8 @@
 import { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Cookies from 'js-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { FaTooth, FaHome } from 'react-icons/fa';
 
 
 class Navigation extends Component {
