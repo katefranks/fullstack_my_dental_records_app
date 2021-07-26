@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import './App.css';
-import { FaEdit , FaTrash, FaRegSave} from 'react-icons/fa';
+import { Modal } from 'react-bootstrap';
+import { FaEdit , FaTrash, FaRegSave, FaSearchPlus} from 'react-icons/fa';
 
 class RecordDetail extends Component {
   //set on state key/values of record
@@ -10,7 +11,7 @@ class RecordDetail extends Component {
       ...this.props.record,
       //unpacking all of the keys/values from record
       isEditing: false,
-      selected: false,
+      show: false,
     }
     // values being passed down are default values, rather than setting the vlaues to an empty string.
     // passing the record down through props
@@ -18,50 +19,55 @@ class RecordDetail extends Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.saveRecord = this.saveRecord.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
 
-saveRecord(e){
-  e.preventDefault();
-  // const record = {...this.props.record};
-  // record = this.state.record;
-  const record = {...this.state};
-
-  if (!(record.appt_img instanceof File)){
-    //"if it's NOT an instance of a file, remove it"
-    delete record.appt_img;
-    //deleting property if not an instance of a file.
+  handleModal(){
+    this.setState({show: !this.state.show})
   }
 
-  delete record.isEditing;
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
-  this.props.editRecord(record);
+  saveRecord(e){
+    e.preventDefault();
+    // const record = {...this.props.record};
+    // record = this.state.record;
+    const record = {...this.state};
 
-  this.setState({isEditing : false});
-
-}
-
-handleInput(e){
-  // Computed property names
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
-  this.setState( {[e.target.name]: e.target.value});
-}
-
-handleCheckbox(e) {
-  this.setState({[e.target.name]: e.target.checked})
-}
-
-handleImage(e) {
-  let file = e.target.files[0];
-  this.setState({appt_img : file, });
-
-  let reader = new FileReader();
-    reader.onloadend = () => {
-      this.setState({
-        preview: reader.result,
-      });
+    if (!(record.appt_img instanceof File)){
+      //"if it's NOT an instance of a file, remove it"
+      delete record.appt_img;
+      //deleting property if not an instance of a file.
     }
-  reader.readAsDataURL(file);
-}
+
+    delete record.isEditing;
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+    this.props.editRecord(record);
+
+    this.setState({isEditing : false});
+
+  }
+
+  handleInput(e){
+    // Computed property names
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
+    this.setState( {[e.target.name]: e.target.value});
+  }
+
+  handleCheckbox(e) {
+    this.setState({[e.target.name]: e.target.checked})
+  }
+
+  handleImage(e) {
+    let file = e.target.files[0];
+    this.setState({appt_img : file, });
+
+    let reader = new FileReader();
+      reader.onloadend = () => {
+        this.setState({
+          preview: reader.result,
+        });
+      }
+    reader.readAsDataURL(file);
+  }
 
 render(){
 
@@ -147,7 +153,8 @@ render(){
           {this.state.appt_img
                 ? <img className="appt-img" src={this.state.preview || this.state.appt_img} alt=""/>
                 : null
-              }
+          }
+          <button type="button" className="btn btn-outline-dark profile-button" onClick={()=> (this.handleModal())}><FaSearchPlus/></button>
         </div>
         <div className="record-button-container">
         {!this.state.isEditing
@@ -156,8 +163,13 @@ render(){
         }
         <button type="button" className="btn btn-outline-dark record-detail-button"  onClick={() => this.props.deleteRecord(this.props.record.id)}><FaTrash/></button>
         </div>
-
       </form>
+      <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
+        <Modal.Header closeButton>{this.state.appt_date}</Modal.Header>
+        <Modal.Body className="profile-modal-body">
+          <img className="ins-card-modal" src={this.state.appt_img} handleModal={this.handleModal} alt=""/>
+        </Modal.Body>
+      </Modal>
   </div>
   </>
   )
@@ -167,7 +179,7 @@ export default RecordDetail;
 
 // For adding modal to view xrays larger:
 // <button type="button" className="btn btn-outline-dark record-detail-button" onClick={()=> (this.selectRecord())}>
-//   {!this.state.selected
+//   {!this.state.show
 //    ?<FaSearchPlus/>
 //    :<FaRegWindowClose/>
 //   }

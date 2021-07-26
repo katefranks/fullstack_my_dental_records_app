@@ -193,7 +193,6 @@ render(){
             <Modal.Body className="profile-modal-body">
               <img className="ins-card-modal" src={this.state.ins_card} handleModal={this.handleModal} alt=""/>
             </Modal.Body>
-
           </Modal>
       </div>
   )
