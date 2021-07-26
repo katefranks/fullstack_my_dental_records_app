@@ -36,6 +36,7 @@ class Medications extends Component {
 async addMedication(medication){
   const medications = [...this.state.medications, medication];
   this.setState({ medications });
+  this.fetchData();
 }
 
 async editMedication(medication){

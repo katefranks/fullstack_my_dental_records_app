@@ -50,7 +50,7 @@ class App extends Component {
       this.setState({isAuthenticated: true});
       this.props.history.push('/');
     } else {
-      alert('Incorrect Username of Password, Please Try Again!')
+      alert('Network issue: Please Try Again!')
     }
   }
 
@@ -103,13 +103,10 @@ render(){
   return(
     <>
     <div className="content-container">
-
-
       <header className="bg-dark" id="main-header">
         <Navbar handleLogout={this.handleLogout} />
         <a href="/" id="header-title">My Dental Records</a>
       </header>
-
         <Switch>
             <Route
               path='/login'
