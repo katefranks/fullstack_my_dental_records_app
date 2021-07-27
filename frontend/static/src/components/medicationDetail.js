@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import './App.css';
-import { FaEdit , FaTrash, FaRegSave } from 'react-icons/fa';
+import { Modal } from 'react-bootstrap';
+import { FaEdit , FaTrash, FaRegSave, FaSearchPlus } from 'react-icons/fa';
 
 
 class MedicationDetail extends Component {
@@ -18,49 +19,54 @@ class MedicationDetail extends Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.saveMedication = this.saveMedication.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
 
-saveMedication(e){
-  e.preventDefault();
-
-  const medication = {...this.state};
-
-  if (!(medication.label_img instanceof File)){
-    //"if it's NOT an instance of a file, remove it"
-    delete medication.label_img;
-    //deleting property if not an instance of a file.
+  handleModal(){
+    this.setState({show: !this.state.show})
   }
 
-  delete medication.isEditing;
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
-  this.props.editMedication(medication);
+  saveMedication(e){
+    e.preventDefault();
 
-  this.setState({isEditing : false});
+    const medication = {...this.state};
 
-}
-
-handleInput(e){
-  // Computed property names
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
-  this.setState( {[e.target.name]: e.target.value});
-}
-
-handleCheckbox(e) {
-  this.setState({[e.target.name]: e.target.checked})
-}
-
-handleImage(e) {
-  let file = e.target.files[0];
-  this.setState({label_img : file, });
-
-  let reader = new FileReader();
-    reader.onloadend = () => {
-      this.setState({
-        preview: reader.result,
-      });
+    if (!(medication.label_img instanceof File)){
+      //"if it's NOT an instance of a file, remove it"
+      delete medication.label_img;
+      //deleting property if not an instance of a file.
     }
-  reader.readAsDataURL(file);
-}
+
+    delete medication.isEditing;
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+    this.props.editMedication(medication);
+
+    this.setState({isEditing : false});
+
+  }
+
+  handleInput(e){
+    // Computed property names
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
+    this.setState( {[e.target.name]: e.target.value});
+  }
+
+  handleCheckbox(e) {
+    this.setState({[e.target.name]: e.target.checked})
+  }
+
+  handleImage(e) {
+    let file = e.target.files[0];
+    this.setState({label_img : file, });
+
+    let reader = new FileReader();
+      reader.onloadend = () => {
+        this.setState({
+          preview: reader.result,
+        });
+      }
+    reader.readAsDataURL(file);
+  }
 
 
 render(){
@@ -123,9 +129,10 @@ render(){
           : null
           }
           {this.state.label_img
-                ? <img className="appt-img" src={this.state.preview || this.state.label_img} alt=""/>
-                : null
-              }
+            ? <img className="appt-img" src={this.state.preview || this.state.label_img} alt=""/>
+            : null
+          }
+          <button type="button" className="btn btn-outline-dark profile-button" onClick={()=> (this.handleModal())}><FaSearchPlus/></button>
         </div>
         <div className="record-button-container">
         {!this.state.isEditing
@@ -135,6 +142,12 @@ render(){
         <button type="button" className="btn btn-outline-dark record-detail-button"  onClick={() => this.props.deleteMedication(this.props.medication.id)}><FaTrash/></button>
         </div>
       </form>
+      <Modal show={this.state.show} onHide={()=> (this.handleModal())}>
+        <Modal.Header closeButton>{this.state.med_name}</Modal.Header>
+        <Modal.Body className="profile-modal-body">
+          <img className="ins-card-modal" src={this.state.label_img} handleModal={this.handleModal} alt=""/>
+        </Modal.Body>
+      </Modal>
   </div>
   </>
   )
