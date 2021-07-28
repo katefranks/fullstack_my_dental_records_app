@@ -113,7 +113,7 @@ async addProfile(e) {
   }
   const response = await fetch('/api/v1/users/profiles/', options);
   this.setState({response, isEditing: false});
-  this.fetchData();
+  // this.fetchData();
 }
 
 async editProfile(e){
@@ -137,11 +137,17 @@ async editProfile(e){
     body: formData,
 
   };
+
   const response = await fetch(`/api/v1/users/profiles/user/`, options);
-  if(!response.ok) {
-  }
-  this.setState({isEditing: false});
-  this.fetchData();
+  const json = await response.json();
+  this.setState({...json, isEditing: false})
+
+
+
+
+  // return response.json();
+  // this.setState({isEditing: false});
+  // this.fetchData();
 }
 
 deleteInsCard(){
