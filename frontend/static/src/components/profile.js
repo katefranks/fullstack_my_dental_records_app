@@ -26,6 +26,7 @@ class Profile extends Component{
     this.addProfile = this.addProfile.bind(this);
     this.deleteInsCard = this.deleteInsCard.bind(this);
     this.handleModal = this.handleModal.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
 handleModal(){
@@ -33,6 +34,22 @@ handleModal(){
 }
 
 componentDidMount(){
+  // fetch('/api/v1/users/profiles/user/')
+  //   .then(response => {
+  //     if (!response.ok){
+  //       // throw new Error('Network response was not ok');
+  //       this.setState({isEditing: true})
+  //     }
+  //     return response.json();
+  //   })
+  //   .then(data => this.setState({ ...data }))
+  //   .catch(error => {
+  //     console.error('There has been a problem with your fetch operation: ', error);
+  //   });
+  this.fetchData();
+}
+
+fetchData(){
   fetch('/api/v1/users/profiles/user/')
     .then(response => {
       if (!response.ok){
@@ -96,7 +113,7 @@ async addProfile(e) {
   }
   const response = await fetch('/api/v1/users/profiles/', options);
   this.setState({response, isEditing: false});
-
+  this.fetchData();
 }
 
 async editProfile(e){
@@ -124,6 +141,7 @@ async editProfile(e){
   if(!response.ok) {
   }
   this.setState({isEditing: false});
+  this.fetchData();
 }
 
 deleteInsCard(){
