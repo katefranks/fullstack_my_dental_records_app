@@ -123,7 +123,7 @@ async editProfile(e){
   const response = await fetch(`/api/v1/users/profiles/user/`, options);
   if(!response.ok) {
   }
-  this.setState({isEditing: false})
+  this.setState({isEditing: false});
 }
 
 deleteInsCard(){
@@ -162,8 +162,14 @@ render(){
             </div>
 
             <div id="ins-card-container" className="form-group">
-              <label for="ins_card" className="profile-form-label form-label">Dental Insurance Card <button type="button" className="btn btn-outline-dark profile-button" onClick={()=> (this.handleModal())}><FaSearchPlus/></button></label>
-
+              {(this.state.isEditing || this.state.ins_card) ?
+              <label for="ins_card" className="profile-form-label form-label">Dental Insurance Card
+                {!this.state.isEditing && this.state.ins_card &&
+                <button type="button" className="btn btn-outline-dark profile-button" onClick={()=> (this.handleModal())}><FaSearchPlus/></button>
+                }
+              </label>
+              : null
+              }
               {this.state.isEditing ?
               <input style={{width: "220px"}} type="file" name="ins_card" onChange={this.handleImage} disabled={!this.state?.isEditing}/>
               : null
