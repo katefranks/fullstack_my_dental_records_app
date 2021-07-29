@@ -32,6 +32,7 @@ class Records extends Component {
 async addRecord(record){
   const records = [record, ...this.state.records];
   this.setState({ records });
+  this.fetchData();
 }
 
 async editRecord(record){
