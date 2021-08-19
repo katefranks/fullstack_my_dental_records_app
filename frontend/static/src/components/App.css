@@ -99,6 +99,11 @@ margin-bottom: 0px;
   margin-bottom: 10px;
 }
 
+.demo-login{
+  align-self: flex-end;
+  padding: 6px;
+  border-radius: 50%;
+}
 
 /* Homepage */
 

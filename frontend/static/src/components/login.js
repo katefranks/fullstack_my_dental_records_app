@@ -11,6 +11,7 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.toggleRegistration = this.toggleRegistration.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
   handleInput(e) {
     this.setState({ [e.target.name]: e.target.value});
@@ -25,11 +26,16 @@ class Login extends Component {
     this.props.history.push("/registration");
   }
 
+  demoLogin(e){
+    this.setState({username: 'demo', email: 'demo@demo.com', password: 'safepass1', });
+  }
+
 render(){
   return(
 
     <div className="login-form-div">
       <form className="form-login p-4 mb-3 login-form-container" onSubmit={this.handleSubmit}>
+      <button onClick={this.demoLogin} type="button"className="btn btn-primary btn-dark demo-login">Demo</button>
       <h2>Login</h2>
       <div className="form-group">
         <label for="username" className="form-label"></label>
