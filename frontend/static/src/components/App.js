@@ -101,7 +101,7 @@ async handleLogout(){
 
 render(){
   return(
-    <>
+    <div className="site-container">
     <div className="content-container">
       <header className="bg-dark" id="main-header">
         <Navbar handleLogout={this.handleLogout} />
@@ -126,7 +126,6 @@ render(){
                 <About handleLogout={this.handleLogout}/>
               )}
             />
-
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/findcare">
              <FindCare />
           </PrivateRoute>
@@ -150,11 +149,9 @@ render(){
               </div>
             </div>
           </PrivateRoute>
-
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/medications">
              <Medications />
           </PrivateRoute>
-
           <PrivateRoute isAuthenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} path="/addMedication">
             <div className="add-record-route">
               <div className="addrecord-form-container">
@@ -172,35 +169,9 @@ render(){
           :<NavLink to='/about' className="mr-2 bg-dark dropdown-item text-white"><h1 id="footer-text"><FaTooth /></h1></NavLink>
           }
         </footer>
-      </>
+        </div>
   );
 }
 }
 
 export default withRouter(App);
-
-// <h2 className="" id="header-title">My Dental Records</h2>
-
-// <a  href="http://www.kateloves2code.com" target="_blank"><h1 id="footer-text"><FaTooth /></h1></a>
-// <h1 id="footer-text"><FaTooth /></h1>
-// <Route
-//   path='/findcare'
-//   render={(props) => (
-//     <FindCare />
-//   )}
-// />
-
-// <a  href="http://www.kateloves2code.com" target="_blank"><h1 id="footer-text"><FaTooth /></h1></a>
-
-// <FaTooth />
-// <footer className="main-footer bg-dark ">
-//   <a  href="http://www.kateloves2code.com" target="_blank">
-//   <h1 id="footer-text"><FaTooth /></h1>
-//   </a>
-// </footer>
-
-//
-//
-//   <Navbar handleLogout={this.handleLogout} />
-//
-// </header>

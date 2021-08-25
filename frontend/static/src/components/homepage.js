@@ -18,8 +18,8 @@ class Homepage extends Component {
 
 render(){
   return(
-    <div>
-    <h1 id="homepage-h1">Welcome!</h1>
+    <div className="homepage-content-container">
+    
     <div className="homepage-container">
     <nav className="homepage-buttons" >
         <Nav.Link  href='/profile' className="homepage-link  btn btn-dark btn-circle btn-xl">Profile</Nav.Link>
